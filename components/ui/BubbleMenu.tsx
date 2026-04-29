@@ -17,8 +17,11 @@ interface BubbleMenuProps {
 }
 
 const defaultItems: MenuItem[] = [
-  { label: 'about', href: '/about', rotation: -5 },
-  { label: 'resume', href: '/resume', rotation: 5 },
+  { label: 'home',     href: '/',                              rotation: -8 },
+  { label: 'about',    href: '/about',                         rotation:  5 },
+  { label: 'resume',   href: '/resume',                        rotation: -3 },
+  { label: 'linkedin', href: 'https://linkedin.com/in/evanaucoin', rotation:  7 },
+  { label: 'email',    href: 'mailto:evan@evanaucoin.com',     rotation: -6 },
 ];
 
 export default function BubbleMenu({
@@ -86,7 +89,11 @@ export default function BubbleMenu({
               }}
               className="bubble"
             >
-              <Link href={item.href} onClick={() => setIsOpen(false)}>
+              <Link
+                href={item.href}
+                className="pill-link"
+                onClick={() => setIsOpen(false)}
+              >
                 {item.label}
               </Link>
             </div>
