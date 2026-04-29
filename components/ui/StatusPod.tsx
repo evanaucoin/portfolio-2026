@@ -1,9 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/components/ui/cn";
 
 const podSpring = { type: "spring" as const, stiffness: 150, damping: 40 };
+
+// Pill dimensions. Height is constant; width is explicit in the empty state
+// and content-driven (via w-fit) in the expanded state so layout can diff them.
+const EMPTY_W = 40; // w-10
+const PILL_H  = 24; // h-6
 
 interface StatusPodProps {
   activeIndex: number;
@@ -16,12 +20,12 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
     <motion.div
       layout
       transition={{ layout: podSpring }}
-      className={cn(
-        "flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white",
-        isWork ? "w-fit" : "w-12",
-      )}
+      // w-fit applies only in the expanded state; empty state uses inline width below.
+      className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white${isWork ? " w-fit" : ""}`}
       style={{
-        height: 42,
+        height: PILL_H,
+        // Explicit inline width for empty state — overrides layout measurement correctly.
+        ...(isWork ? {} : { width: EMPTY_W }),
         boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
       }}
     >
@@ -33,7 +37,7 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
-            className="select-none whitespace-nowrap px-6 text-[18px] leading-none text-zinc-400"
+            className="select-none whitespace-nowrap px-5 text-sm leading-none text-zinc-400"
           >
             {activeIndex} of 3{" "}
             <span className="text-zinc-800">work</span>
