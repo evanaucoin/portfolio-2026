@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const podSpring = { type: "spring" as const, stiffness: 150, damping: 40 };
 
-// Empty (intro/connect): pill at rest width.
-// Work (cards 1–3): pill expands to fill more horizontal space.
-const EMPTY_WIDTH = 160; // ~w-40
-const WORK_WIDTH  = 384; // max-w-sm
+// Empty (intro/connect): compact resting pill.
+// Work (cards 1–3): expands to comfortably frame the label.
+const EMPTY_WIDTH  = 136; // ~10% smaller than the old 160
+const EMPTY_HEIGHT = 42;  // ~10% smaller than the old 48
+const WORK_WIDTH   = 384; // max-w-sm
+const WORK_HEIGHT  = 42;  // same height in both states — smooth horizontal-only expansion
 
 interface StatusPodProps {
   activeIndex: number;
@@ -18,13 +20,13 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
 
   return (
     <motion.div
-      animate={{ width: isWork ? WORK_WIDTH : EMPTY_WIDTH }}
+      animate={{
+        width:  isWork ? WORK_WIDTH  : EMPTY_WIDTH,
+        height: isWork ? WORK_HEIGHT : EMPTY_HEIGHT,
+      }}
       transition={podSpring}
       className="flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white"
-      style={{
-        height: 48,
-        boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
-      }}
+      style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}
     >
       <AnimatePresence mode="wait">
         {isWork && (
@@ -34,7 +36,7 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
-            className="select-none whitespace-nowrap px-5 text-sm text-zinc-400"
+            className="select-none whitespace-nowrap px-6 text-[18px] leading-none text-zinc-400"
           >
             {activeIndex} of 3{" "}
             <span className="text-zinc-800">work</span>
