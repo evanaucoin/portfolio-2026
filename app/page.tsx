@@ -5,26 +5,40 @@ import { motion } from "framer-motion";
 
 const CARD_COUNT = 5;
 
-// Visual state for each "slot" relative to the active card.
-// Slot 4 is the off-screen-above position cards animate through when exiting.
+// Slot 4 sits above the stack (y: -150) and owns the highest zIndex so the
+// exiting card always slides *over* the remaining cards as it leaves — no
+// clipping from cards below.
 const SLOT_STATES = [
-  { y: 0,    scale: 1,    opacity: 1, zIndex: 5 }, // front
+  { y: 0,    scale: 1,    opacity: 1, zIndex: 6 }, // front
   { y: 60,   scale: 0.92, opacity: 1, zIndex: 4 }, // peek 1
   { y: 120,  scale: 0.84, opacity: 1, zIndex: 3 }, // peek 2
   { y: 120,  scale: 0.84, opacity: 0, zIndex: 2 }, // hidden behind peek 2
-  { y: -200, scale: 0.84, opacity: 0, zIndex: 1 }, // exited above
+  { y: -150, scale: 0.84, opacity: 0, zIndex: 7 }, // exiting above (highest z)
 ];
 
-const spring = { type: "spring" as const, stiffness: 300, damping: 30 };
+const cardSpring = { type: "spring" as const, stiffness: 300, damping: 30 };
+
+// Exiting card (slot 4): spring the Y immediately but delay the fade so the
+// card is visibly travelling upward before it dissolves.
+function getTransition(slot: number) {
+  const isExiting = slot === 4;
+  return {
+    y:      cardSpring,
+    scale:  cardSpring,
+    opacity: isExiting
+      ? { type: "tween" as const, duration: 0.2, delay: 0.15, ease: "easeIn" }
+      : { type: "tween" as const, duration: 0.15, ease: "easeOut" },
+  };
+}
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const isThrottled = useRef(false);
+  const isScrolling = useRef(false);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (isThrottled.current) return;
+      if (isScrolling.current) return;
 
       setActiveIndex((prev) =>
         e.deltaY > 0
@@ -32,10 +46,10 @@ export default function Home() {
           : (prev - 1 + CARD_COUNT) % CARD_COUNT
       );
 
-      isThrottled.current = true;
+      isScrolling.current = true;
       setTimeout(() => {
-        isThrottled.current = false;
-      }, 700);
+        isScrolling.current = false;
+      }, 800);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
@@ -53,8 +67,13 @@ export default function Home() {
             <motion.div
               key={i}
               animate={{ y, scale, opacity }}
-              transition={spring}
-              style={{ zIndex, transformOrigin: "top center" }}
+              transition={getTransition(slot)}
+              style={{
+                zIndex,
+                transformOrigin: "top center",
+                // Invisible cards must not swallow pointer events
+                pointerEvents: slot >= 3 ? "none" : "auto",
+              }}
               className="absolute inset-0 rounded-[32px] border border-zinc-200 bg-white shadow-sm"
             />
           );
