@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { StatusPod } from "@/components/ui/StatusPod";
+import { RotatingText } from "@/components/ui/RotatingText";
 
 const CARD_COUNT = 5;
 
@@ -139,8 +140,27 @@ export default function Home() {
                 transformPerspective: 1000,
                 pointerEvents: slot >= 3 ? "none" : "auto",
               }}
-              className="absolute inset-0 rounded-[32px] border border-zinc-200 bg-white shadow-sm"
-            />
+              className="absolute inset-0 rounded-[32px] border border-zinc-200 bg-white shadow-sm overflow-hidden"
+            >
+              {i === 0 && (
+                <div className="flex h-full flex-col justify-between px-14 py-10">
+                  <span className="text-sm font-medium text-zinc-400">
+                    Evan AuCoin
+                  </span>
+                  <p className="text-5xl font-medium tracking-tight text-zinc-900 leading-tight">
+                    I create{" "}
+                    <RotatingText
+                      texts={["Design", "Solutions", "Products"]}
+                      mainClassName="inline-flex px-6 py-2 bg-blue-600 text-white rounded-full overflow-hidden font-medium tracking-tight"
+                    />
+                    {" "}that matter.
+                  </p>
+                  <span className="text-sm font-medium text-zinc-400">
+                    GBDA @ UWaterloo
+                  </span>
+                </div>
+              )}
+            </motion.div>
           );
         })}
       </div>
