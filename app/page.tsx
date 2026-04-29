@@ -1,11 +1,15 @@
-// Cards 3 and 4 share Card 2's transform exactly — they sit hidden behind it,
-// adding physical depth without introducing extra visible peek layers.
+// transformOrigin "top center" anchors scaling to the top edge, so the bottom
+// shrinks upward by H*(1-scale). translateY must exceed that shrinkage to keep
+// each back card's bottom edge below the card in front of it.
+// At aspect-[21/9] on max-w-6xl, H ≈ 494px:
+//   card 1: 494*0.08 ≈ 40px shrinkage → translateY 50px gives ~10px peek
+//   card 2: 494*0.16 ≈ 79px shrinkage → translateY 95px gives ~16px peek from card 1
 const STACK_OFFSETS = [
   { translateY: 0,  scale: 1    }, // front
-  { translateY: 30, scale: 0.97 }, // first peek
-  { translateY: 60, scale: 0.94 }, // second peek
-  { translateY: 60, scale: 0.94 }, // hidden behind card 2
-  { translateY: 60, scale: 0.94 }, // hidden behind card 2
+  { translateY: 50, scale: 0.92 }, // first peek
+  { translateY: 95, scale: 0.84 }, // second peek
+  { translateY: 95, scale: 0.84 }, // hidden behind card 2
+  { translateY: 95, scale: 0.84 }, // hidden behind card 2
 ];
 
 export default function Home() {
@@ -18,7 +22,7 @@ export default function Home() {
             style={{
               zIndex: STACK_OFFSETS.length - i,
               transform: `translateY(${offset.translateY}px) scale(${offset.scale})`,
-              transformOrigin: "center center",
+              transformOrigin: "top center",
             }}
             className="absolute inset-0 rounded-[32px] border border-zinc-200 bg-white shadow-sm"
           />
