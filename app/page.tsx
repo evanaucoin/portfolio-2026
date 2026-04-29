@@ -17,17 +17,48 @@ const SLOT_STATES = [
 ];
 
 const cardSpring = { type: "spring" as const, stiffness: 300, damping: 30 };
+const exitSpring = { type: "spring" as const, stiffness: 400, damping: 30 };
 
-// Exiting card (slot 4): spring the Y immediately but delay the fade so the
-// card is visibly travelling upward before it dissolves.
+// Build the full animate target for a given slot.
+// Slot 4 gets the "flick" treatment: tilt + 3-stop opacity keyframes.
+function getAnimate(slot: number) {
+  const { y, scale, opacity } = SLOT_STATES[slot];
+  if (slot === 4) {
+    return {
+      y,
+      scale,
+      opacity: [1, 1, 0] as number[],
+      rotateX: 15,
+      rotateZ: -8,
+    };
+  }
+  return { y, scale, opacity, rotateX: 0, rotateZ: 0 };
+}
+
+// Slot 4 uses the snappier exit spring for translate/rotate.
+// Opacity is a tween with `times` so the card stays fully visible for the
+// first 55 % of its travel, then dissolves quickly at the end.
 function getTransition(slot: number) {
-  const isExiting = slot === 4;
+  if (slot === 4) {
+    return {
+      y:       exitSpring,
+      scale:   exitSpring,
+      rotateX: exitSpring,
+      rotateZ: exitSpring,
+      opacity: {
+        type: "tween" as const,
+        duration: 0.5,
+        times: [0, 0.55, 1],
+        ease: "easeIn",
+      },
+    };
+  }
   return {
-    y:      cardSpring,
-    scale:  cardSpring,
-    opacity: isExiting
-      ? { type: "tween" as const, duration: 0.2, delay: 0.15, ease: "easeIn" }
-      : { type: "tween" as const, duration: 0.15, ease: "easeOut" },
+    y:       cardSpring,
+    scale:   cardSpring,
+    rotateX: cardSpring,
+    rotateZ: cardSpring,
+    opacity: { type: "tween" as const, duration: 0.15, ease: "easeOut" },
   };
 }
 
@@ -62,17 +93,17 @@ export default function Home() {
       <div className="relative w-full max-w-6xl aspect-[21/9] overflow-visible">
         {Array.from({ length: CARD_COUNT }).map((_, i) => {
           const slot = (i - activeIndex + CARD_COUNT) % CARD_COUNT;
-          const { y, scale, opacity, zIndex } = SLOT_STATES[slot];
+          const { zIndex } = SLOT_STATES[slot];
 
           return (
             <motion.div
               key={i}
-              animate={{ y, scale, opacity }}
+              animate={getAnimate(slot)}
               transition={getTransition(slot)}
               style={{
                 zIndex,
                 transformOrigin: "top center",
-                // Invisible cards must not swallow pointer events
+                transformPerspective: 1000,
                 pointerEvents: slot >= 3 ? "none" : "auto",
               }}
               className="absolute inset-0 rounded-[32px] border border-zinc-200 bg-white shadow-sm"
