@@ -1,12 +1,11 @@
-// translateY then scale with transformOrigin "center center":
-// net bottom = H * (1 + scale) / 2 + translateY
-// Each back card's bottom lands ~10px below the one in front of it at max-w-5xl.
+// Cards 3 and 4 share Card 2's transform exactly — they sit hidden behind it,
+// adding physical depth without introducing extra visible peek layers.
 const STACK_OFFSETS = [
-  { translateY: 0,  scale: 1    },
-  { translateY: 20, scale: 0.97 },
-  { translateY: 40, scale: 0.94 },
-  { translateY: 60, scale: 0.91 },
-  { translateY: 80, scale: 0.88 },
+  { translateY: 0,  scale: 1    }, // front
+  { translateY: 15, scale: 0.97 }, // first peek
+  { translateY: 30, scale: 0.94 }, // second peek
+  { translateY: 30, scale: 0.94 }, // hidden behind card 2
+  { translateY: 30, scale: 0.94 }, // hidden behind card 2
 ];
 
 export default function Home() {
@@ -23,10 +22,7 @@ export default function Home() {
               transform: `translateY(${offset.translateY}px) scale(${offset.scale})`,
               transformOrigin: "center center",
             }}
-            className={[
-              "absolute inset-0 rounded-[40px] bg-white",
-              i === 0 ? "border border-zinc-200" : "border border-zinc-300",
-            ].join(" ")}
+            className="absolute inset-0 rounded-[40px] border border-zinc-200 bg-white shadow-sm"
           />
         ))}
       </div>
