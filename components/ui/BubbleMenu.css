@@ -3,10 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 3rem;
+  padding: 1rem; /* tight corners — 16px all sides */
 }
 
-/* ── Logo ────────────────────────────────────────────────────── */
+/* ── Logo (top-left corner) ──────────────────────────────────── */
 .bubble-logo {
   font-size: 1.875rem; /* text-3xl */
   font-weight: 600;
@@ -14,7 +14,7 @@
   color: #18181b;
   text-decoration: none;
   line-height: 1;
-  min-height: 52px; /* matches trigger size */
+  min-height: 52px;
   display: flex;
   align-items: center;
 }
@@ -23,26 +23,25 @@
   color: #18181b;
 }
 
-/* ── Right-side controls (items + toggle) ────────────────────── */
+/* ── Right-side controls: only the toggle lives here now ─────── */
 .bubble-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
 }
 
-/* ── Bubble cluster (pill-list) ──────────────────────────────── */
+/* ── Vertical bubble stack — fixed below the toggle ─────────── */
 .bubble-items {
+  position: fixed;
+  top: 5rem;    /* clears the 52px trigger + 1rem nav padding */
+  right: 1rem;  /* matches the corner padding */
+  z-index: 49;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 12px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: 0;
-  justify-content: flex-end;
 }
 
-/* ── Individual bubble (pill-col) ────────────────────────────── */
+/* ── Individual bubble ───────────────────────────────────────── */
 .bubble {
   --bubble-size: 52px; /* desktop */
   flex: 0 0 auto;
@@ -66,7 +65,8 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  min-height: 52px; /* matches trigger size */
+  justify-content: center;
+  min-height: 52px;
   padding: 0 1.25rem;
   white-space: nowrap;
   line-height: 1;
@@ -76,7 +76,7 @@
   color: #18181b; /* zinc-900 */
 }
 
-/* ── Hamburger toggle button ─────────────────────────────────── */
+/* ── Hamburger toggle button (top-right corner) ──────────────── */
 .bubble-toggle {
   width: 2.5rem;
   height: 2.5rem;
@@ -84,7 +84,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px; /* balanced for 2px-thick lines → translateY(4px) */
+  gap: 6px; /* balanced for 2px lines → exact translateY(4px) */
   background: none;
   border: none;
   cursor: pointer;
@@ -92,6 +92,8 @@
   border-radius: 0.375rem;
   transition: background-color 0.15s ease;
   flex-shrink: 0;
+  position: relative;
+  z-index: 50; /* sits above the bubble stack */
 }
 
 .bubble-toggle:hover {
@@ -108,7 +110,7 @@
   transform-origin: center;
 }
 
-/* Two lines collapse into an ✕ — translateY(4px) matches 2px line + 6px gap */
+/* Two lines collapse into an ✕ */
 .bubble-toggle.open .line-1 {
   transform: translateY(4px) rotate(45deg);
 }
@@ -119,10 +121,6 @@
 
 /* ── Mobile ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .bubble-nav {
-    padding: 1rem 1.5rem;
-  }
-
   .bubble {
     --bubble-size: 48px; /* mobile */
   }
