@@ -13,11 +13,11 @@ const SLOT_STATES = [
   { y: 60,   scale: 0.92, opacity: 1, zIndex: 4 }, // peek 1
   { y: 120,  scale: 0.84, opacity: 1, zIndex: 3 }, // peek 2
   { y: 120,  scale: 0.84, opacity: 0, zIndex: 2 }, // hidden behind peek 2
-  { y: -150, scale: 0.84, opacity: 0, zIndex: 7 }, // exiting above (highest z)
+  { y: -800, scale: 0.84, opacity: 0, zIndex: 7 }, // exiting above (highest z)
 ];
 
 const cardSpring = { type: "spring" as const, stiffness: 300, damping: 30 };
-const exitSpring = { type: "spring" as const, stiffness: 400, damping: 30 };
+const exitSpring = { type: "spring" as const, stiffness: 500, damping: 32 };
 
 // Build the full animate target for a given slot.
 // Slot 4 gets the "flick" treatment: tilt + 3-stop opacity keyframes.
@@ -27,9 +27,9 @@ function getAnimate(slot: number) {
     return {
       y,
       scale,
-      opacity: [1, 1, 0] as number[],
-      rotateX: 15,
-      rotateZ: -8,
+      opacity: [1, 1, 0.8, 0] as number[],
+      rotateX: 25,
+      rotateZ: -10,
     };
   }
   return { y, scale, opacity, rotateX: 0, rotateZ: 0 };
@@ -47,8 +47,8 @@ function getTransition(slot: number) {
       rotateZ: exitSpring,
       opacity: {
         type: "tween" as const,
-        duration: 0.5,
-        times: [0, 0.55, 1],
+        duration: 0.6,
+        times: [0, 0.5, 0.8, 1],
         ease: "easeIn",
       },
     };
