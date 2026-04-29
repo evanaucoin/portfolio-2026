@@ -1,0 +1,109 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { gsap } from 'gsap';
+import './BubbleMenu.css';
+
+interface MenuItem {
+  label: string;
+  href: string;
+  rotation: number;
+}
+
+interface BubbleMenuProps {
+  items?: MenuItem[];
+  logo?: React.ReactNode;
+}
+
+const defaultItems: MenuItem[] = [
+  { label: 'about', href: '/about', rotation: -5 },
+  { label: 'resume', href: '/resume', rotation: 5 },
+];
+
+export default function BubbleMenu({
+  items = defaultItems,
+  logo = <span>Evan AuCoin</span>,
+}: BubbleMenuProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const bubblesRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Hide all bubbles on mount before first interaction
+  useEffect(() => {
+    const els = bubblesRef.current.filter(Boolean) as HTMLDivElement[];
+    gsap.set(els, { scale: 0, opacity: 0, y: -8 });
+  }, []);
+
+  // Animate bubbles in or out when menu state changes
+  useEffect(() => {
+    if (isOpen) {
+      items.forEach((item, i) => {
+        const el = bubblesRef.current[i];
+        if (!el) return;
+        gsap.to(el, {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          rotation: item.rotation,
+          delay: i * 0.08,
+          ease: 'back.out(1.7)',
+          duration: 0.45,
+        });
+      });
+    } else {
+      const els = [...bubblesRef.current].reverse();
+      els.forEach((el, i) => {
+        if (!el) return;
+        gsap.to(el, {
+          scale: 0,
+          opacity: 0,
+          y: -8,
+          rotation: 0,
+          delay: i * 0.05,
+          ease: 'power2.in',
+          duration: 0.25,
+        });
+      });
+    }
+  }, [isOpen, items]);
+
+  return (
+    <nav className="bubble-nav">
+      <Link href="/" className="bubble-logo">
+        {logo}
+      </Link>
+
+      <div className="bubble-controls">
+        <div
+          className="bubble-items"
+          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+        >
+          {items.map((item, i) => (
+            <div
+              key={item.href}
+              ref={(el) => {
+                bubblesRef.current[i] = el;
+              }}
+              className="bubble"
+            >
+              <Link href={item.href} onClick={() => setIsOpen(false)}>
+                {item.label}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Hamburger → ✕ toggle — do not modify this logic */}
+        <button
+          className={`bubble-toggle${isOpen ? ' open' : ''}`}
+          onClick={() => setIsOpen((v) => !v)}
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+        >
+          <span className="line line-1" />
+          <span className="line line-2" />
+        </button>
+      </div>
+    </nav>
+  );
+}
