@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { StatusPod } from "@/components/ui/StatusPod";
 
 const CARD_COUNT = 5;
 
@@ -21,6 +22,7 @@ const exitSpring = { type: "spring" as const, stiffness: 160, damping: 36 };
 const backSpring = { type: "spring" as const, stiffness: 150, damping: 40 };
 
 type Direction = "forward" | "backward";
+
 
 // Slot 4 forward: flick exit with tilt + staged opacity dissolve.
 // Slot 4 backward: invisible reposition — no opacity keyframes to avoid a flash.
@@ -116,7 +118,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex h-screen items-center justify-center px-12">
+    <main className="flex h-screen flex-col items-center px-12">
+      {/* Top spacer — mirrors the bottom section so the deck lands dead-center. */}
+      <div className="flex-1" />
+
+      {/* Card deck */}
       <div className="relative w-full max-w-6xl aspect-[21/9] overflow-visible">
         {Array.from({ length: CARD_COUNT }).map((_, i) => {
           const slot = (i - activeIndex + CARD_COUNT) % CARD_COUNT;
@@ -137,6 +143,11 @@ export default function Home() {
             />
           );
         })}
+      </div>
+
+      {/* Bottom section — equal height to top spacer; pod floats in its center. */}
+      <div className="flex flex-1 items-center justify-center">
+        <StatusPod activeIndex={activeIndex} />
       </div>
     </main>
   );
