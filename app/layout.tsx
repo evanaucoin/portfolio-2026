@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geist.variable}>
-      <body className="bg-white antialiased">
+    <html lang="en" className={`${geist.variable} h-full overflow-hidden`}>
+      <body className="h-full overflow-hidden bg-white antialiased">
         <Navbar />
         {children}
       </body>

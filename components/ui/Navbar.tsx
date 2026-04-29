@@ -1,14 +1,13 @@
 import Link from "next/link";
 
 const links = [
-  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Resume", href: "/resume" },
 ];
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header className="fixed top-0 left-0 right-0 z-50">
       <nav className="flex items-center justify-between px-12 py-6">
         <Link
           href="/"
