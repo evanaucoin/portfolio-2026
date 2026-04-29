@@ -39,17 +39,18 @@ export default function Home() {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       if (isScrolling.current) return;
+      if (Math.abs(e.deltaY) <= 50) return;
+
+      isScrolling.current = true;
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 1000);
 
       setActiveIndex((prev) =>
         e.deltaY > 0
           ? (prev + 1) % CARD_COUNT
           : (prev - 1 + CARD_COUNT) % CARD_COUNT
       );
-
-      isScrolling.current = true;
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 800);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
