@@ -1,15 +1,9 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/components/ui/cn";
 
 const podSpring = { type: "spring" as const, stiffness: 150, damping: 40 };
-
-// Empty (intro/connect): compact resting pill.
-// Work (cards 1–3): expands to comfortably frame the label.
-const EMPTY_WIDTH  = 136; // ~10% smaller than the old 160
-const EMPTY_HEIGHT = 42;  // ~10% smaller than the old 48
-const WORK_WIDTH   = 384; // max-w-sm
-const WORK_HEIGHT  = 42;  // same height in both states — smooth horizontal-only expansion
 
 interface StatusPodProps {
   activeIndex: number;
@@ -20,13 +14,16 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
 
   return (
     <motion.div
-      animate={{
-        width:  isWork ? WORK_WIDTH  : EMPTY_WIDTH,
-        height: isWork ? WORK_HEIGHT : EMPTY_HEIGHT,
+      layout
+      transition={{ layout: podSpring }}
+      className={cn(
+        "flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white",
+        isWork ? "w-fit" : "w-12",
+      )}
+      style={{
+        height: 42,
+        boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
       }}
-      transition={podSpring}
-      className="flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white"
-      style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}
     >
       <AnimatePresence mode="wait">
         {isWork && (
