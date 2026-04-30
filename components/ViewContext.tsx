@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-export type View = "home" | "dzd";
+export type View = "home" | "dzd" | "prism";
 
 interface ViewContextType {
   view: View;
