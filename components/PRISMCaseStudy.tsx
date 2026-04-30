@@ -63,11 +63,11 @@ export default function PRISMCaseStudy() {
   };
 
   return (
-    <div ref={containerRef} className="h-full overflow-y-auto bg-white">
+    <div ref={containerRef} className="h-full overflow-y-auto bg-zinc-50">
       <div className="flex">
 
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
-        <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
+        <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 bg-white border-r border-zinc-100">
           <div>
             {/* Home — escape hatch */}
             <button
@@ -346,7 +346,7 @@ function GalleryContainer({
   caption?: string;
 }) {
   return (
-    <div className="rounded-[2.5rem] bg-zinc-50 p-12">
+    <div className="rounded-[2.5rem] bg-white border border-zinc-200/50 shadow-sm p-12">
       <div className="grid grid-cols-2 gap-8">
         {children}
       </div>
@@ -359,7 +359,7 @@ function GalleryContainer({
 
 function ScreenPod({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative aspect-[9/19.5] rounded-3xl overflow-hidden border border-zinc-200/50 shadow-2xl bg-white">
+    <div className="relative aspect-[9/19.5] rounded-3xl overflow-hidden bg-white">
       <Image
         src={src}
         alt={alt}
