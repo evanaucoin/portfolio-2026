@@ -6,14 +6,14 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
-  { id: "intro",      label: "Intro"       },
-  { id: "problem",    label: "Problem"     },
-  { id: "solution",   label: "Solution"    },
-  { id: "dashboard",  label: "Dashboard"   },
-  { id: "practice",   label: "Practice"    },
-  { id: "insights",   label: "Insights"    },
-  { id: "privacy",    label: "Privacy"     },
-  { id: "reflection", label: "Reflection"  },
+  { id: "intro",      label: "Intro"      },
+  { id: "problem",    label: "Problem"    },
+  { id: "solution",   label: "Solution"   },
+  { id: "dashboard",  label: "Dashboard"  },
+  { id: "practice",   label: "Practice"   },
+  { id: "insights",   label: "Insights"   },
+  { id: "privacy",    label: "Privacy"    },
+  { id: "reflection", label: "Reflection" },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -69,9 +69,10 @@ export default function PRISMCaseStudy() {
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
         <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
           <div>
+            {/* Home — escape hatch */}
             <button
               onClick={() => setView("home")}
-              className="flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-medium text-zinc-400 hover:text-blue-600 transition-colors group w-full text-left"
+              className="flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-medium text-zinc-400 hover:text-emerald-700 transition-colors group w-full text-left"
             >
               <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
               Home
@@ -89,7 +90,7 @@ export default function PRISMCaseStudy() {
                   onClick={() => scrollTo(id)}
                   className={`text-left px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                     activeSection === id
-                      ? "bg-blue-600 text-white"
+                      ? "bg-emerald-700 text-white"
                       : "text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50"
                   }`}
                 >
@@ -101,7 +102,7 @@ export default function PRISMCaseStudy() {
 
           <button
             onClick={() => setView("home")}
-            className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-blue-600 transition-colors group"
+            className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-emerald-700 transition-colors group"
           >
             <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
             Back to work
@@ -164,7 +165,7 @@ export default function PRISMCaseStudy() {
                   playsInline
                   className="max-w-sm mx-auto w-full rounded-3xl shadow-lg block"
                 >
-                  <source src="/PRISM_demo.mp4" type="video/mp4" />
+                  <source src="/prism_hero.mp4" type="video/mp4" />
                 </video>
               </div>
             </section>
@@ -180,7 +181,7 @@ export default function PRISMCaseStudy() {
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
                 Social cues are often biological barriers, not just social ones. 40% of young
                 professionals report &lsquo;social exhaustion&rsquo; as their main barrier to
-                success. PRISM bridges that gap.
+                success. PRISM bridges the gap.
               </p>
             </section>
 
@@ -218,24 +219,8 @@ export default function PRISMCaseStudy() {
               </p>
 
               <GalleryContainer caption="Left: Dashboard overview. Right: Active recording session.">
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_dashboardv2.png"
-                    alt="PRISM dashboard — social spectrum overview"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_recordingsesh.png"
-                    alt="PRISM recording session — live interaction capture"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
+                <ScreenPod src="/prism_dashboard.png" alt="PRISM dashboard — social spectrum overview" />
+                <ScreenPod src="/prism_recording.png" alt="PRISM recording session — live interaction capture" />
               </GalleryContainer>
             </section>
 
@@ -254,24 +239,8 @@ export default function PRISMCaseStudy() {
               </p>
 
               <GalleryContainer caption="Targeted quizzes surface the exact skill needed in the moment.">
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_practiceV1.png"
-                    alt="PRISM practice — guided skill-building quiz"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_practiceV2.png"
-                    alt="PRISM practice — scenario simulation"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
+                <ScreenPod src="/prism_practice_hub.png" alt="PRISM practice hub — skill selection" />
+                <ScreenPod src="/prism_practice_quiz.png" alt="PRISM practice quiz — guided scenario" />
               </GalleryContainer>
             </section>
 
@@ -289,24 +258,8 @@ export default function PRISMCaseStudy() {
               </p>
 
               <GalleryContainer caption="Longitudinal insights track how your communication evolves.">
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_insightsV1.png"
-                    alt="PRISM insights — post-session breakdown"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
-                <ScreenPod>
-                  <Image
-                    src="/PRISM_insightsV2.png"
-                    alt="PRISM insights — trend view over time"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </ScreenPod>
+                <ScreenPod src="/prism_insights_main.png" alt="PRISM insights — post-session breakdown" />
+                <ScreenPod src="/prism_insights_detail.png" alt="PRISM insights — detail view" />
               </GalleryContainer>
             </section>
 
@@ -351,9 +304,7 @@ export default function PRISMCaseStudy() {
                     JOURNEY
                   </h2>
                   <p className="text-zinc-500 text-lg">Redesigning navigation for the modern traveler</p>
-                  <button
-                    className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-700 transition-colors group"
-                  >
+                  <button className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-700 transition-colors group">
                     View Project
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </button>
@@ -381,7 +332,7 @@ export default function PRISMCaseStudy() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-[10px] font-semibold tracking-[0.15em] text-blue-600 uppercase mb-4 block">
+    <span className="text-[10px] font-semibold tracking-[0.15em] text-emerald-700 uppercase mb-4 block">
       {children}
     </span>
   );
@@ -406,10 +357,16 @@ function GalleryContainer({
   );
 }
 
-function ScreenPod({ children }: { children: React.ReactNode }) {
+function ScreenPod({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative aspect-[9/19.5] rounded-3xl overflow-hidden border border-zinc-200/50 shadow-2xl bg-white">
-      {children}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-contain"
+        sizes="(max-width: 768px) 50vw, 380px"
+      />
     </div>
   );
 }
