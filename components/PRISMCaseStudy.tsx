@@ -304,7 +304,10 @@ export default function PRISMCaseStudy() {
                     JOURNEY
                   </h2>
                   <p className="text-zinc-500 text-lg">Redesigning navigation for the modern traveler</p>
-                  <button className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-700 transition-colors group">
+                  <button
+                    onClick={() => setView("journey")}
+                    className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-700 transition-colors group"
+                  >
                     View Project
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </button>
