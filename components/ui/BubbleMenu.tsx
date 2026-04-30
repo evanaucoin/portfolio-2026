@@ -22,9 +22,8 @@ interface BubbleMenuProps {
 const defaultItems: MenuItem[] = [
   { label: 'home',     href: '/',                                                        rotation: -8 },
   { label: 'about',    href: '/about',                                                   rotation:  5 },
-  { label: 'resume',   href: '/resume',                                                  rotation: -3 },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/evan-aucoin-184229354',        rotation:  7, target: '_blank', rel: 'noopener noreferrer' },
-  { label: 'email',    href: 'mailto:eaucoin@uwaterloo.ca',                              rotation: -6 },
+  { label: 'email',    href: 'mailto:eaucoin@uwaterloo.ca',                              rotation: -6, target: '_blank' },
 ];
 
 export default function BubbleMenu({
