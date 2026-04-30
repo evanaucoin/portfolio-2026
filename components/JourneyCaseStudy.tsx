@@ -11,7 +11,6 @@ const SECTIONS = [
   { id: "solution",   label: "Solution"   },
   { id: "process",    label: "Process"    },
   { id: "interface",  label: "Interface"  },
-  { id: "social",     label: "Social"     },
   { id: "reflection", label: "Reflection" },
 ] as const;
 
@@ -98,52 +97,49 @@ export default function JourneyCaseStudy() {
           <div className="max-w-4xl mx-auto px-8 lg:px-16 pt-32 pb-40">
 
             {/* ── INTRO ──────────────────────────────────────────────── */}
-            <section id="journey-intro" className="mb-32">
+            <section id="journey-intro" className="mb-24">
 
-              {/* Project summary — 12-col gutter grid */}
+              {/* 12-col gutter grid */}
               <div className="grid grid-cols-12 gap-16 mb-20">
 
-                {/* cols 1–7: title + description */}
+                {/* cols 1–7 */}
                 <div className="col-span-7">
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     JOURNEY
                   </h1>
                   <p className="text-[17px] text-zinc-500 leading-loose">
-                    In a world obsessed with instant gratification, Journey redesigns the standard
-                    navigation app. Instead of just giving you the fastest route from A to B, it
-                    uses AI to curate a personalized itinerary of meaningful stops along the way.
-                    It brings the magic back to the road trip.
+                    Navigation apps are built for speed, but Journey is built for the experience.
+                    Using AI, it turns travel from Toronto to NYC into a curated itinerary of stops
+                    that actually matter to you. This project was my favorite because we prioritized
+                    deep UX thinking over quick UI.
                   </p>
                 </div>
 
-                {/* col 8: intentional gutter — empty */}
+                {/* col 8: intentional gutter */}
 
-                {/* cols 9–12: metadata */}
+                {/* cols 9–12 */}
                 <div className="col-span-4 col-start-9 flex flex-col pt-1">
                   <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4">Team</p>
                   <ul className="space-y-2 text-[15px] text-zinc-500">
                     <li>1 Design Lead</li>
                     <li>2 Designers (Me)</li>
                     <li>3 Researchers (Me)</li>
-                    <li>Team of 4</li>
                   </ul>
-                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-2 mt-8">Focus</p>
-                  <p className="text-[15px] text-zinc-500">UX Research &amp; Wireframing</p>
+                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-2 mt-8">Role</p>
+                  <p className="text-[15px] text-zinc-500">UX Architecture &amp; Wireframing</p>
                 </div>
               </div>
 
-              {/* Hero — wide gallery (no video) */}
-              <div className="bg-zinc-50 rounded-[2.5rem] p-12 w-full">
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-zinc-200/50">
-                  <Image
-                    src="/Journey_preview.png"
-                    alt="Journey — AI-curated road trip itinerary app"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1280px) 100vw, 896px"
-                    priority
-                  />
-                </div>
+              {/* ── HERO — editorial bleed, no container ── */}
+              <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src="/Journey_preview.png"
+                  alt="Journey — AI-curated road trip itinerary app"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 896px"
+                  priority
+                />
               </div>
             </section>
 
@@ -153,7 +149,7 @@ export default function JourneyCaseStudy() {
             <section id="journey-problem" className="py-32">
               <SectionLabel>Problem</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                The Joy Is in the Journey
+                The Route Problem
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
                 Navigation apps optimize for speed, making travel feel like a chore. We wanted
@@ -172,7 +168,7 @@ export default function JourneyCaseStudy() {
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
                 Tell the AI you&rsquo;re driving from Toronto to NYC, and it builds a route
-                based on your family&rsquo;s preferences, turning a boring drive into an
+                based on your family&rsquo;s preferences — turning a boring drive into an
                 adventure.
               </p>
             </section>
@@ -185,102 +181,100 @@ export default function JourneyCaseStudy() {
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 UX Before Pixels
               </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                While the Design Lead handled the final UI, I focused heavily on the UX. We
-                spent weeks in ideation. This was my favorite project because we prioritized
-                thoughtful systems over quick pixels.
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                I led the UX research and wireframing while the Design Lead focused on the
+                final visual system. We spent weeks in ideation, using Kanban to manage our
+                &ldquo;fail-fast&rdquo; iterations.
               </p>
 
-              <div className="rounded-[2.5rem] bg-zinc-50 border border-zinc-200/50 p-10">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100">
-                    <Image
-                      src="/Journey_kanban.png"
-                      alt="Journey ideation — kanban board and task mapping"
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 400px"
-                    />
-                  </div>
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100">
-                    <Image
-                      src="/Journey_wireframe.png"
-                      alt="Journey wireframes — low-fidelity UX exploration"
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 400px"
-                    />
-                  </div>
+              {/* ── Stacked Desk — kanban on top, wireframe peeking behind ── */}
+              <div className="relative">
+                {/* Kanban — front layer */}
+                <div
+                  className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl z-10"
+                  style={{ transform: "rotate(-0.75deg)" }}
+                >
+                  <Image
+                    src="/Journey_kanban.png"
+                    alt="Journey ideation — kanban board and task mapping"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1280px) 100vw, 896px"
+                  />
                 </div>
-                <p className="text-sm text-zinc-400 text-center mt-8 leading-snug">
-                  Left: Kanban ideation board. Right: Low-fidelity wireframes.
-                </p>
+                {/* Wireframe — back layer, peeking from below */}
+                <div
+                  className="relative aspect-video rounded-3xl overflow-hidden shadow-xl z-0 -mt-20 ml-6"
+                  style={{ transform: "rotate(1.25deg)" }}
+                >
+                  <Image
+                    src="/Journey_wireframe.png"
+                    alt="Journey wireframes — low-fidelity UX exploration"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1280px) 100vw, 896px"
+                  />
+                </div>
               </div>
+              <p className="text-sm text-zinc-400 text-center mt-8 leading-snug">
+                Kanban ideation (front) over low-fidelity wireframes (behind).
+              </p>
             </section>
 
             <hr className="border-zinc-100" />
 
-            {/* ── INTERFACE ──────────────────────────────────────────── */}
+            {/* ── INTERFACE — merged itinerary + social ────────────────── */}
             <section id="journey-interface" className="py-32">
               <SectionLabel>Interface</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                The AI-Curated Itinerary
+                The Final System
               </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                The final AI-curated itinerary.
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                The final system combines AI-curated itineraries with a social layer for
+                sharing travel snapshots.
               </p>
 
-              <div className="rounded-[2.5rem] bg-zinc-50 border border-zinc-200/50 p-10">
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-100">
-                  <Image
-                    src="/Journey_UI.png"
-                    alt="Journey UI — final AI-curated itinerary interface"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1280px) 100vw, 800px"
-                  />
+              {/* Side-by-side floating panels — no grey frames */}
+              <div className="flex gap-8 items-start justify-center flex-wrap">
+                <div className="max-w-sm w-full flex-1 min-w-[240px]">
+                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/Journey_UI.png"
+                      alt="Journey UI — AI-curated itinerary interface"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 384px"
+                    />
+                  </div>
+                  <p className="text-sm text-zinc-400 text-center mt-4">Itinerary view</p>
+                </div>
+                <div className="max-w-sm w-full flex-1 min-w-[240px]">
+                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/Journey_Social.png"
+                      alt="Journey social feed — sharing curated travel stops"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 384px"
+                    />
+                  </div>
+                  <p className="text-sm text-zinc-400 text-center mt-4">Social feed</p>
                 </div>
               </div>
             </section>
 
             <hr className="border-zinc-100" />
 
-            {/* ── SOCIAL ─────────────────────────────────────────────── */}
-            <section id="journey-social" className="py-32">
-              <SectionLabel>Social</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Share the Road
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                Travel is better shared. The social feed lets users share snapshots of their
-                curated stops.
-              </p>
-
-              <div className="rounded-[2.5rem] bg-zinc-50 border border-zinc-200/50 p-10">
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-zinc-100">
-                  <Image
-                    src="/Journey_Social.png"
-                    alt="Journey social feed — sharing curated travel stops"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 1280px) 100vw, 800px"
-                  />
-                </div>
-              </div>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── REFLECTION ─────────────────────────────────────────── */}
+            {/* ── REFLECTION ─────────────────────────────────────────────── */}
             <section id="journey-reflection" className="py-32">
               <SectionLabel>Reflection</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 Rigor Over Speed
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                This team taught me the value of rigorous ideation. By separating the UX and UI
-                roles, we were able to build a much deeper, more thoughtful product than if we
-                had rushed straight to high-fidelity designs.
+                Journey taught me that rigorous UX research is the foundation of a great
+                product. By separating roles, we built a deeper itinerary system that AI can
+                actually use to generate meaningful travel.
               </p>
             </section>
 
@@ -322,7 +316,7 @@ export default function JourneyCaseStudy() {
   );
 }
 
-// ── Shared sub-components ─────────────────────────────────────────────────────
+// ── Sub-components ────────────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
