@@ -165,7 +165,7 @@ export default function PRISMCaseStudy() {
                   playsInline
                   className="max-w-sm mx-auto w-full rounded-3xl shadow-lg block"
                 >
-                  <source src="/prism_hero.mp4" type="video/mp4" />
+                  <source src="/PRISM_demo.mp4" type="video/mp4" />
                 </video>
               </div>
             </section>
