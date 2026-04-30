@@ -100,13 +100,24 @@ export default function PRISMCaseStudy() {
             </nav>
           </div>
 
-          <button
-            onClick={() => setView("home")}
-            className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-emerald-700 transition-colors group"
-          >
-            <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
-            Back to work
-          </button>
+          {/* Footer — back link + build manifest */}
+          <div className="flex flex-col gap-4">
+            <button
+              onClick={() => setView("home")}
+              className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-emerald-700 transition-colors group"
+            >
+              <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
+              Back to work
+            </button>
+            <hr className="border-zinc-100" />
+            <div className="font-mono text-[10px] text-zinc-400 leading-relaxed">
+              <p className="font-semibold mb-1.5">BUILD_MANIFEST_v1.0</p>
+              <p>BUILT WITH: Vibe Coding / Cursor / LLM (Sonnet 3.5)</p>
+              <p>FRAMEWORK: Next.js 15 / React 19 / TypeScript</p>
+              <p>INTERFACE: Tailwind CSS / Framer Motion</p>
+              <p>DEPLOY: Vercel / Git</p>
+            </div>
+          </div>
         </aside>
 
         {/* ── MAIN CONTENT ─────────────────────────────────────────── */}
