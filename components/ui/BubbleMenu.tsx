@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import './BubbleMenu.css';
+import { useView } from '@/components/ViewContext';
 
 interface MenuItem {
   label: string;
@@ -32,6 +33,7 @@ export default function BubbleMenu({
 }: BubbleMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const bubblesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const { view, setView } = useView();
 
   // Hide all bubbles on mount before first interaction
   useEffect(() => {
@@ -96,7 +98,13 @@ export default function BubbleMenu({
                 className="pill-link"
                 target={item.target}
                 rel={item.rel}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  if (item.href === '/' && view !== 'home') {
+                    e.preventDefault();
+                    setView('home');
+                  }
+                  setIsOpen(false);
+                }}
               >
                 {item.label}
               </Link>
