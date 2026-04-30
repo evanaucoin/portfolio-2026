@@ -266,9 +266,12 @@ export default function Home() {
                     className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-12 pb-16 z-20"
                     style={{ transform: "translateZ(0)" }}
                   >
-                    <h2 className="text-6xl font-medium text-white">Journey</h2>
+                    <h2 className="text-6xl font-medium text-white">JOURNEY</h2>
+                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                      Project: Itinerary travel app
+                    </p>
                     <p className="text-lg text-zinc-200 max-w-lg">
-                      Redesigning navigation for the modern traveler
+                      An AI-driven experience that emphasizes the journey, not just the destination.
                     </p>
                   </div>
                 </>
@@ -301,8 +304,11 @@ export default function Home() {
                     style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)", transform: "translateZ(0)" }}
                   >
                     <h2 className="text-6xl font-medium text-white">PRISM</h2>
+                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                      Project: Social coaching app
+                    </p>
                     <p className="text-lg text-zinc-200 max-w-lg">
-                      Designed to build user&apos;s social intelligence
+                      Turning &apos;invisible&apos; social cues into clear, actionable insights.
                     </p>
                   </div>
                 </>
@@ -335,8 +341,11 @@ export default function Home() {
                     style={{ transform: "translateZ(0)" }}
                   >
                     <h2 className="text-6xl font-medium text-white">DZD</h2>
+                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                      Project: Fitness companion app
+                    </p>
                     <p className="text-lg text-zinc-200 max-w-lg">
-                      Redesigning the search experience for active living
+                      Redesigning the search experience for active living.
                     </p>
                   </div>
                 </>
