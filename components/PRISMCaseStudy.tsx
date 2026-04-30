@@ -217,8 +217,8 @@ export default function PRISMCaseStudy() {
                 engagement.
               </p>
 
-              <div className="grid grid-cols-2 gap-6">
-                <PhoneFrame>
+              <GalleryContainer caption="Left: Dashboard overview. Right: Active recording session.">
+                <ScreenPod>
                   <Image
                     src="/PRISM_dashboardv2.png"
                     alt="PRISM dashboard — social spectrum overview"
@@ -226,8 +226,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-                <PhoneFrame>
+                </ScreenPod>
+                <ScreenPod>
                   <Image
                     src="/PRISM_recordingsesh.png"
                     alt="PRISM recording session — live interaction capture"
@@ -235,9 +235,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-              </div>
-              <Caption>Left: Dashboard overview. Right: Active recording session.</Caption>
+                </ScreenPod>
+              </GalleryContainer>
             </section>
 
             <hr className="border-zinc-100" />
@@ -254,8 +253,8 @@ export default function PRISMCaseStudy() {
                 over immediately.
               </p>
 
-              <div className="grid grid-cols-2 gap-6">
-                <PhoneFrame>
+              <GalleryContainer caption="Targeted quizzes surface the exact skill needed in the moment.">
+                <ScreenPod>
                   <Image
                     src="/PRISM_practiceV1.png"
                     alt="PRISM practice — guided skill-building quiz"
@@ -263,8 +262,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-                <PhoneFrame>
+                </ScreenPod>
+                <ScreenPod>
                   <Image
                     src="/PRISM_practiceV2.png"
                     alt="PRISM practice — scenario simulation"
@@ -272,9 +271,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-              </div>
-              <Caption>Targeted quizzes surface the exact skill needed in the moment.</Caption>
+                </ScreenPod>
+              </GalleryContainer>
             </section>
 
             <hr className="border-zinc-100" />
@@ -290,8 +288,8 @@ export default function PRISMCaseStudy() {
                 worked, what to refine, and how your social intelligence is trending over time.
               </p>
 
-              <div className="grid grid-cols-2 gap-6">
-                <PhoneFrame>
+              <GalleryContainer caption="Longitudinal insights track how your communication evolves.">
+                <ScreenPod>
                   <Image
                     src="/PRISM_insightsV1.png"
                     alt="PRISM insights — post-session breakdown"
@@ -299,8 +297,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-                <PhoneFrame>
+                </ScreenPod>
+                <ScreenPod>
                   <Image
                     src="/PRISM_insightsV2.png"
                     alt="PRISM insights — trend view over time"
@@ -308,9 +306,8 @@ export default function PRISMCaseStudy() {
                     className="object-contain"
                     sizes="(max-width: 768px) 50vw, 380px"
                   />
-                </PhoneFrame>
-              </div>
-              <Caption>Longitudinal insights track how your communication evolves.</Caption>
+                </ScreenPod>
+              </GalleryContainer>
             </section>
 
             <hr className="border-zinc-100" />
@@ -390,24 +387,29 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PhoneFrame({
+function GalleryContainer({
   children,
-  className = "",
+  caption,
 }: {
   children: React.ReactNode;
-  className?: string;
+  caption?: string;
 }) {
   return (
-    <div
-      className={`relative aspect-[9/19.5] rounded-2xl overflow-hidden bg-zinc-50 border border-zinc-100 ${className}`}
-    >
-      {children}
+    <div className="rounded-[2.5rem] bg-zinc-50 p-12">
+      <div className="grid grid-cols-2 gap-8">
+        {children}
+      </div>
+      {caption && (
+        <p className="text-sm text-zinc-400 text-center mt-8 leading-snug">{caption}</p>
+      )}
     </div>
   );
 }
 
-function Caption({ children }: { children: React.ReactNode }) {
+function ScreenPod({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-sm text-zinc-400 text-center mt-4 leading-snug">{children}</p>
+    <div className="relative aspect-[9/19.5] rounded-3xl overflow-hidden border border-zinc-200/50 shadow-2xl bg-white">
+      {children}
+    </div>
   );
 }
