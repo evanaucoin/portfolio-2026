@@ -55,6 +55,12 @@
   overflow: hidden;
   opacity: 0; /* GSAP controls visibility */
   will-change: transform, opacity;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.bubble:hover {
+  background-color: #2563eb; /* blue-600 */
+  border-color: transparent;
 }
 
 /* ── Pill link (inner <a>) ───────────────────────────────────── */
@@ -70,10 +76,11 @@
   padding: 0 1.25rem;
   white-space: nowrap;
   line-height: 1;
+  transition: color 0.25s ease;
 }
 
 .pill-link:hover {
-  color: #18181b; /* zinc-900 */
+  color: #ffffff;
 }
 
 /* ── Hamburger toggle button (top-right corner) ──────────────── */
