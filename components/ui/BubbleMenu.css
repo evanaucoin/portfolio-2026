@@ -16,7 +16,7 @@
   line-height: 1;
   min-height: 52px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .bubble-logo:hover {
@@ -32,7 +32,7 @@
 /* ── Vertical bubble stack — fixed below the toggle ─────────── */
 .bubble-items {
   position: fixed;
-  top: 5rem;    /* clears the 52px trigger + 1rem nav padding */
+  top: 8rem;    /* clears the taller logo + 1rem nav padding */
   right: 1rem;  /* matches the corner padding */
   z-index: 49;
   display: flex;
