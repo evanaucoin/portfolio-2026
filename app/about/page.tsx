@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -66,6 +67,8 @@ function Section({ title, children, delay = 0 }: SectionProps) {
 }
 
 export default function About() {
+  const [thriftingOpen, setThriftingOpen] = useState(false);
+
   return (
     <main className="h-screen overflow-y-auto">
       <div className="mx-auto max-w-2xl px-6 pt-32 pb-24">
@@ -82,7 +85,7 @@ export default function About() {
             Hi, I&apos;m Evan.
           </h1>
           <p className="text-zinc-500">
-            Product Designer | Seeking Fall 2026 Internships
+            Aspiring Product Designer | Seeking Fall 2026 Internships
           </p>
         </motion.div>
 
@@ -94,18 +97,120 @@ export default function About() {
           variants={fadeUp}
           className="mb-10 space-y-4 text-zinc-600 leading-relaxed"
         >
+          {/* Paragraph 1 — academic intro with inline links */}
           <p>
-            I&apos;m a third-year Global Business and Digital Arts student at the
-            University of Waterloo, minoring in Entrepreneurship. I live at the
-            intersection of business strategy, human-centric design, and AI
-            orchestration.
-          </p>
-          <p>
-            My goal is to understand how organizations truly scale. Whether I&apos;m
-            leading the GBDA Society or sprinting through a 3-day design
-            competition, I focus on bridging the gap between complex technical
+            I&apos;m a third-year{" "}
+            <a
+              href="https://uwaterloo.ca/stratford-school-of-interaction-design-and-business/global-business-and-digital-arts"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+            >
+              Global Business and Digital Arts (GBDA)
+            </a>{" "}
+            student at the University of Waterloo, minoring in{" "}
+            <a
+              href="https://uwaterloo.ca/conrad-school-entrepreneurship-business/undergraduate-students/minor-entrepreneurship"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+            >
+              Entrepreneurship (BET)
+            </a>
+            . Whether I&apos;m leading the GBDA Society or sprinting through a 3-day
+            design competition, I focus on bridging the gap between technical
             systems and meaningful user experiences.
           </p>
+
+          {/* Paragraph 2 — personal interests with thrifting accordion trigger */}
+          <p>
+            Outside of academics I have a passion for ping pong, weight lifting,
+            collecting fragrances and funko pops, then also{" "}
+            <button
+              onClick={() => setThriftingOpen((v) => !v)}
+              className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-blue-600 font-medium transition-colors ${
+                thriftingOpen
+                  ? "bg-blue-100"
+                  : "bg-blue-50 hover:bg-blue-100"
+              }`}
+            >
+              thrifting :)
+              <motion.span
+                animate={{ rotate: thriftingOpen ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="inline-block text-xs leading-none"
+              >
+                ▾
+              </motion.span>
+            </button>
+          </p>
+
+          {/* Thrifting accordion */}
+          <AnimatePresence initial={false}>
+            {thriftingOpen && (
+              <motion.div
+                key="thrifting-panel"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <div className="pt-2 pb-1 space-y-4">
+                  {/* YouTube embed — responsive 16:9 wrapper */}
+                  <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingTop: "56.25%" }}>
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
+                      src="https://www.youtube.com/embed/-me5MWMKBX0?si=yNa6nmsAKq4hQGwB"
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+
+                  {/* Mission text */}
+                  <p className="text-sm text-zinc-500 leading-relaxed">
+                    <span className="font-semibold text-zinc-700">MISSION:</span>{" "}
+                    What is The Greater Toronto Area&apos;s impact within the circular
+                    economy? At 6am three of my buddies and I hopped in a car and
+                    drove from Waterloo to downtown Toronto. We had the amazing
+                    opportunity to speak and interview with the founder of{" "}
+                    <a
+                      href="https://www.designwith.ca/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-800 font-medium underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+                    >
+                      DESIGNwith
+                    </a>
+                    . There we learned how this circular design and research lab is
+                    playing an active role in improving Toronto&apos;s sustainability and
+                    aiding the community through employing immigrant and refugee
+                    women. We also had the chance to see what is being done locally
+                    to UWaterloo. We had the opportunity to receive backstage access
+                    and learn from one of UWaterloo and Laurier&apos;s largest
+                    initiatives,{" "}
+                    <a
+                      href="https://www.instagram.com/fashionforchange/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-800 font-medium underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+                    >
+                      Fashion for Change
+                    </a>
+                    . This is where students build and play a role in the KW
+                    region&apos;s sustainability efforts by repurposing clothing by
+                    bringing it new life. Ultimately, I feel extremely grateful for
+                    having a hand in this documentary&apos;s production as someone who
+                    enjoys thrifting and having a helping hand in whatever way I
+                    can for the community.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* ── Leadership ─────────────────────────────────────────────── */}
@@ -208,21 +313,6 @@ export default function About() {
             ))}
           </div>
         </Section>
-
-        {/* ── Personal ───────────────────────────────────────────────── */}
-        <motion.div
-          custom={6}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="border-t border-zinc-200 pt-6"
-        >
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            Outside of design, I&apos;m deep-diving into AI prompt engineering,
-            participating in case competitions, or exploring the intersection of
-            entrepreneurship and digital culture.
-          </p>
-        </motion.div>
 
         {/* ── Contact ────────────────────────────────────────────────── */}
         <motion.div
