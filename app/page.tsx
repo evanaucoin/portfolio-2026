@@ -38,12 +38,7 @@ const SLOT_STATES = [
   { y: -800, scale: 0.84, opacity: 0, zIndex: 7 }, // exit staging (highest z)
 ];
 
-// Forward deck motion — snappy step up through the stack.
-const cardSpring = { type: "spring" as const, stiffness: 380, damping: 36 };
-// Forward exit — the flicked card launches off the top.
-const exitSpring = { type: "spring" as const, stiffness: 280, damping: 32 };
-// Backward motion — fast, decisive snap back down.
-const backSpring = { type: "spring" as const, stiffness: 440, damping: 38 };
+const easeTransition = { duration: 0.5, ease: "easeOut" } as const;
 
 type Direction = "forward" | "backward";
 
@@ -70,45 +65,8 @@ function getAnimate(slot: number, dir: Direction) {
   return { y, scale, opacity, rotateX: 0, rotateZ: 0 };
 }
 
-function getTransition(slot: number, dir: Direction) {
-  // ── Forward exit ────────────────────────────────────────────────────────────
-  if (slot === 4 && dir === "forward") {
-    return {
-      y:       exitSpring,
-      scale:   exitSpring,
-      rotateX: exitSpring,
-      rotateZ: exitSpring,
-      opacity: {
-        type: "tween" as const,
-        duration: 0.35,
-        times: [0, 0.4, 0.75, 1],
-        ease: "easeIn",
-      },
-    };
-  }
-
-  // ── Backward pass — fast, no rotation overhead ───────────────────────────────
-  if (dir === "backward") {
-    return {
-      y:     backSpring,
-      scale: backSpring,
-      // Cards target rotateX/Z 0 on backward; let them snap there instantly.
-      rotateX: { type: "tween" as const, duration: 0.1, ease: "easeOut" },
-      rotateZ: { type: "tween" as const, duration: 0.1, ease: "easeOut" },
-      opacity: slot === 0
-        ? { type: "tween" as const, duration: 0.15, ease: "easeOut" }
-        : { type: "tween" as const, duration: 0.08, ease: "easeOut" },
-    };
-  }
-
-  // ── Default forward ─────────────────────────────────────────────────────────
-  return {
-    y:       cardSpring,
-    scale:   cardSpring,
-    rotateX: cardSpring,
-    rotateZ: cardSpring,
-    opacity: { type: "tween" as const, duration: 0.12, ease: "easeOut" },
-  };
+function getTransition(_slot: number, _dir: Direction) {
+  return easeTransition;
 }
 
 export default function Home() {
@@ -416,7 +374,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <DZDCaseStudy />
@@ -432,7 +390,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <PRISMCaseStudy />
@@ -448,7 +406,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <JourneyCaseStudy />
