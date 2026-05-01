@@ -104,7 +104,7 @@ export default function About() {
               href="https://uwaterloo.ca/stratford-school-of-interaction-design-and-business/global-business-and-digital-arts"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+              className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
             >
               Global Business and Digital Arts (GBDA)
             </a>{" "}
@@ -113,11 +113,20 @@ export default function About() {
               href="https://uwaterloo.ca/conrad-school-entrepreneurship-business/undergraduate-students/minor-entrepreneurship"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+              className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
             >
               Entrepreneurship (BET)
             </a>
-            . Whether I&apos;m leading the GBDA Society or sprinting through a 3-day
+            . Whether I&apos;m leading the{" "}
+            <a
+              href="https://uwaterloo.ca/stratford-school-of-interaction-design-and-business/global-business-and-digital-arts/student-opportunities-gbda/gbda-society"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
+            >
+              GBDA Society
+            </a>{" "}
+            or sprinting through a 3-day
             design competition, I focus on bridging the gap between technical
             systems and meaningful user experiences.
           </p>
@@ -181,7 +190,7 @@ export default function About() {
                       href="https://www.designwith.ca/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-800 font-medium underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+                      className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
                     >
                       DESIGNwith
                     </a>
@@ -196,7 +205,7 @@ export default function About() {
                       href="https://www.instagram.com/fashionforchange/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-800 font-medium underline underline-offset-2 decoration-zinc-300 hover:decoration-blue-500 transition-colors"
+                      className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
                     >
                       Fashion for Change
                     </a>
@@ -217,26 +226,24 @@ export default function About() {
         <Section title="Leadership" delay={2}>
           <div className="space-y-4">
             {[
-              {
-                role: "President, GBDA Society",
-                location: "Waterloo, ON",
-                period: "APR 2026 – PRESENT",
-              },
-              {
-                role: "Dir. of Operations, GBDA Society",
-                location: "Waterloo, ON",
-                period: "DEC 2025 – APR 2026",
-              },
-              {
-                role: "Ops. Coordinator, GBDA Society",
-                location: "Waterloo, ON",
-                period: "SEP 2025 – DEC 2025",
-              },
+              { prefix: "President,",         period: "APR 2026 – PRESENT"  },
+              { prefix: "Dir. of Operations,", period: "DEC 2025 – APR 2026" },
+              { prefix: "Ops. Coordinator,",   period: "SEP 2025 – DEC 2025" },
             ].map((item) => (
               <div key={item.period} className="flex items-baseline justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-zinc-900">{item.role}</p>
-                  <p className="text-xs text-zinc-400">{item.location}</p>
+                  <p className="text-sm font-medium text-zinc-900">
+                    {item.prefix}{" "}
+                    <a
+                      href="https://uwaterloo.ca/stratford-school-of-interaction-design-and-business/global-business-and-digital-arts/student-opportunities-gbda/gbda-society"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
+                    >
+                      GBDA Society
+                    </a>
+                  </p>
+                  <p className="text-xs text-zinc-400">Waterloo, ON</p>
                 </div>
                 <p className="text-xs text-zinc-400 whitespace-nowrap shrink-0">{item.period}</p>
               </div>
@@ -287,7 +294,6 @@ export default function About() {
             </div>
             <div>
               <p className="text-sm font-medium text-zinc-900">Minor in Entrepreneurship</p>
-              <p className="text-xs text-zinc-400">Honours Co-op Program</p>
             </div>
           </div>
         </Section>
