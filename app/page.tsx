@@ -416,7 +416,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <DZDCaseStudy />
@@ -432,7 +432,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <PRISMCaseStudy />
@@ -448,7 +448,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
-            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+            transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
             className="fixed inset-0 z-[40] bg-white"
           >
             <JourneyCaseStudy />

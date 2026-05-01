@@ -162,7 +162,7 @@ export default function About() {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+                transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] as const }}
                 style={{ overflow: "hidden" }}
               >
                 <div className="pt-2 pb-1 space-y-4">
