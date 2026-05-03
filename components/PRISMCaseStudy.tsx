@@ -7,16 +7,12 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
-  { id: "intro",      label: "Intro"        },
-  { id: "problem",    label: "Problem"      },
-  { id: "personas",   label: "Personas"     },
-  { id: "process",    label: "Process"      },
-  { id: "solution",   label: "Solution"     },
-  { id: "dashboard",  label: "Dashboard"    },
-  { id: "practice",   label: "Practice"     },
-  { id: "insights",   label: "Insights"     },
-  { id: "privacy",    label: "Privacy"      },
-  { id: "reflection", label: "Reflection"   },
+  { id: "intro",      label: "Intro"      },
+  { id: "problem",    label: "Problem"    },
+  { id: "solution",   label: "Solution"   },
+  { id: "process",    label: "Process"    },
+  { id: "interface",  label: "Interface"  },
+  { id: "reflection", label: "Reflection" },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -66,13 +62,12 @@ export default function PRISMCaseStudy() {
   };
 
   return (
-    <div ref={containerRef} className="h-full overflow-y-auto bg-zinc-50">
+    <div ref={containerRef} className="h-full overflow-y-auto bg-white">
       <div className="flex">
 
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
-        <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 bg-white border-r border-zinc-100">
+        <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
           <div>
-            {/* Home — escape hatch */}
             <button
               onClick={() => setView("home")}
               className="flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-medium text-zinc-400 hover:text-emerald-700 transition-colors group w-full text-left"
@@ -119,10 +114,8 @@ export default function PRISMCaseStudy() {
             {/* ── INTRO ──────────────────────────────────────────────── */}
             <section id="prism-intro" className="mb-32">
 
-              {/* Project summary — 12-col gutter grid */}
               <div className="grid grid-cols-12 gap-16 mb-20">
 
-                {/* cols 1–7: title + description */}
                 <div className="col-span-7">
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     PRISM
@@ -135,9 +128,6 @@ export default function PRISMCaseStudy() {
                   </p>
                 </div>
 
-                {/* col 8: intentional gutter — empty */}
-
-                {/* cols 9–12: metadata */}
                 <div className="col-span-4 col-start-9 flex flex-col pt-1">
                   <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4">Team</p>
                   <ul className="space-y-2 text-[15px] text-zinc-500">
@@ -150,7 +140,6 @@ export default function PRISMCaseStudy() {
                 </div>
               </div>
 
-              {/* Hero video — phone pod */}
               <div className="relative rounded-3xl bg-zinc-100 p-10">
                 <button
                   onClick={togglePlay}
@@ -190,40 +179,21 @@ export default function PRISMCaseStudy() {
 
             <hr className="border-zinc-100" />
 
-            {/* ── PERSONAS ───────────────────────────────────────────── */}
-            <section id="prism-personas" className="py-32">
-              <SectionLabel>Discovery</SectionLabel>
+            {/* ── SOLUTION ───────────────────────────────────────────── */}
+            <section id="prism-solution" className="py-32">
+              <SectionLabel>Solution</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Defining the User
+                Refract the Signal
               </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
-                Social friction is universal, but its impact is most critical in the workplace. I
-                anchored the design in three archetypes: Alex, whose indecision is eased by
-                reviewing specific word choices; Sarah, who manages anxiety with leadership through
-                real-time conversational progression; and Elliot, a manager building self-assurance
-                by confirming his conviction against how he&rsquo;s actually perceived. Solving for
-                these professional anxieties shifted PRISM from a generic data tracker to a tool for
-                building confidence.
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
+                PRISM captures interactions via smartphone or Meta Glasses to reveal
+                communication patterns.{" "}
+                <strong className="text-zinc-700 font-semibold">
+                  It uses AI to refract chaotic social &lsquo;vibes&rsquo; into a visible
+                  spectrum of data. If you&rsquo;re stuck, it suggests specific skill-building
+                  quizzes so you can master conversations in real-time.
+                </strong>
               </p>
-
-              {/* Persona artifact — constrained, embedded feel */}
-              <div className="mx-auto max-w-2xl">
-                <div className="rounded-xl overflow-hidden border border-zinc-200 shadow-sm bg-white">
-                  <div className="relative w-full">
-                    <Image
-                      src="/PRISM_persona.png"
-                      alt="PRISM user personas — Alex, Sarah, and Elliot"
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto block"
-                      sizes="(max-width: 768px) 100vw, 672px"
-                    />
-                  </div>
-                </div>
-                <p className="text-sm text-zinc-400 text-center mt-4 leading-snug">
-                  The three personas whose social challenges shaped every design decision.
-                </p>
-              </div>
             </section>
 
             <hr className="border-zinc-100" />
@@ -243,10 +213,40 @@ export default function PRISMCaseStudy() {
                 functional UX before we ever touched the final UI.
               </p>
 
-              {/* Stacked workspace — light container, images layered like pinned artifacts */}
+              {/* Personas — discovery artifact within process */}
+              <div className="mb-12">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Discovery</p>
+                <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-10">
+                  Social friction is universal, but its impact is most critical in the workplace. I
+                  anchored the design in three archetypes: Alex, whose indecision is eased by
+                  reviewing specific word choices; Sarah, who manages anxiety with leadership through
+                  real-time conversational progression; and Elliot, a manager building self-assurance
+                  by confirming his conviction against how he&rsquo;s actually perceived. Solving for
+                  these professional anxieties shifted PRISM from a generic data tracker to a tool for
+                  building confidence.
+                </p>
+                <div className="mx-auto max-w-2xl">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200 shadow-sm bg-white">
+                    <div className="relative w-full">
+                      <Image
+                        src="/PRISM_persona.png"
+                        alt="PRISM user personas — Alex, Sarah, and Elliot"
+                        width={1200}
+                        height={800}
+                        className="w-full h-auto block"
+                        sizes="(max-width: 768px) 100vw, 672px"
+                      />
+                    </div>
+                  </div>
+                  <p className="text-sm text-zinc-400 text-center mt-4 leading-snug">
+                    The three personas whose social challenges shaped every design decision.
+                  </p>
+                </div>
+              </div>
+
+              {/* Sprint artifacts */}
               <div className="rounded-2xl bg-zinc-100 p-8 border border-zinc-200">
                 <div className="relative">
-                  {/* Front layer — work1, slight counter-clockwise tilt */}
                   <div
                     className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-md z-10"
                     style={{ transform: "rotate(-0.75deg)" }}
@@ -260,7 +260,6 @@ export default function PRISMCaseStudy() {
                       sizes="(max-width: 1280px) 100vw, 768px"
                     />
                   </div>
-                  {/* Back layer — work2, peeking from below */}
                   <div
                     className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-sm z-0 -mt-16 ml-6"
                     style={{ transform: "rotate(1.25deg)" }}
@@ -276,7 +275,6 @@ export default function PRISMCaseStudy() {
                   </div>
                 </div>
 
-                {/* Bottom strip — work3 + work4 side by side */}
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div className="rounded-xl overflow-hidden border border-zinc-200">
                     <Image
@@ -308,95 +306,53 @@ export default function PRISMCaseStudy() {
 
             <hr className="border-zinc-100" />
 
-            {/* ── SOLUTION ───────────────────────────────────────────── */}
-            <section id="prism-solution" className="py-32">
-              <SectionLabel>Solution</SectionLabel>
+            {/* ── INTERFACE ──────────────────────────────────────────── */}
+            <section id="prism-interface" className="py-32">
+              <SectionLabel>Interface</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Refract the Signal
+                The Full Spectrum
               </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                PRISM captures interactions via smartphone or Meta Glasses to reveal
-                communication patterns.{" "}
-                <strong className="text-zinc-700 font-semibold">
-                  It uses AI to refract chaotic social &lsquo;vibes&rsquo; into a visible
-                  spectrum of data. If you&rsquo;re stuck, it suggests specific skill-building
-                  quizzes so you can master conversations in real-time.
-                </strong>
-              </p>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── DASHBOARD ──────────────────────────────────────────── */}
-            <section id="prism-dashboard" className="py-32">
-              <SectionLabel>Dashboard</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Your Social Spectrum
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                The dashboard surfaces your communication patterns at a glance — turning
-                recorded sessions into an actionable breakdown of tone, cadence, and
-                engagement.
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                Four surfaces — dashboard, recording, practice, and insights — each designed
+                to turn an invisible social moment into something you can act on.
               </p>
 
-              <GalleryContainer caption="Left: Dashboard overview. Right: Active recording session.">
-                <ScreenPod src="/prism_dashboard.png" alt="PRISM dashboard — social spectrum overview" />
-                <ScreenPod src="/prism_recording.png" alt="PRISM recording session — live interaction capture" />
-              </GalleryContainer>
-            </section>
+              {/* Dashboard + Recording */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Dashboard</p>
+                <GalleryContainer caption="Left: Dashboard overview. Right: Active recording session.">
+                  <ScreenPod src="/prism_dashboard.png" alt="PRISM dashboard — social spectrum overview" />
+                  <ScreenPod src="/prism_recording.png" alt="PRISM recording session — live interaction capture" />
+                </GalleryContainer>
+              </div>
 
-            <hr className="border-zinc-100" />
+              {/* Practice */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Practice</p>
+                <GalleryContainer caption="Targeted quizzes surface the exact skill needed in the moment.">
+                  <ScreenPod src="/prism_practice_hub.png" alt="PRISM practice hub — skill selection" />
+                  <ScreenPod src="/prism_practice_quiz.png" alt="PRISM practice quiz — guided scenario" />
+                </GalleryContainer>
+              </div>
 
-            {/* ── PRACTICE ───────────────────────────────────────────── */}
-            <section id="prism-practice" className="py-32">
-              <SectionLabel>Practice</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Skill-Building in Real-Time
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                When patterns suggest a skill gap, PRISM surfaces targeted quizzes and
-                scenarios. Practice sessions simulate real conversations so improvements carry
-                over immediately.
-              </p>
+              {/* Insights */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Insights</p>
+                <GalleryContainer caption="Longitudinal insights track how your communication evolves.">
+                  <ScreenPod src="/prism_insights_main.png" alt="PRISM insights — post-session breakdown" />
+                  <ScreenPod src="/prism_insights_detail.png" alt="PRISM insights — detail view" />
+                </GalleryContainer>
+              </div>
 
-              <GalleryContainer caption="Targeted quizzes surface the exact skill needed in the moment.">
-                <ScreenPod src="/prism_practice_hub.png" alt="PRISM practice hub — skill selection" />
-                <ScreenPod src="/prism_practice_quiz.png" alt="PRISM practice quiz — guided scenario" />
-              </GalleryContainer>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── INSIGHTS ───────────────────────────────────────────── */}
-            <section id="prism-insights" className="py-32">
-              <SectionLabel>Insights</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                See the Full Spectrum
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                Post-session insights break down every dimension of an interaction — what
-                worked, what to refine, and how your social intelligence is trending over time.
-              </p>
-
-              <GalleryContainer caption="Longitudinal insights track how your communication evolves.">
-                <ScreenPod src="/prism_insights_main.png" alt="PRISM insights — post-session breakdown" />
-                <ScreenPod src="/prism_insights_detail.png" alt="PRISM insights — detail view" />
-              </GalleryContainer>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── PRIVACY ────────────────────────────────────────────── */}
-            <section id="prism-privacy" className="py-32">
-              <SectionLabel>Privacy</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Consent First
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                Consent is the first screen. The app requires confirmation that the other party
-                is aware of the recording. The glasses LED is always active. There is no silent
-                mode.
-              </p>
+              {/* Privacy note */}
+              <div className="rounded-2xl bg-zinc-50 border border-zinc-100 px-8 py-6">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-3">Privacy</p>
+                <p className="text-zinc-500 text-[15px] leading-relaxed max-w-xl">
+                  Consent is the first screen. The app requires confirmation that the other party
+                  is aware of the recording. The glasses LED is always active. There is no silent
+                  mode.
+                </p>
+              </div>
             </section>
 
             <hr className="border-zinc-100" />

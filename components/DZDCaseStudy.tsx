@@ -7,15 +7,12 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
-  { id: "intro",      label: "Intro"       },
-  { id: "problem",    label: "Problem"     },
-  { id: "solution",   label: "Solution"    },
-  { id: "dashboard",  label: "Dashboard"   },
-  { id: "nutrition",  label: "Nutrition"   },
-  { id: "training",   label: "Training"    },
-  { id: "data",       label: "Data"        },
-  { id: "process",    label: "Process"     },
-  { id: "reflection", label: "Reflection"  },
+  { id: "intro",      label: "Intro"      },
+  { id: "problem",    label: "Problem"    },
+  { id: "solution",   label: "Solution"   },
+  { id: "process",    label: "Process"    },
+  { id: "interface",  label: "Interface"  },
+  { id: "reflection", label: "Reflection" },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -39,7 +36,6 @@ export default function DZDCaseStudy() {
     }
   };
 
-  // Scroll-spy: mark the section whose top edge has crossed 35 % of the viewport.
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -48,7 +44,7 @@ export default function DZDCaseStudy() {
       const trigger = window.innerHeight * 0.35;
       let current: SectionId = "intro";
       for (const { id } of SECTIONS) {
-        const el = document.getElementById(id);
+        const el = document.getElementById(`dzd-${id}`);
         if (el && el.getBoundingClientRect().top <= trigger) {
           current = id;
         }
@@ -61,7 +57,7 @@ export default function DZDCaseStudy() {
   }, []);
 
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
+    const el = document.getElementById(`dzd-${id}`);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -72,7 +68,6 @@ export default function DZDCaseStudy() {
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
         <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
           <div>
-            {/* Home — static escape hatch, above section links */}
             <button
               onClick={() => setView("home")}
               className="flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-medium text-zinc-400 hover:text-blue-600 transition-colors group w-full text-left"
@@ -103,7 +98,6 @@ export default function DZDCaseStudy() {
             </nav>
           </div>
 
-          {/* Footer back link — same action, consistent escape hatch */}
           <button
             onClick={() => setView("home")}
             className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-blue-600 transition-colors group"
@@ -118,12 +112,10 @@ export default function DZDCaseStudy() {
           <div className="max-w-4xl mx-auto px-8 lg:px-16 pt-32 pb-40">
 
             {/* ── INTRO ──────────────────────────────────────────────── */}
-            <section id="intro" className="mb-32">
+            <section id="dzd-intro" className="mb-32">
 
-              {/* Project summary — intentional 12-col gutter grid */}
               <div className="grid grid-cols-12 gap-16 mb-20">
 
-                {/* cols 1–7: title + description */}
                 <div className="col-span-7">
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     DZD
@@ -136,9 +128,6 @@ export default function DZDCaseStudy() {
                   </p>
                 </div>
 
-                {/* col 8: intentional gutter — empty */}
-
-                {/* cols 9–12: metadata */}
                 <div className="col-span-4 col-start-9 flex flex-col pt-1">
                   <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4">Team</p>
                   <ul className="space-y-2 text-[15px] text-zinc-500">
@@ -149,7 +138,6 @@ export default function DZDCaseStudy() {
                 </div>
               </div>
 
-              {/* Walkthrough video — gallery frame */}
               <div className="relative rounded-3xl bg-zinc-100 p-10">
                 <button
                   onClick={togglePlay}
@@ -175,7 +163,7 @@ export default function DZDCaseStudy() {
             <hr className="border-zinc-100" />
 
             {/* ── PROBLEM ────────────────────────────────────────────── */}
-            <section id="problem" className="py-32">
+            <section id="dzd-problem" className="py-32">
               <SectionLabel>Problem</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 Analysis Paralysis
@@ -190,7 +178,7 @@ export default function DZDCaseStudy() {
             <hr className="border-zinc-100" />
 
             {/* ── SOLUTION ───────────────────────────────────────────── */}
-            <section id="solution" className="py-32">
+            <section id="dzd-solution" className="py-32">
               <SectionLabel>Solution</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 Remove the Decisions
@@ -231,194 +219,8 @@ export default function DZDCaseStudy() {
 
             <hr className="border-zinc-100" />
 
-            {/* ── DASHBOARD ──────────────────────────────────────────── */}
-            <section id="dashboard" className="py-32">
-              <SectionLabel>Dashboard</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                The 14-Day Streak
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                14 days of consistency is the threshold where habits become automatic. The
-                dashboard makes the streak the only number that matters — miss a day, it
-                resets; hit 14, you level up.
-              </p>
-
-              <div className="flex justify-center">
-                <PhoneFrame className="max-w-[280px] w-full">
-                  <Image
-                    src="/dzd_dashboard.png"
-                    alt="DZD dashboard — 14-day streak and daily targets"
-                    fill
-                    className="object-contain"
-                    sizes="280px"
-                  />
-                </PhoneFrame>
-              </div>
-              <Caption>One number. Consistency over perfection.</Caption>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── NUTRITION ──────────────────────────────────────────── */}
-            <section id="nutrition" className="py-32">
-              <SectionLabel>Nutrition</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Frictionless Food Logging
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                The Anabolic Meter collapses all of nutrition into one question:{" "}
-                <em>did you hit your protein?</em> The chatbot log accepts plain language —
-                no barcode scanning, no database trawling.
-              </p>
-
-              <div className="grid grid-cols-2 gap-6">
-                <PhoneFrame>
-                  <Image
-                    src="/dzd_nutrition.png"
-                    alt="DZD Anabolic Meter — radial protein progress indicator"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </PhoneFrame>
-                <PhoneFrame>
-                  <Image
-                    src="/DZD02.frictionlessnutrution-2.png"
-                    alt="DZD conversational food log — NLP meal tracking"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </PhoneFrame>
-              </div>
-              <Caption>Left: Anabolic Meter. Right: Conversational food log.</Caption>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── TRAINING ───────────────────────────────────────────── */}
-            <section id="training" className="py-32">
-              <SectionLabel>Training</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Easy Subs — No Excuses
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                No equipment? No problem. The Easy Subs feature swaps exercises so you never
-                have an excuse to skip a workout.
-              </p>
-
-              {/* ── Program UI component ─────────────────────────────── */}
-              <div className="rounded-3xl bg-zinc-50 border border-zinc-100 p-8 space-y-8">
-
-                {/* Split badges */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mr-2">Split</span>
-                  {["Push", "Pull", "Legs", "Upper", "Lower"].map((s, i) => (
-                    <span
-                      key={s}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold border ${
-                        i < 3
-                          ? "bg-blue-600 text-white border-blue-600"
-                          : "bg-white text-zinc-500 border-zinc-200"
-                      }`}
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Weekly calendar */}
-                <div>
-                  <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-4">This week</p>
-                  <div className="flex gap-2.5">
-                    {[
-                      { day: "M", active: true  },
-                      { day: "T", active: true  },
-                      { day: "W", active: false },
-                      { day: "T", active: true  },
-                      { day: "F", active: true  },
-                      { day: "S", active: false },
-                      { day: "S", active: false },
-                    ].map(({ day, active }, i) => (
-                      <div
-                        key={i}
-                        className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold ${
-                          active
-                            ? "bg-blue-600 text-white"
-                            : "bg-white border border-zinc-200 text-zinc-400"
-                        }`}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Push Day card */}
-                <div className="rounded-2xl bg-white border border-zinc-100 overflow-hidden">
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100">
-                    <span className="text-sm font-semibold text-zinc-900">Push Day</span>
-                    <span className="text-[10px] font-semibold tracking-widest text-blue-600 uppercase">Today</span>
-                  </div>
-                  <div className="divide-y divide-zinc-50">
-                    {[
-                      { name: "Bench Press",      sets: "3 × 5", sub: null },
-                      { name: "Overhead Press",   sets: "2 × 6", sub: null },
-                      { name: "Incline DB Press", sets: "3 × 8", sub: "Tap to swap → Cable Fly" },
-                    ].map(({ name, sets, sub }) => (
-                      <div key={name} className="flex items-center justify-between px-6 py-4">
-                        <div>
-                          <p className="text-sm font-medium text-zinc-800">{name}</p>
-                          {sub && <p className="text-xs text-blue-500 mt-0.5">{sub}</p>}
-                        </div>
-                        <span className="text-xs font-semibold text-zinc-400 tabular-nums">{sets}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── DATA VIZ ───────────────────────────────────────────── */}
-            <section id="data" className="py-32">
-              <SectionLabel>Data</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Progress You Can See
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-14">
-                Weight trends, workout frequency, and nutrition adherence — surfaced in a clean
-                weekly view. Just enough signal to show the habits are compounding.
-              </p>
-
-              <div className="grid grid-cols-2 gap-6">
-                <PhoneFrame>
-                  <Image
-                    src="/dzd_progress.png"
-                    alt="DZD progress chart — weight and workout trends over time"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </PhoneFrame>
-                <PhoneFrame>
-                  <Image
-                    src="/DZD03.dataviz-2.png"
-                    alt="DZD data visualization — adherence and performance metrics"
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 380px"
-                  />
-                </PhoneFrame>
-              </div>
-              <Caption>Weekly progress data, designed to celebrate consistency.</Caption>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── PROCESS ────────────────────────────────────────────────── */}
-            <section id="process" className="py-32">
+            {/* ── PROCESS ────────────────────────────────────────────── */}
+            <section id="dzd-process" className="py-32">
               <SectionLabel>Process</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 The Iterative Grind
@@ -430,10 +232,8 @@ export default function DZDCaseStudy() {
                 artifact here represents a decision point where clarity won over aesthetics.
               </p>
 
-              {/* Work pod — grey container holding all process artifacts */}
               <div className="rounded-2xl bg-zinc-100 p-8 border border-zinc-200">
 
-                {/* Row 1 — work1 large, work2 peeking below with slight tilt */}
                 <div className="relative mb-4">
                   <div
                     className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-md z-10"
@@ -463,7 +263,6 @@ export default function DZDCaseStudy() {
                   </div>
                 </div>
 
-                {/* Row 2 — three-up grid: work3, work4, work5 */}
                 <div className="grid grid-cols-3 gap-3 mb-3">
                   <div className="rounded-xl overflow-hidden border border-zinc-200">
                     <Image
@@ -497,7 +296,6 @@ export default function DZDCaseStudy() {
                   </div>
                 </div>
 
-                {/* Row 3 — two-up grid: work6, work7 */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl overflow-hidden border border-zinc-200">
                     <Image
@@ -529,8 +327,162 @@ export default function DZDCaseStudy() {
 
             <hr className="border-zinc-100" />
 
-            {/* ── REFLECTION ───────────────────────────────────────────── */}
-            <section id="reflection" className="py-32">
+            {/* ── INTERFACE ──────────────────────────────────────────── */}
+            <section id="dzd-interface" className="py-32">
+              <SectionLabel>Interface</SectionLabel>
+              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
+                The Final System
+              </h2>
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                Three core surfaces — streak dashboard, nutrition meter, and training log —
+                each built around a single question the user never has to ask twice.
+              </p>
+
+              {/* Dashboard */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Dashboard</p>
+                <div className="flex justify-center">
+                  <PhoneFrame className="max-w-[280px] w-full">
+                    <Image
+                      src="/dzd_dashboard.png"
+                      alt="DZD dashboard — 14-day streak and daily targets"
+                      fill
+                      className="object-contain"
+                      sizes="280px"
+                    />
+                  </PhoneFrame>
+                </div>
+                <Caption>14 days of consistency. One number. Miss a day, it resets.</Caption>
+              </div>
+
+              {/* Nutrition */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Nutrition</p>
+                <div className="grid grid-cols-2 gap-6">
+                  <PhoneFrame>
+                    <Image
+                      src="/dzd_nutrition.png"
+                      alt="DZD Anabolic Meter — radial protein progress indicator"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 380px"
+                    />
+                  </PhoneFrame>
+                  <PhoneFrame>
+                    <Image
+                      src="/DZD02.frictionlessnutrution-2.png"
+                      alt="DZD conversational food log — NLP meal tracking"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 380px"
+                    />
+                  </PhoneFrame>
+                </div>
+                <Caption>Anabolic Meter (left) + conversational food log (right).</Caption>
+              </div>
+
+              {/* Training */}
+              <div className="mb-14">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Training</p>
+                <div className="rounded-3xl bg-zinc-50 border border-zinc-100 p-8 space-y-8">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mr-2">Split</span>
+                    {["Push", "Pull", "Legs", "Upper", "Lower"].map((s, i) => (
+                      <span
+                        key={s}
+                        className={`px-3 py-1 rounded-full text-xs font-semibold border ${
+                          i < 3
+                            ? "bg-blue-600 text-white border-blue-600"
+                            : "bg-white text-zinc-500 border-zinc-200"
+                        }`}
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-4">This week</p>
+                    <div className="flex gap-2.5">
+                      {[
+                        { day: "M", active: true  },
+                        { day: "T", active: true  },
+                        { day: "W", active: false },
+                        { day: "T", active: true  },
+                        { day: "F", active: true  },
+                        { day: "S", active: false },
+                        { day: "S", active: false },
+                      ].map(({ day, active }, i) => (
+                        <div
+                          key={i}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold ${
+                            active
+                              ? "bg-blue-600 text-white"
+                              : "bg-white border border-zinc-200 text-zinc-400"
+                          }`}
+                        >
+                          {day}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-white border border-zinc-100 overflow-hidden">
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100">
+                      <span className="text-sm font-semibold text-zinc-900">Push Day</span>
+                      <span className="text-[10px] font-semibold tracking-widest text-blue-600 uppercase">Today</span>
+                    </div>
+                    <div className="divide-y divide-zinc-50">
+                      {[
+                        { name: "Bench Press",      sets: "3 × 5", sub: null },
+                        { name: "Overhead Press",   sets: "2 × 6", sub: null },
+                        { name: "Incline DB Press", sets: "3 × 8", sub: "Tap to swap → Cable Fly" },
+                      ].map(({ name, sets, sub }) => (
+                        <div key={name} className="flex items-center justify-between px-6 py-4">
+                          <div>
+                            <p className="text-sm font-medium text-zinc-800">{name}</p>
+                            {sub && <p className="text-xs text-blue-500 mt-0.5">{sub}</p>}
+                          </div>
+                          <span className="text-xs font-semibold text-zinc-400 tabular-nums">{sets}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <Caption>Easy Subs — swap exercises without losing your place in the program.</Caption>
+              </div>
+
+              {/* Progress */}
+              <div>
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">Progress</p>
+                <div className="grid grid-cols-2 gap-6">
+                  <PhoneFrame>
+                    <Image
+                      src="/dzd_progress.png"
+                      alt="DZD progress chart — weight and workout trends over time"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 380px"
+                    />
+                  </PhoneFrame>
+                  <PhoneFrame>
+                    <Image
+                      src="/DZD03.dataviz-2.png"
+                      alt="DZD data visualization — adherence and performance metrics"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 380px"
+                    />
+                  </PhoneFrame>
+                </div>
+                <Caption>Weekly progress data, designed to celebrate consistency.</Caption>
+              </div>
+            </section>
+
+            <hr className="border-zinc-100" />
+
+            {/* ── REFLECTION ─────────────────────────────────────────── */}
+            <section id="dzd-reflection" className="py-32">
               <SectionLabel>Reflection</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
                 What I&rsquo;d Do Next
