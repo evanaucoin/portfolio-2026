@@ -72,9 +72,12 @@ export default function Connect() {
           className="flex flex-col items-center"
         >
           {/* Floating stack pod */}
-          <div className="mb-6 inline-flex items-center rounded-full bg-zinc-100 px-4 py-1.5">
-            <span className="text-sm font-medium text-zinc-500 whitespace-nowrap">
-              Portfolio Stack: Figma • Next.js • Tailwind • Cursor • Gemini • Vercel
+          <div className="mb-6 inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm">
+            <span className="whitespace-nowrap text-xs font-medium text-zinc-500">
+              Portfolio Stack:&nbsp;
+            </span>
+            <span className="whitespace-nowrap text-xs font-semibold text-zinc-900">
+              Figma • Next.js • Tailwind • Cursor • Gemini • Vercel
             </span>
           </div>
 
