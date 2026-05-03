@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { useView } from "@/components/ViewContext";
 
@@ -440,12 +441,14 @@ export default function DZDCaseStudy() {
                     PRISM
                   </h2>
                   <p className="text-zinc-500 text-lg">Designed to build social intelligence</p>
-                  <button
+                  <Link
+                    href="/prism"
+                    onClick={(e) => { e.preventDefault(); setView("prism"); }}
                     className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-700 transition-colors group"
                   >
                     View Project
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
                 <div className="relative w-72 h-44 rounded-2xl overflow-hidden border border-zinc-100 flex-shrink-0">
                   <Image
