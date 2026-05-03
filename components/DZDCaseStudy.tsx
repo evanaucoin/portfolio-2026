@@ -14,6 +14,7 @@ const SECTIONS = [
   { id: "nutrition",  label: "Nutrition"   },
   { id: "training",   label: "Training"    },
   { id: "data",       label: "Data"        },
+  { id: "process",    label: "Process"     },
   { id: "reflection", label: "Reflection"  },
 ] as const;
 
@@ -412,6 +413,118 @@ export default function DZDCaseStudy() {
                 </PhoneFrame>
               </div>
               <Caption>Weekly progress data, designed to celebrate consistency.</Caption>
+            </section>
+
+            <hr className="border-zinc-100" />
+
+            {/* ── PROCESS ────────────────────────────────────────────────── */}
+            <section id="process" className="py-32">
+              <SectionLabel>Process</SectionLabel>
+              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
+                The Iterative Grind
+              </h2>
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                DZD didn&rsquo;t start with abstract personas&mdash;it started with a personal need to
+                solve real friction. The early work was messy: Kanban boards, scrapped UI directions,
+                and mid-fidelity flows that got thrown out when the logic didn&rsquo;t hold. Every
+                artifact here represents a decision point where clarity won over aesthetics.
+              </p>
+
+              {/* Work pod — grey container holding all process artifacts */}
+              <div className="rounded-2xl bg-zinc-100 p-8 border border-zinc-200">
+
+                {/* Row 1 — work1 large, work2 peeking below with slight tilt */}
+                <div className="relative mb-4">
+                  <div
+                    className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-md z-10"
+                    style={{ transform: "rotate(-0.5deg)" }}
+                  >
+                    <Image
+                      src="/DZD.work1.png"
+                      alt="DZD — Kanban planning and early scoping"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 1280px) 100vw, 768px"
+                    />
+                  </div>
+                  <div
+                    className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-sm z-0 -mt-14 ml-8"
+                    style={{ transform: "rotate(1deg)" }}
+                  >
+                    <Image
+                      src="/DZD.work2.png"
+                      alt="DZD — early information architecture and user flows"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 1280px) 100vw, 768px"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2 — three-up grid: work3, work4, work5 */}
+                <div className="grid grid-cols-3 gap-3 mb-3">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
+                    <Image
+                      src="/DZD.work3.png"
+                      alt="DZD — scrapped UI direction"
+                      width={600}
+                      height={500}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 33vw, 256px"
+                    />
+                  </div>
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
+                    <Image
+                      src="/DZD.work4.png"
+                      alt="DZD — mid-fidelity wireframe iteration"
+                      width={600}
+                      height={500}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 33vw, 256px"
+                    />
+                  </div>
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
+                    <Image
+                      src="/DZD.work5.png"
+                      alt="DZD — component exploration"
+                      width={600}
+                      height={500}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 33vw, 256px"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 3 — two-up grid: work6, work7 */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
+                    <Image
+                      src="/DZD.work6.png"
+                      alt="DZD — interaction and navigation patterns"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 50vw, 384px"
+                    />
+                  </div>
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
+                    <Image
+                      src="/DZD.work7.png"
+                      alt="DZD — final flow consolidation"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 50vw, 384px"
+                    />
+                  </div>
+                </div>
+
+                <p className="text-sm text-zinc-400 text-center mt-6 leading-snug">
+                  Process artifacts: from Kanban planning to scrapped UI and mid-fidelity flows.
+                </p>
+              </div>
             </section>
 
             <hr className="border-zinc-100" />
