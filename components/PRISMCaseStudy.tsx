@@ -7,14 +7,16 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
-  { id: "intro",      label: "Intro"      },
-  { id: "problem",    label: "Problem"    },
-  { id: "solution",   label: "Solution"   },
-  { id: "dashboard",  label: "Dashboard"  },
-  { id: "practice",   label: "Practice"   },
-  { id: "insights",   label: "Insights"   },
-  { id: "privacy",    label: "Privacy"    },
-  { id: "reflection", label: "Reflection" },
+  { id: "intro",      label: "Intro"        },
+  { id: "problem",    label: "Problem"      },
+  { id: "personas",   label: "Personas"     },
+  { id: "process",    label: "Process"      },
+  { id: "solution",   label: "Solution"     },
+  { id: "dashboard",  label: "Dashboard"    },
+  { id: "practice",   label: "Practice"     },
+  { id: "insights",   label: "Insights"     },
+  { id: "privacy",    label: "Privacy"      },
+  { id: "reflection", label: "Reflection"   },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -184,6 +186,94 @@ export default function PRISMCaseStudy() {
                 professionals report &lsquo;social exhaustion&rsquo; as their main barrier to
                 success. PRISM bridges the gap.
               </p>
+            </section>
+
+            <hr className="border-zinc-100" />
+
+            {/* ── PERSONAS ───────────────────────────────────────────── */}
+            <section id="prism-personas" className="py-32">
+              <SectionLabel>Discovery</SectionLabel>
+              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
+                Defining the User
+              </h2>
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                Before sketching a single screen, we needed to understand exactly who we were
+                designing for. We built three distinct personas — Alex, Sarah, and Elliot — each
+                representing a different profile of social overwhelm. Alex struggles with reading
+                tone in professional settings. Sarah finds group dynamics unpredictable. Elliot
+                knows the theory but freezes in practice. These weren&rsquo;t archetypes pulled
+                from thin air; they were composites derived from interviews, observation, and
+                secondary research. Every architectural decision that followed &mdash; what data
+                to surface, when to intervene, how to frame feedback &mdash; was traced back to
+                one of these three users.
+              </p>
+
+              {/* Persona artifact — constrained, embedded feel */}
+              <div className="mx-auto max-w-2xl">
+                <div className="rounded-xl overflow-hidden border border-zinc-200 shadow-sm bg-white">
+                  <div className="relative w-full">
+                    <Image
+                      src="/PRISM_persona.png"
+                      alt="PRISM user personas — Alex, Sarah, and Elliot"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 768px) 100vw, 672px"
+                    />
+                  </div>
+                </div>
+                <p className="text-sm text-zinc-400 text-center mt-4 leading-snug">
+                  The three personas whose social challenges shaped every design decision.
+                </p>
+              </div>
+            </section>
+
+            <hr className="border-zinc-100" />
+
+            {/* ── PROCESS ────────────────────────────────────────────── */}
+            <section id="prism-process" className="py-32">
+              <SectionLabel>Process</SectionLabel>
+              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
+                Logic, Architecture, and Iteration
+              </h2>
+              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
+                High-fidelity UI came last. Before touching a single polished frame, we spent
+                weeks mapping system logic, sketching user flows, and pressure-testing visual
+                metaphors. The question wasn&rsquo;t &ldquo;what does it look like?&rdquo; — it
+                was &ldquo;what does it need to do, and how should information flow?&rdquo; The
+                artifacts below are raw: whiteboard diagrams, mid-fidelity explorations, and flow
+                maps where decisions were still being made. This is where the real design
+                happened.
+              </p>
+
+              {/* 2×2 mood-board grid — dark, sketch-pinned treatment */}
+              <div className="rounded-2xl bg-zinc-900 p-6 border border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { src: "/PRISM.work1.png", alt: "PRISM — system logic and flow mapping" },
+                    { src: "/PRISM.work2.png", alt: "PRISM — architecture exploration" },
+                    { src: "/PRISM.work3.png", alt: "PRISM — mid-fidelity wireframe iteration" },
+                    { src: "/PRISM.work4.png", alt: "PRISM — visual metaphor sketches" },
+                  ].map(({ src, alt }) => (
+                    <div
+                      key={src}
+                      className="rounded-xl overflow-hidden border border-white/10 bg-zinc-800"
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={800}
+                        height={600}
+                        className="w-full h-auto block"
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-zinc-500 text-center mt-6 leading-snug">
+                  Work-in-progress artifacts: system diagrams, flow maps, and mid-fidelity explorations.
+                </p>
+              </div>
             </section>
 
             <hr className="border-zinc-100" />
