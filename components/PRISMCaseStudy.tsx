@@ -197,15 +197,13 @@ export default function PRISMCaseStudy() {
                 Defining the User
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
-                Before sketching a single screen, we needed to understand exactly who we were
-                designing for. We built three distinct personas — Alex, Sarah, and Elliot — each
-                representing a different profile of social overwhelm. Alex struggles with reading
-                tone in professional settings. Sarah finds group dynamics unpredictable. Elliot
-                knows the theory but freezes in practice. These weren&rsquo;t archetypes pulled
-                from thin air; they were composites derived from interviews, observation, and
-                secondary research. Every architectural decision that followed &mdash; what data
-                to surface, when to intervene, how to frame feedback &mdash; was traced back to
-                one of these three users.
+                Social friction is universal, but its impact is most critical in the workplace. I
+                anchored the design in three archetypes: Alex, whose indecision is eased by
+                reviewing specific word choices; Sarah, who manages anxiety with leadership through
+                real-time conversational progression; and Elliot, a manager building self-assurance
+                by confirming his conviction against how he&rsquo;s actually perceived. Solving for
+                these professional anxieties shifted PRISM from a generic data tracker to a tool for
+                building confidence.
               </p>
 
               {/* Persona artifact — constrained, embedded feel */}
@@ -234,44 +232,76 @@ export default function PRISMCaseStudy() {
             <section id="prism-process" className="py-32">
               <SectionLabel>Process</SectionLabel>
               <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Logic, Architecture, and Iteration
+                Three Days of Friction
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
-                High-fidelity UI came last. Before touching a single polished frame, we spent
-                weeks mapping system logic, sketching user flows, and pressure-testing visual
-                metaphors. The question wasn&rsquo;t &ldquo;what does it look like?&rdquo; — it
-                was &ldquo;what does it need to do, and how should information flow?&rdquo; The
-                artifacts below are raw: whiteboard diagrams, mid-fidelity explorations, and flow
-                maps where decisions were still being made. This is where the real design
-                happened.
+                We built the PRISM concept during a compressed 3-day sprint. No polished UI — just
+                competitive scoping, rapid flow mapping, and pressure-testing the core logic against
+                our personas. Day one was understanding the problem space. Day two was throwing out
+                our first answer and finding a better one. Day three was turning surviving ideas into
+                something you could actually navigate. The artifacts below are the honest record of
+                that process.
               </p>
 
-              {/* 2×2 mood-board grid — dark, sketch-pinned treatment */}
-              <div className="rounded-2xl bg-zinc-900 p-6 border border-white/10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {[
-                    { src: "/PRISM.work1.png", alt: "PRISM — system logic and flow mapping" },
-                    { src: "/PRISM.work2.png", alt: "PRISM — architecture exploration" },
-                    { src: "/PRISM.work3.png", alt: "PRISM — mid-fidelity wireframe iteration" },
-                    { src: "/PRISM.work4.png", alt: "PRISM — visual metaphor sketches" },
-                  ].map(({ src, alt }) => (
-                    <div
-                      key={src}
-                      className="rounded-xl overflow-hidden border border-white/10 bg-zinc-800"
-                    >
-                      <Image
-                        src={src}
-                        alt={alt}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto block"
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                      />
-                    </div>
-                  ))}
+              {/* Stacked workspace — dark container, images layered like pinned artifacts */}
+              <div className="rounded-2xl bg-zinc-900 p-8 border border-white/10">
+                <div className="relative">
+                  {/* Front layer — work1, slight counter-clockwise tilt */}
+                  <div
+                    className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl z-10"
+                    style={{ transform: "rotate(-0.75deg)" }}
+                  >
+                    <Image
+                      src="/PRISM.work1.png"
+                      alt="PRISM — competitor scoping and system logic"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 1280px) 100vw, 768px"
+                    />
+                  </div>
+                  {/* Back layer — work2, peeking from below */}
+                  <div
+                    className="relative rounded-xl overflow-hidden border border-white/10 shadow-xl z-0 -mt-16 ml-6"
+                    style={{ transform: "rotate(1.25deg)" }}
+                  >
+                    <Image
+                      src="/PRISM.work2.png"
+                      alt="PRISM — architecture and user flow mapping"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 1280px) 100vw, 768px"
+                    />
+                  </div>
                 </div>
+
+                {/* Bottom strip — work3 + work4 side by side */}
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div className="rounded-xl overflow-hidden border border-white/10">
+                    <Image
+                      src="/PRISM.work3.png"
+                      alt="PRISM — mid-fidelity wireframe iteration"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 640px) 50vw, 384px"
+                    />
+                  </div>
+                  <div className="rounded-xl overflow-hidden border border-white/10">
+                    <Image
+                      src="/PRISM.work4.png"
+                      alt="PRISM — visual metaphor and interaction sketches"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto block"
+                      sizes="(max-width: 640px) 50vw, 384px"
+                    />
+                  </div>
+                </div>
+
                 <p className="text-sm text-zinc-500 text-center mt-6 leading-snug">
-                  Work-in-progress artifacts: system diagrams, flow maps, and mid-fidelity explorations.
+                  3-day sprint artifacts: from competitor scoping to mid-fidelity flows.
                 </p>
               </div>
             </section>
