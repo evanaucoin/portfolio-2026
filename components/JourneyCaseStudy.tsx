@@ -56,10 +56,11 @@ export default function JourneyCaseStudy() {
           <div>
             <button
               onClick={() => setView("home")}
-              className="flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm font-medium text-zinc-400 hover:text-amber-600 transition-colors group w-full text-left"
+              className="mb-8 w-full text-left"
             >
-              <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
-              Home
+              <span className="inline-block bg-zinc-100 text-zinc-900 font-medium text-sm px-3 py-1.5 rounded-full">
+                Home
+              </span>
             </button>
 
             <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block">
@@ -83,14 +84,6 @@ export default function JourneyCaseStudy() {
               ))}
             </nav>
           </div>
-
-          <button
-            onClick={() => setView("home")}
-            className="flex items-center gap-1.5 text-sm font-medium text-zinc-400 hover:text-amber-600 transition-colors group"
-          >
-            <span className="group-hover:-translate-x-0.5 transition-transform inline-block">←</span>
-            Back to work
-          </button>
         </aside>
 
         {/* ── MAIN CONTENT ─────────────────────────────────────────── */}
