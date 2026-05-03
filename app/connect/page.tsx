@@ -44,8 +44,8 @@ const fadeUp: Variants = {
 
 export default function Connect() {
   return (
-    <main className="h-screen overflow-y-auto">
-      <div className="mx-auto max-w-2xl px-6 pt-32 pb-24">
+    <main className="h-screen flex flex-col items-center justify-center px-6">
+      <div className="w-full max-w-2xl">
 
         {/* ── Header ─────────────────────────────────────────────────── */}
         <motion.div
@@ -64,7 +64,7 @@ export default function Connect() {
         </motion.div>
 
         {/* ── Stack pod + contact card ────────────────────────────────── */}
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center">
 
           {/* Floating stack pod */}
           <motion.div
@@ -72,7 +72,7 @@ export default function Connect() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="relative z-50 mb-10 inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-md"
+            className="relative z-50 mb-8 inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
           >
             <span className="whitespace-nowrap text-xs font-medium text-zinc-500">
               Portfolio Stack:&nbsp;
