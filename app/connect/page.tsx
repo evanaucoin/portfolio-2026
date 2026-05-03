@@ -64,25 +64,32 @@ export default function Connect() {
         </motion.div>
 
         {/* ── Stack pod + contact card ────────────────────────────────── */}
-        <motion.div
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="flex flex-col items-center"
-        >
+        <div className="flex flex-col items-center justify-center">
+
           {/* Floating stack pod */}
-          <div className="mb-6 inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm">
+          <motion.div
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="relative z-50 mb-10 inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-md"
+          >
             <span className="whitespace-nowrap text-xs font-medium text-zinc-500">
               Portfolio Stack:&nbsp;
             </span>
             <span className="whitespace-nowrap text-xs font-semibold text-zinc-900">
               Figma • Next.js • Tailwind • Cursor • Gemini • Vercel
             </span>
-          </div>
+          </motion.div>
 
-          {/* Contact links */}
-          <div className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-8 py-8 flex flex-col items-center gap-4">
+          {/* Contact links card */}
+          <motion.div
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-8 py-8 flex flex-col items-center gap-4"
+          >
             <a
               href="https://www.linkedin.com/in/evan-aucoin-184229354"
               target="_blank"
@@ -99,8 +106,9 @@ export default function Connect() {
               <MailIcon className="w-4 h-4" />
               eaucoin@uwaterloo.ca
             </a>
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
 
       </div>
     </main>
