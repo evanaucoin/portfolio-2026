@@ -235,20 +235,20 @@ export default function PRISMCaseStudy() {
                 Three Days of Friction
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
-                We built the PRISM concept during a compressed 3-day sprint. No polished UI — just
-                competitive scoping, rapid flow mapping, and pressure-testing the core logic against
-                our personas. Day one was understanding the problem space. Day two was throwing out
-                our first answer and finding a better one. Day three was turning surviving ideas into
-                something you could actually navigate. The artifacts below are the honest record of
-                that process.
+                We built the PRISM concept during a compressed 3-day sprint, prioritizing system
+                logic over polished aesthetics. Day 1 was spent scoping competitors and translating
+                user stories into raw wireframes. By Day 2, we were pressure-testing user flows
+                through mid-fidelity prototypes, eventually unifying the architecture on Day 3. This
+                &ldquo;fail-fast&rdquo; approach ensured every design decision was rooted in
+                functional UX before we ever touched the final UI.
               </p>
 
-              {/* Stacked workspace — dark container, images layered like pinned artifacts */}
-              <div className="rounded-2xl bg-zinc-900 p-8 border border-white/10">
+              {/* Stacked workspace — light container, images layered like pinned artifacts */}
+              <div className="rounded-2xl bg-zinc-100 p-8 border border-zinc-200">
                 <div className="relative">
                   {/* Front layer — work1, slight counter-clockwise tilt */}
                   <div
-                    className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl z-10"
+                    className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-md z-10"
                     style={{ transform: "rotate(-0.75deg)" }}
                   >
                     <Image
@@ -262,7 +262,7 @@ export default function PRISMCaseStudy() {
                   </div>
                   {/* Back layer — work2, peeking from below */}
                   <div
-                    className="relative rounded-xl overflow-hidden border border-white/10 shadow-xl z-0 -mt-16 ml-6"
+                    className="relative rounded-xl overflow-hidden border border-zinc-200 shadow-sm z-0 -mt-16 ml-6"
                     style={{ transform: "rotate(1.25deg)" }}
                   >
                     <Image
@@ -278,7 +278,7 @@ export default function PRISMCaseStudy() {
 
                 {/* Bottom strip — work3 + work4 side by side */}
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                  <div className="rounded-xl overflow-hidden border border-white/10">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
                     <Image
                       src="/PRISM.work3.png"
                       alt="PRISM — mid-fidelity wireframe iteration"
@@ -288,7 +288,7 @@ export default function PRISMCaseStudy() {
                       sizes="(max-width: 640px) 50vw, 384px"
                     />
                   </div>
-                  <div className="rounded-xl overflow-hidden border border-white/10">
+                  <div className="rounded-xl overflow-hidden border border-zinc-200">
                     <Image
                       src="/PRISM.work4.png"
                       alt="PRISM — visual metaphor and interaction sketches"
@@ -300,7 +300,7 @@ export default function PRISMCaseStudy() {
                   </div>
                 </div>
 
-                <p className="text-sm text-zinc-500 text-center mt-6 leading-snug">
+                <p className="text-sm text-zinc-400 text-center mt-6 leading-snug">
                   3-day sprint artifacts: from competitor scoping to mid-fidelity flows.
                 </p>
               </div>
