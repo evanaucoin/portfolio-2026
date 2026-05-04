@@ -52,10 +52,9 @@ export default function Connect() {
         initial="hidden"
         animate="visible"
         variants={fadeUp}
-        className="mt-8 mb-8 mx-auto flex w-fit items-center rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm px-10 shadow-[0_6px_32px_rgba(0,0,0,0.10)]"
-        style={{ height: 56 }}
+        className="mt-8 mb-8 mx-auto flex w-fit max-w-[420px] items-center justify-center rounded-[28px] border border-zinc-200 bg-white/80 backdrop-blur-sm px-8 py-4 shadow-[0_6px_32px_rgba(0,0,0,0.10)]"
       >
-        <span className="select-none whitespace-nowrap text-[11px] leading-none text-zinc-500">
+        <span className="select-none text-sm leading-snug text-zinc-500 text-center">
           Stack:&nbsp;
           <span className="text-zinc-900 font-semibold">Figma Product Suite • Adobe Creative Cloud • Next.js • TypeScript • TailwindCSS • React • Framer Motion • Cursor • Gemini • Claude • Vercel</span>
         </span>

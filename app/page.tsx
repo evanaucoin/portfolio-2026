@@ -165,7 +165,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
-                className={`select-none whitespace-nowrap px-10 leading-none ${TOP_POD[activeIndex]!.small ? "text-[11px]" : "text-sm"}`}
+                className={`select-none whitespace-nowrap px-10 leading-none ${TOP_POD[activeIndex]!.small ? "text-[11px]" : "text-[22px]"}`}
               >
                 <span className="text-zinc-500">{TOP_POD[activeIndex]!.label}&nbsp;</span>
                 <span className="text-zinc-900 font-semibold">{TOP_POD[activeIndex]!.tools}</span>
