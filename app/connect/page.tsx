@@ -44,15 +44,31 @@ const fadeUp: Variants = {
 
 export default function Connect() {
   return (
-    <main className="relative h-screen px-6">
+    <main className="relative flex h-screen flex-col items-center px-6">
 
-      {/* ── Vertically centered content ──────────────────────────────── */}
-      <div className="flex h-full flex-col items-center justify-center">
+      {/* ── Top pod — sits near the top, outside the centered group ── */}
+      <motion.div
+        custom={0}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        className="mt-20 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
+      >
+        <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
+          Portfolio Stack:&nbsp;
+        </span>
+        <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
+          Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel
+        </span>
+      </motion.div>
+
+      {/* ── Centered card group — flex-1 so it takes remaining space ── */}
+      <div className="flex flex-1 flex-col items-center justify-center w-full">
         <div className="w-full max-w-2xl">
 
           {/* ── Header ───────────────────────────────────────────────── */}
           <motion.div
-            custom={0}
+            custom={1}
             initial="hidden"
             animate="visible"
             variants={fadeUp}
@@ -66,57 +82,37 @@ export default function Connect() {
             </p>
           </motion.div>
 
-          {/* ── Top pod + contact card ────────────────────────────────── */}
-          <div>
-
-            {/* Top stack pod */}
-            <motion.div
-              custom={1}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              className="mx-auto mb-24 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
+          {/* ── Contact links card ───────────────────────────────────── */}
+          <motion.div
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-8 py-8 flex flex-col items-center gap-4"
+          >
+            <a
+              href="https://www.linkedin.com/in/evan-aucoin-184229354"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-700 transition-colors hover:border-blue-600 hover:bg-blue-600 hover:text-white"
             >
-              <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
-                Portfolio Stack:&nbsp;
-              </span>
-              <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
-                Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel
-              </span>
-            </motion.div>
-
-            {/* Contact links card */}
-            <motion.div
-              custom={2}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-8 py-8 flex flex-col items-center gap-4"
+              <LinkedinIcon className="w-4 h-4" />
+              LinkedIn
+            </a>
+            <a
+              href="mailto:eaucoin@uwaterloo.ca"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
             >
-              <a
-                href="https://www.linkedin.com/in/evan-aucoin-184229354"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-700 transition-colors hover:border-blue-600 hover:bg-blue-600 hover:text-white"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-                LinkedIn
-              </a>
-              <a
-                href="mailto:eaucoin@uwaterloo.ca"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-700 transition-colors hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
-              >
-                <MailIcon className="w-4 h-4" />
-                eaucoin@uwaterloo.ca
-              </a>
-            </motion.div>
+              <MailIcon className="w-4 h-4" />
+              eaucoin@uwaterloo.ca
+            </a>
+          </motion.div>
 
-          </div>
         </div>
       </div>
 
-      {/* ── Bottom pod — fixed empty white pill, anchored to viewport bottom ── */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
+      {/* ── Bottom pod — fixed, anchored to viewport floor, empty ── */}
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 pointer-events-none">
         <div
           className="rounded-full border border-zinc-200 bg-white"
           style={{
