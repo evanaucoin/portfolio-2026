@@ -78,7 +78,7 @@ export default function Connect() {
               Portfolio Stack:&nbsp;
             </span>
             <span className="whitespace-nowrap text-xs font-semibold text-zinc-900">
-              Figma • Next.js • Tailwind • Cursor • Gemini • Vercel
+              Figma • Next.js • Framer Motion • Cursor • Gemini • Claude • Vercel
             </span>
           </motion.div>
 

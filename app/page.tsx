@@ -345,8 +345,9 @@ export default function Home() {
         })}
       </div>
 
-      {/* Bottom section — equal height to top spacer; pod floats in its center. */}
-      <div className="flex flex-1 items-center justify-center">
+      {/* Bottom section — equal height to top spacer; pod floats in its center.
+          Hidden on the connect card (index 4) so no empty pill lingers below it. */}
+      <div className={`flex flex-1 items-center justify-center transition-opacity duration-300 ${activeIndex === 4 ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         <StatusPod activeIndex={activeIndex} />
       </div>
 
