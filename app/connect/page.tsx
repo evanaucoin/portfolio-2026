@@ -69,13 +69,13 @@ export default function Connect() {
           {/* ── Top pod + contact card ────────────────────────────────── */}
           <div>
 
-            {/* Top stack pod — same height as the bottom pod, w-fit, centered */}
+            {/* Top stack pod */}
             <motion.div
               custom={1}
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="mx-auto mb-8 flex h-14 w-fit items-center rounded-full border border-zinc-200 bg-white px-6 shadow-sm"
+              className="mx-auto mb-12 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
             >
               <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
                 Portfolio Stack:&nbsp;
