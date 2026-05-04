@@ -70,14 +70,14 @@ export default function PRISMCaseStudy() {
           <div>
             <button
               onClick={() => setView("home")}
-              className="mb-8 w-full text-left"
+              className="mb-10 w-full flex justify-center"
             >
-              <span className="inline-block bg-zinc-100 text-zinc-900 font-medium text-sm px-3 py-1.5 rounded-full">
+              <span className="inline-block bg-zinc-100 text-zinc-900 font-medium text-base px-6 py-2 rounded-full">
                 Home
               </span>
             </button>
 
-            <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block">
+            <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block mt-2">
               Case Study
             </span>
             <p className="text-xl font-semibold text-zinc-900 mb-8 tracking-tight">PRISM</p>
