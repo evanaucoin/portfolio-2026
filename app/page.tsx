@@ -144,15 +144,15 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col h-screen overflow-hidden px-12">
+    <main className="flex flex-col h-screen overflow-hidden items-center gap-6 md:gap-10 px-4 md:px-12 py-10 md:py-16">
       {/* Top pod — always mounted; ghost pill on intro, expanded with content on all other states */}
-      <div className="flex justify-center mt-8 mb-0">
+      <div className="flex justify-center w-full">
         <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
-          className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm${TOP_POD[activeIndex] ? " w-fit" : ""}`}
+          className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm${TOP_POD[activeIndex] ? " w-[90%] md:w-fit max-w-2xl" : ""}`}
           style={{
-            height: 56,
+            minHeight: 56,
             ...(TOP_POD[activeIndex] ? {} : { width: 88 }),
             boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
           }}
@@ -165,7 +165,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
-                className={`select-none whitespace-nowrap px-10 leading-none ${TOP_POD[activeIndex]!.small ? "text-[11px]" : "text-[22px]"}`}
+                className={`select-none flex flex-wrap justify-center text-center px-6 py-3 leading-snug gap-x-1 ${TOP_POD[activeIndex]!.small ? "text-[10px] sm:text-xs md:text-[13px]" : "text-xs sm:text-sm md:text-[22px]"}`}
               >
                 <span className="text-zinc-500">{TOP_POD[activeIndex]!.label}&nbsp;</span>
                 <span className="text-zinc-900 font-semibold">{TOP_POD[activeIndex]!.tools}</span>
@@ -176,9 +176,9 @@ export default function Home() {
       </div>
 
       {/* Card deck — flex-1 eats remaining space and keeps the card floating in the middle */}
-      <div className="flex-1 flex items-center justify-center pb-24">
+      <div className="flex-1 flex items-center justify-center pb-16 md:pb-24 w-full">
       <div
-        className={`relative w-full max-w-6xl aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-[92%] sm:w-[85%] md:w-[600px] aspect-[4/3] md:aspect-video overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -214,21 +214,21 @@ export default function Home() {
               }`}
             >
               {i === 0 && (
-                <div className="flex h-full w-full flex-col items-center justify-between py-16 px-12">
-                  <span className="text-sm font-medium text-zinc-400 text-center">
+                <div className="flex h-full w-full flex-col items-center justify-between py-8 px-6 md:py-16 md:px-12">
+                  <span className="text-xs sm:text-sm font-medium text-zinc-400 text-center">
                     Evan AuCoin
                   </span>
                   <div className="flex flex-1 items-center justify-center">
-                    <p className="text-5xl font-medium tracking-tight text-zinc-900 leading-tight text-center">
+                    <p className="text-xl sm:text-3xl md:text-5xl font-medium tracking-tight text-zinc-900 leading-tight text-center">
                       I create{" "}
                       <RotatingText
                         texts={["Design", "Solutions", "Products"]}
-                        mainClassName="inline-flex px-6 py-2 bg-blue-600 text-white rounded-full overflow-hidden font-medium tracking-tight"
+                        mainClassName="inline-flex px-4 py-1 md:px-6 md:py-2 bg-blue-600 text-white rounded-full overflow-hidden font-medium tracking-tight"
                       />
                       {" "}that matter.
                     </p>
                   </div>
-                  <span className="text-sm font-medium text-zinc-400 text-center">
+                  <span className="text-xs sm:text-sm font-medium text-zinc-400 text-center">
                     GBDA @ UWaterloo
                   </span>
                 </div>
@@ -257,14 +257,14 @@ export default function Home() {
                   />
                   {/* Layer B — sharp text, no filters */}
                   <div
-                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-12 pb-16 z-20"
+                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-6 pb-8 md:px-12 md:pb-16 z-20"
                     style={{ transform: "translateZ(0)" }}
                   >
-                    <h2 className="text-6xl font-medium text-white">JOURNEY</h2>
-                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-medium text-white">JOURNEY</h2>
+                    <p className="text-xs sm:text-sm font-normal text-zinc-300 mt-1 mb-2">
                       Project: Itinerary travel app
                     </p>
-                    <p className="text-lg text-zinc-200 max-w-lg">
+                    <p className="text-xs sm:text-sm md:text-lg text-zinc-200 max-w-lg">
                       An AI-driven experience that emphasizes the journey, not just the destination.
                     </p>
                   </div>
@@ -294,14 +294,14 @@ export default function Home() {
                   />
                   {/* Layer B — sharp text, no filters */}
                   <div
-                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-12 pb-16 z-20"
+                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-6 pb-8 md:px-12 md:pb-16 z-20"
                     style={{ textShadow: "0 2px 4px rgba(0,0,0,0.3)", transform: "translateZ(0)" }}
                   >
-                    <h2 className="text-6xl font-medium text-white">PRISM</h2>
-                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-medium text-white">PRISM</h2>
+                    <p className="text-xs sm:text-sm font-normal text-zinc-300 mt-1 mb-2">
                       Project: Social coaching app
                     </p>
-                    <p className="text-lg text-zinc-200 max-w-lg">
+                    <p className="text-xs sm:text-sm md:text-lg text-zinc-200 max-w-lg">
                       Turning &apos;invisible&apos; social cues into clear, actionable insights.
                     </p>
                   </div>
@@ -331,24 +331,24 @@ export default function Home() {
                   />
                   {/* Layer B — sharp text, no filters */}
                   <div
-                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-12 pb-16 z-20"
+                    className="absolute bottom-0 left-0 w-full flex flex-col justify-end px-6 pb-8 md:px-12 md:pb-16 z-20"
                     style={{ transform: "translateZ(0)" }}
                   >
-                    <h2 className="text-6xl font-medium text-white">DZD</h2>
-                    <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-medium text-white">DZD</h2>
+                    <p className="text-xs sm:text-sm font-normal text-zinc-300 mt-1 mb-2">
                       Project: Fitness companion app
                     </p>
-                    <p className="text-lg text-zinc-200 max-w-lg">
+                    <p className="text-xs sm:text-sm md:text-lg text-zinc-200 max-w-lg">
                       Redesigning the search experience for active living.
                     </p>
                   </div>
                 </>
               )}
               {i === 4 && (
-                <div className="flex h-full w-full flex-col items-center justify-center space-y-16">
+                <div className="flex h-full w-full flex-col items-center justify-center space-y-8 md:space-y-16">
                   <SplitText
                     text="Let's connect"
-                    className="text-8xl font-bold text-white tracking-tighter"
+                    className="text-3xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter"
                     delay={100}
                     isActive={slot === 0}
                   />
@@ -360,18 +360,18 @@ export default function Home() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -3 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                      className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-full border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
                     >
-                      <LinkedinIcon className="w-8 h-8" />
+                      <LinkedinIcon className="w-5 h-5 md:w-8 md:h-8" />
                     </motion.a>
                     {/* Email */}
                     <motion.a
                       href="mailto:eaucoin@uwaterloo.ca"
                       whileHover={{ scale: 1.1, y: -3 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center justify-center w-20 h-20 rounded-full border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                      className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-full border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
                     >
-                      <Mail className="w-8 h-8" />
+                      <Mail className="w-5 h-5 md:w-8 md:h-8" />
                     </motion.a>
                   </div>
                 </div>
@@ -383,7 +383,7 @@ export default function Home() {
       </div>
 
       {/* Bottom pod — fixed at viewport bottom, independent of central layout */}
-      <div className="fixed bottom-10 left-0 right-0 flex justify-center">
+      <div className="fixed bottom-6 md:bottom-10 left-0 right-0 flex justify-center">
         <StatusPod activeIndex={activeIndex} />
       </div>
 
