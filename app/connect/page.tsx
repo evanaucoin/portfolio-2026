@@ -75,7 +75,7 @@ export default function Connect() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              className="mx-auto mb-12 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
+              className="mx-auto mb-24 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
             >
               <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
                 Portfolio Stack:&nbsp;
@@ -116,7 +116,7 @@ export default function Connect() {
       </div>
 
       {/* ── Bottom pod — fixed empty white pill, anchored to viewport bottom ── */}
-      <div className="fixed bottom-8 left-0 right-0 flex justify-center pointer-events-none">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
         <div
           className="rounded-full border border-zinc-200 bg-white"
           style={{
