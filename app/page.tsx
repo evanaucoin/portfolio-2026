@@ -145,8 +145,8 @@ export default function Home() {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center px-12">
-      {/* Top pod — fixed-height container keeps deck position stable when content changes */}
-      <div className="flex h-9 items-center justify-center mb-8">
+      {/* Top pod */}
+      <div className="flex justify-center">
         <AnimatePresence mode="wait">
           {TOP_POD[activeIndex] && (
             <motion.div
@@ -155,12 +155,12 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-              className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
+              className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
             >
-              <span className="whitespace-nowrap text-xs font-medium text-zinc-500">
+              <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
                 {TOP_POD[activeIndex]!.label}&nbsp;
               </span>
-              <span className="whitespace-nowrap text-xs font-semibold text-zinc-900">
+              <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
                 {TOP_POD[activeIndex]!.tools}
               </span>
             </motion.div>
@@ -170,7 +170,7 @@ export default function Home() {
 
       {/* Card deck — hidden until mount reset completes to prevent flash */}
       <div
-        className={`relative w-full max-w-6xl aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-full max-w-6xl aspect-[21/9] overflow-visible transition-opacity duration-300 mt-12 ${isReady ? "opacity-100" : "opacity-0"}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -373,8 +373,8 @@ export default function Home() {
         })}
       </div>
 
-      {/* Bottom pod — mirrors top pod spacing for a balanced sandwich */}
-      <div className="flex items-center justify-center mt-8">
+      {/* Bottom pod — fixed at viewport bottom, independent of central layout */}
+      <div className="fixed bottom-8 left-0 right-0 flex justify-center">
         <StatusPod activeIndex={activeIndex} />
       </div>
 
