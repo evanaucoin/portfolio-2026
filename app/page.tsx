@@ -264,8 +264,8 @@ export default function Home() {
                     <p className="text-sm font-normal text-zinc-300 mt-1 mb-2">
                       Project: Itinerary travel app
                     </p>
-                    <p className="text-lg text-zinc-200 max-w-lg">
-                      An AI-driven experience that emphasizes the journey, not just the destination.
+                    <p className="text-lg text-zinc-100 max-w-[300px]">
+                      Focusing on where, not when.
                     </p>
                   </div>
                 </>
