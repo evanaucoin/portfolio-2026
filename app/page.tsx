@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className="relative h-screen overflow-hidden">
       {/* Top pod — fixed, floats independently above the card stack */}
-      <div className="fixed top-24 left-1/2 -translate-x-1/2 z-20">
+      <div className="fixed top-12 left-1/2 -translate-x-1/2 z-20">
         <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
@@ -178,7 +178,7 @@ export default function Home() {
       {/* Card deck — absolutely centered, independent of pods */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div
-        className={`relative w-[600px] aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-[850px] aspect-video overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
