@@ -44,17 +44,17 @@ const fadeUp: Variants = {
 
 export default function Connect() {
   return (
-    <main className="relative flex h-screen flex-col items-center px-6">
+    <main className="relative min-h-screen w-full flex flex-col">
 
-      {/* ── Top pod — sits near the top, outside the centered group ── */}
+      {/* ── Top pod ── */}
       <motion.div
         custom={0}
         initial="hidden"
         animate="visible"
         variants={fadeUp}
-        className="mt-20 flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
+        className="mt-20 mb-8 mx-auto flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
       >
-        <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
+        <span className="whitespace-nowrap text-[10px] text-zinc-500">
           Portfolio Stack:&nbsp;
         </span>
         <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
@@ -62,8 +62,8 @@ export default function Connect() {
         </span>
       </motion.div>
 
-      {/* ── Centered card group — flex-1 so it takes remaining space ── */}
-      <div className="flex flex-1 flex-col items-center justify-center w-full">
+      {/* ── Card — flex-1 centers it between the two pods ── */}
+      <div className="flex flex-1 items-center justify-center px-6">
         <div className="w-full max-w-2xl">
 
           {/* ── Header ───────────────────────────────────────────────── */}
@@ -111,16 +111,9 @@ export default function Connect() {
         </div>
       </div>
 
-      {/* ── Bottom pod — fixed, anchored to viewport floor, empty ── */}
+      {/* ── Bottom pod — fixed to viewport floor, empty, matches top pod height ── */}
       <div className="fixed bottom-10 left-1/2 -translate-x-1/2 pointer-events-none">
-        <div
-          className="rounded-full border border-zinc-200 bg-white"
-          style={{
-            height: 56,
-            width: 88,
-            boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
-          }}
-        />
+        <div className="w-[88px] rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-[0_6px_32px_rgba(0,0,0,0.10)]" />
       </div>
 
     </main>
