@@ -30,12 +30,12 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const CARD_COUNT = 5;
 
-const TOP_POD: Record<number, { label: string; tools: string } | null> = {
+const TOP_POD: Record<number, { label: string; tools: string; small?: boolean } | null> = {
   0: null,
-  1: { label: "Tools:", tools: "Figma" },
-  2: { label: "Tools:", tools: "Figma • Figma Make" },
-  3: { label: "Tools:", tools: "Figma" },
-  4: { label: "Portfolio Stack:", tools: "Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel" },
+  1: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Claude" },
+  2: { label: "Stack:", tools: "Figma Product Suite • Claude" },
+  3: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Claude" },
+  4: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Next.js • TypeScript • TailwindCSS • React • Framer Motion • Cursor • Gemini • Claude • Vercel", small: true },
 };
 
 const SLOT_STATES = [
@@ -165,10 +165,10 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
-                className="select-none whitespace-nowrap px-10 text-[22px] leading-none text-zinc-400"
+                className={`select-none whitespace-nowrap px-10 leading-none ${TOP_POD[activeIndex]!.small ? "text-[11px]" : "text-sm"}`}
               >
-                {TOP_POD[activeIndex]!.label}&nbsp;
-                <span className="text-zinc-800">{TOP_POD[activeIndex]!.tools}</span>
+                <span className="text-zinc-500">{TOP_POD[activeIndex]!.label}&nbsp;</span>
+                <span className="text-zinc-900 font-semibold">{TOP_POD[activeIndex]!.tools}</span>
               </motion.span>
             )}
           </AnimatePresence>
