@@ -15,17 +15,17 @@ interface StatusPodProps {
 
 export function StatusPod({ activeIndex }: StatusPodProps) {
   const isWork = activeIndex >= 1 && activeIndex <= 3;
+  const isConnect = activeIndex === 4;
+  const isExpanded = isWork || isConnect;
 
   return (
     <motion.div
       layout
       transition={{ layout: podSpring }}
-      // w-fit applies only in the expanded state; empty state uses inline width below.
-      className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white${isWork ? " w-fit" : ""}`}
+      className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white${isExpanded ? " w-fit" : ""}`}
       style={{
         height: PILL_H,
-        // Explicit inline width for empty state — overrides layout measurement correctly.
-        ...(isWork ? {} : { width: EMPTY_W }),
+        ...(isExpanded ? {} : { width: EMPTY_W }),
         boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
       }}
     >
@@ -41,6 +41,18 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
           >
             {activeIndex} of 3{" "}
             <span className="text-zinc-800">work</span>
+          </motion.span>
+        )}
+        {isConnect && (
+          <motion.span
+            key="connect-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
+            className="select-none whitespace-nowrap px-10 text-[22px] leading-none text-zinc-400"
+          >
+            <span className="text-zinc-800">Connect</span>
           </motion.span>
         )}
       </AnimatePresence>

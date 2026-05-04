@@ -30,6 +30,14 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const CARD_COUNT = 5;
 
+const TOP_POD: Record<number, { label: string; tools: string } | null> = {
+  0: null,
+  1: { label: "Tools:", tools: "Figma" },
+  2: { label: "Tools:", tools: "Figma • Figma Make" },
+  3: { label: "Tools:", tools: "Figma" },
+  4: { label: "Portfolio Stack:", tools: "Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel" },
+};
+
 const SLOT_STATES = [
   { y: 0,    scale: 1,    opacity: 1, zIndex: 6 }, // front
   { y: 60,   scale: 0.92, opacity: 1, zIndex: 4 }, // peek 1
@@ -136,9 +144,29 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex h-screen flex-col items-center px-12">
-      {/* Top spacer — mirrors the bottom section so the deck lands dead-center. */}
-      <div className="flex-1" />
+    <main className="flex h-screen flex-col items-center justify-center px-12">
+      {/* Top pod — fixed-height container keeps deck position stable when content changes */}
+      <div className="flex h-9 items-center justify-center mb-8">
+        <AnimatePresence mode="wait">
+          {TOP_POD[activeIndex] && (
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
+              className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
+            >
+              <span className="whitespace-nowrap text-xs font-medium text-zinc-500">
+                {TOP_POD[activeIndex]!.label}&nbsp;
+              </span>
+              <span className="whitespace-nowrap text-xs font-semibold text-zinc-900">
+                {TOP_POD[activeIndex]!.tools}
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Card deck — hidden until mount reset completes to prevent flash */}
       <div
@@ -345,9 +373,8 @@ export default function Home() {
         })}
       </div>
 
-      {/* Bottom section — equal height to top spacer; pod floats in its center.
-          Hidden on the connect card (index 4) so no empty pill lingers below it. */}
-      <div className={`flex flex-1 items-center justify-center transition-opacity duration-300 ${activeIndex === 4 ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+      {/* Bottom pod — mirrors top pod spacing for a balanced sandwich */}
+      <div className="flex items-center justify-center mt-8">
         <StatusPod activeIndex={activeIndex} />
       </div>
 
