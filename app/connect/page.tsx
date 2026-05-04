@@ -44,7 +44,7 @@ const fadeUp: Variants = {
 
 export default function Connect() {
   return (
-    <main className="relative min-h-screen w-full flex flex-col">
+    <main className="flex flex-col h-screen overflow-hidden w-full">
 
       {/* ── Top pod ── */}
       <motion.div
@@ -52,18 +52,17 @@ export default function Connect() {
         initial="hidden"
         animate="visible"
         variants={fadeUp}
-        className="mt-20 mb-8 mx-auto flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-sm"
+        className="mt-8 mb-8 mx-auto flex w-fit items-center rounded-full border border-zinc-200 bg-white px-10 shadow-[0_6px_32px_rgba(0,0,0,0.10)]"
+        style={{ height: 56 }}
       >
-        <span className="whitespace-nowrap text-[10px] text-zinc-500">
+        <span className="select-none whitespace-nowrap text-[22px] leading-none text-zinc-400">
           Portfolio Stack:&nbsp;
-        </span>
-        <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
-          Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel
+          <span className="text-zinc-800">Figma • Next.js • TypeScript • Framer Motion • Cursor • Gemini • Claude • Vercel</span>
         </span>
       </motion.div>
 
       {/* ── Card — flex-1 centers it between the two pods ── */}
-      <div className="flex flex-1 items-center justify-center px-6">
+      <div className="flex flex-1 items-center justify-center px-6 pb-24">
         <div className="w-full max-w-2xl">
 
           {/* ── Header ───────────────────────────────────────────────── */}
@@ -113,7 +112,7 @@ export default function Connect() {
 
       {/* ── Bottom pod — fixed to viewport floor, empty, matches top pod height ── */}
       <div className="fixed bottom-10 left-1/2 -translate-x-1/2 pointer-events-none">
-        <div className="w-[88px] rounded-full border border-zinc-200 bg-white px-4 py-1.5 shadow-[0_6px_32px_rgba(0,0,0,0.10)]" />
+        <div className="rounded-full border border-zinc-200 bg-white shadow-[0_6px_32px_rgba(0,0,0,0.10)]" style={{ width: 88, height: 56 }} />
       </div>
 
     </main>

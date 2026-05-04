@@ -144,9 +144,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center px-12">
+    <main className="flex flex-col h-screen overflow-hidden px-12">
       {/* Top pod */}
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center mt-8 mb-0">
         <AnimatePresence mode="wait">
           {TOP_POD[activeIndex] && (
             <motion.div
@@ -167,9 +167,10 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
-      {/* Card deck — hidden until mount reset completes to prevent flash */}
+      {/* Card deck — flex-1 eats remaining space and keeps the card floating in the middle */}
+      <div className="flex-1 flex items-center justify-center pb-24">
       <div
-        className={`relative w-full max-w-6xl aspect-[21/9] overflow-visible transition-opacity duration-300 mt-12 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-full max-w-6xl aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -371,9 +372,10 @@ export default function Home() {
           );
         })}
       </div>
+      </div>
 
       {/* Bottom pod — fixed at viewport bottom, independent of central layout */}
-      <div className="fixed bottom-8 left-0 right-0 flex justify-center">
+      <div className="fixed bottom-10 left-0 right-0 flex justify-center">
         <StatusPod activeIndex={activeIndex} />
       </div>
 
