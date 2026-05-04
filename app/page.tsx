@@ -33,7 +33,7 @@ const CARD_COUNT = 5;
 const TOP_POD: Record<number, { label: string; tools: string; small?: boolean } | null> = {
   0: null,
   1: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Claude" },
-  2: { label: "Stack:", tools: "Figma Product Suite • Claude" },
+  2: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Claude" },
   3: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Claude" },
   4: { label: "Stack:", tools: "Figma Product Suite • Adobe Creative Cloud • Next.js • TypeScript • TailwindCSS • React • Framer Motion • Cursor • Gemini • Claude • Vercel", small: true },
 };

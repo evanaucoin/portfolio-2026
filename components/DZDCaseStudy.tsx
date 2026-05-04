@@ -113,13 +113,13 @@ export default function DZDCaseStudy() {
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     DZD
                   </h1>
-                  <p className="text-[17px] text-zinc-500 leading-relaxed mb-5">
+                  <p className="text-[17px] text-zinc-500 leading-relaxed mb-6">
                     DZD is an AI fitness companion app concept. I found myself switching
                     through chat bots and social media for solutions, when faced with too many
                     questions I asked myself, &ldquo;Why can&rsquo;t I find all the answers in
                     one place?&rdquo;. So I came up with DZD (Yo you&rsquo;re deezed fam). I
-                    designed this concept to fix the &lsquo;analysis paralysis&rsquo; that stops
-                    people from achieving their fitness goals.
+                    designed this concept to fix the &lsquo;analysis paralysis&rsquo; that stop
+                    people from even starting.
                   </p>
                   <p className="text-[17px] text-zinc-500 leading-relaxed">
                     I built this mobile app concept using Figma Design, Figma Make, Adobe
@@ -133,6 +133,8 @@ export default function DZDCaseStudy() {
                     <li>1 Designer (Me)</li>
                     <li>1 Developer (Me)</li>
                   </ul>
+                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4 mt-8">Role</p>
+                  <p className="text-[15px] text-zinc-500">User Research, Ideation, Wireframing, UX/UI design, Vibe Coding</p>
                   <p className="mt-auto pt-8 text-[15px] text-zinc-400">2026</p>
                 </div>
               </div>

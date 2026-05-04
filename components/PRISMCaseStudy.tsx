@@ -113,11 +113,14 @@ export default function PRISMCaseStudy() {
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     PRISM
                   </h1>
-                  <p className="text-[17px] text-zinc-500 leading-loose">
+                  <p className="text-[17px] text-zinc-500 leading-loose mb-6">
                     Why does 10 minutes of conversation sometimes feel like a test? PRISM is a
                     social intelligence platform that turns invisible cues into clear insights.
-                    It helps the socially overwhelmed navigate interpersonal success. Built with
-                    Figma Design and Figma Make.
+                    It helps the socially overwhelmed navigate interpersonal success.
+                  </p>
+                  <p className="text-[17px] text-zinc-500 leading-loose">
+                    This mobile app concept was built using Figma Design, Figma Make, Adobe
+                    Photoshop, and Claude
                   </p>
                 </div>
 
@@ -129,6 +132,8 @@ export default function PRISMCaseStudy() {
                     <li>1 Researcher</li>
                     <li>3 Ideated with</li>
                   </ul>
+                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4 mt-8">Role</p>
+                  <p className="text-[15px] text-zinc-500">User Research, Ideation, Wireframing, UX/UI design, Vibe Coding</p>
                   <p className="mt-auto pt-8 text-[15px] text-zinc-400">2026</p>
                 </div>
               </div>

@@ -101,11 +101,14 @@ export default function JourneyCaseStudy() {
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     JOURNEY
                   </h1>
-                  <p className="text-[17px] text-zinc-500 leading-loose">
+                  <p className="text-[17px] text-zinc-500 leading-loose mb-6">
                     Navigation apps are built for speed, but Journey is built for the experience.
                     Using AI, it turns travel from Toronto to NYC into a curated itinerary of stops
                     that actually matter to you. This project was my favorite because we prioritized
                     deep UX thinking over quick UI.
+                  </p>
+                  <p className="text-[17px] text-zinc-500 leading-loose">
+                    This mobile app concept was built using Figma Design, Adobe Photoshop, and Claude
                   </p>
                 </div>
 
@@ -119,8 +122,8 @@ export default function JourneyCaseStudy() {
                     <li>2 Designers (Me)</li>
                     <li>3 Researchers (Me)</li>
                   </ul>
-                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-2 mt-8">Role</p>
-                  <p className="text-[15px] text-zinc-500">UX Architecture &amp; Wireframing</p>
+                  <p className="text-xs font-semibold text-zinc-900 tracking-widest uppercase mb-4 mt-8">Role</p>
+                  <p className="text-[15px] text-zinc-500">User Research, Ideation, Wireframing, UX design</p>
                 </div>
               </div>
 
