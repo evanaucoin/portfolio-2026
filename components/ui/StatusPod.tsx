@@ -20,7 +20,7 @@ export function StatusPod({ activeIndex }: StatusPodProps) {
     <motion.div
       layout
       transition={{ layout: podSpring }}
-      className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white${isWork ? " w-fit" : ""}`}
+      className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm${isWork ? " w-fit" : ""}`}
       style={{
         height: PILL_H,
         ...(isWork ? {} : { width: EMPTY_W }),

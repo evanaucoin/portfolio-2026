@@ -145,26 +145,34 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-screen overflow-hidden px-12">
-      {/* Top pod */}
+      {/* Top pod — always mounted; ghost pill on intro, expanded with content on all other states */}
       <div className="flex justify-center mt-8 mb-0">
-        <AnimatePresence mode="wait">
-          {TOP_POD[activeIndex] && (
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-              className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-white px-10"
-              style={{ height: 56, boxShadow: "0 6px 32px rgba(0,0,0,0.10)" }}
-            >
-              <span className="select-none whitespace-nowrap text-[22px] leading-none text-zinc-400">
+        <motion.div
+          layout
+          transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
+          className={`flex items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm${TOP_POD[activeIndex] ? " w-fit" : ""}`}
+          style={{
+            height: 56,
+            ...(TOP_POD[activeIndex] ? {} : { width: 88 }),
+            boxShadow: "0 6px 32px rgba(0,0,0,0.10)",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            {TOP_POD[activeIndex] && (
+              <motion.span
+                key={activeIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ type: "tween", duration: 0.18, ease: "easeOut" }}
+                className="select-none whitespace-nowrap px-10 text-[22px] leading-none text-zinc-400"
+              >
                 {TOP_POD[activeIndex]!.label}&nbsp;
                 <span className="text-zinc-800">{TOP_POD[activeIndex]!.tools}</span>
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Card deck — flex-1 eats remaining space and keeps the card floating in the middle */}
