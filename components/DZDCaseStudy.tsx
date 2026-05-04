@@ -113,11 +113,17 @@ export default function DZDCaseStudy() {
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
                     DZD
                   </h1>
-                  <p className="text-[17px] text-zinc-500 leading-loose">
-                    DZD is an AI fitness companion. It cuts through the noise of TikTok and
-                    ChatGPT to give you a clear plan. I built this concept to fix the
-                    &lsquo;analysis paralysis&rsquo; that stops people from starting.
-                    Built with Figma.
+                  <p className="text-[17px] text-zinc-500 leading-relaxed mb-5">
+                    DZD is an AI fitness companion app concept. I found myself switching
+                    through chat bots and social media for solutions, when faced with too many
+                    questions I asked myself, &ldquo;Why can&rsquo;t I find all the answers in
+                    one place?&rdquo;. So I came up with DZD (Yo you&rsquo;re deezed fam). I
+                    designed this concept to fix the &lsquo;analysis paralysis&rsquo; that stops
+                    people from achieving their fitness goals.
+                  </p>
+                  <p className="text-[17px] text-zinc-500 leading-relaxed">
+                    I built this mobile app concept using Figma Design, Figma Make, Adobe
+                    Illustrator, Adobe Firefly, and Claude
                   </p>
                 </div>
 
