@@ -178,7 +178,7 @@ export default function Home() {
       {/* Card deck — absolutely centered, independent of pods */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div
-        className={`relative w-[850px] aspect-video overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -219,7 +219,7 @@ export default function Home() {
                     Evan AuCoin
                   </span>
                   <div className="flex flex-1 items-center justify-center">
-                    <p className="text-5xl font-medium tracking-tight text-zinc-900 leading-tight text-center">
+                    <p className="text-6xl font-medium tracking-tight text-zinc-900 leading-tight text-center">
                       I create{" "}
                       <RotatingText
                         texts={["Design", "Solutions", "Products"]}
