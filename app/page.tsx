@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className="flex h-screen flex-col items-center justify-center px-12">
       {/* Top pod */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-10">
         <AnimatePresence mode="wait">
           {TOP_POD[activeIndex] && (
             <motion.div
@@ -155,13 +155,12 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
-              className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-white px-4 py-1 shadow-sm"
+              className="inline-flex w-fit items-center rounded-full border border-zinc-200 bg-white px-10"
+              style={{ height: 56, boxShadow: "0 6px 32px rgba(0,0,0,0.10)" }}
             >
-              <span className="whitespace-nowrap text-[10px] font-medium text-zinc-500">
+              <span className="select-none whitespace-nowrap text-[22px] leading-none text-zinc-400">
                 {TOP_POD[activeIndex]!.label}&nbsp;
-              </span>
-              <span className="whitespace-nowrap text-[10px] font-semibold text-zinc-900">
-                {TOP_POD[activeIndex]!.tools}
+                <span className="text-zinc-800">{TOP_POD[activeIndex]!.tools}</span>
               </span>
             </motion.div>
           )}
