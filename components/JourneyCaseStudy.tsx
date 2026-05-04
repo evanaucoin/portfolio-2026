@@ -8,8 +8,6 @@ import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
   { id: "intro",      label: "Intro"      },
-  { id: "problem",    label: "Problem"    },
-  { id: "solution",   label: "Solution"   },
   { id: "process",    label: "Process"    },
   { id: "interface",  label: "Interface"  },
   { id: "reflection", label: "Reflection" },
@@ -91,10 +89,10 @@ export default function JourneyCaseStudy() {
           <div className="max-w-4xl mx-auto px-8 lg:px-16 pt-32 pb-40">
 
             {/* ── INTRO ──────────────────────────────────────────────── */}
-            <section id="journey-intro" className="mb-24">
+            <section id="journey-intro" className="mb-32">
 
               {/* 12-col gutter grid */}
-              <div className="grid grid-cols-12 gap-16 mb-20">
+              <div className="grid grid-cols-12 gap-16">
 
                 {/* cols 1–7 */}
                 <div className="col-span-7">
@@ -107,12 +105,21 @@ export default function JourneyCaseStudy() {
                     that actually matter to you. This project was my favorite because we prioritized
                     deep UX thinking over quick UI.
                   </p>
-                  <p className="text-[17px] text-zinc-500 leading-loose">
+                  <p className="text-[17px] text-zinc-500 leading-loose mb-8">
                     This mobile app concept was built using Figma Design, Adobe Photoshop, and Claude
                   </p>
-                </div>
 
-                {/* col 8: intentional gutter */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl bg-zinc-50 border border-zinc-100 px-4 py-3">
+                      <span className="text-[9px] font-semibold tracking-widest text-zinc-400 uppercase block mb-1.5">Problem</span>
+                      <p className="text-[13px] text-zinc-600 leading-snug">Navigation apps optimize for speed, reducing travel to a chore instead of an experience.</p>
+                    </div>
+                    <div className="rounded-xl bg-amber-50 border border-amber-100 px-4 py-3">
+                      <span className="text-[9px] font-semibold tracking-widest text-amber-600 uppercase block mb-1.5">Solution</span>
+                      <p className="text-[13px] text-zinc-700 leading-snug">An AI that builds personalized routes around your interests &mdash; turning the drive into the destination.</p>
+                    </div>
+                  </div>
+                </div>
 
                 {/* cols 9–12 */}
                 <div className="col-span-4 col-start-9 flex flex-col pt-1">
@@ -127,48 +134,6 @@ export default function JourneyCaseStudy() {
                   <p className="text-[15px] text-zinc-500">User Research, Ideation, Wireframing, UX design</p>
                 </div>
               </div>
-
-              {/* ── HERO — editorial bleed, no container ── */}
-              <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-xl">
-                <Image
-                  src="/Journey_preview.png"
-                  alt="Journey — AI-curated road trip itinerary app"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1280px) 100vw, 896px"
-                  priority
-                />
-              </div>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── PROBLEM ────────────────────────────────────────────── */}
-            <section id="journey-problem" className="py-32">
-              <SectionLabel>Problem</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                The Route Problem
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                Navigation apps optimize for speed, making travel feel like a chore. We wanted
-                to design an experience that emphasizes the journey itself, not just the
-                destination.
-              </p>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── SOLUTION ───────────────────────────────────────────── */}
-            <section id="journey-solution" className="py-32">
-              <SectionLabel>Solution</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                A Route That Knows You
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                Tell the AI you&rsquo;re driving from Toronto to NYC, and it builds a route
-                based on your family&rsquo;s preferences — turning a boring drive into an
-                adventure.
-              </p>
             </section>
 
             <hr className="border-zinc-100" />
@@ -232,32 +197,52 @@ export default function JourneyCaseStudy() {
                 sharing travel snapshots.
               </p>
 
-              {/* Side-by-side floating panels — no grey frames */}
-              <div className="flex gap-8 items-start justify-center flex-wrap">
-                <div className="max-w-sm w-full flex-1 min-w-[240px]">
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
-                    <Image
-                      src="/Journey_UI.png"
-                      alt="Journey UI — AI-curated itinerary interface"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 384px"
-                    />
-                  </div>
-                  <p className="text-sm text-zinc-400 text-center mt-4">Itinerary view</p>
+              {/* Featured mockup + Problem/Solution pods */}
+              <div className="flex gap-6 items-center mb-14">
+                <div className="flex-1 min-w-0 relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/Journey_UI.png"
+                    alt="Journey UI — AI-curated itinerary interface"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 384px"
+                  />
                 </div>
-                <div className="max-w-sm w-full flex-1 min-w-[240px]">
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
-                    <Image
-                      src="/Journey_Social.png"
-                      alt="Journey social feed — sharing curated travel stops"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 384px"
-                    />
+                <div className="flex flex-col gap-4 w-[240px] flex-shrink-0">
+                  <div className="rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-sm">
+                    <span className="text-[9px] font-semibold tracking-widest text-zinc-400 uppercase block mb-2">Problem</span>
+                    <p className="text-[13px] text-zinc-700 leading-snug">Navigation apps optimize for speed, making travel feel like a chore instead of an experience worth having.</p>
                   </div>
-                  <p className="text-sm text-zinc-400 text-center mt-4">Social feed</p>
+                  <div className="rounded-2xl border border-amber-100 bg-amber-50 px-5 py-4 shadow-sm">
+                    <span className="text-[9px] font-semibold tracking-widest text-amber-600 uppercase block mb-2">Solution</span>
+                    <p className="text-[13px] text-zinc-700 leading-snug">Tell the AI your route and it curates stops around your preferences &mdash; turning a boring drive into an adventure.</p>
+                  </div>
                 </div>
+              </div>
+
+              {/* Preview hero */}
+              <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-xl mb-8">
+                <Image
+                  src="/Journey_preview.png"
+                  alt="Journey — AI-curated road trip itinerary app"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 896px"
+                />
+              </div>
+
+              {/* Social feed */}
+              <div className="max-w-sm mx-auto">
+                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/Journey_Social.png"
+                    alt="Journey social feed — sharing curated travel stops"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 384px"
+                  />
+                </div>
+                <p className="text-sm text-zinc-400 text-center mt-4">Social feed</p>
               </div>
             </section>
 

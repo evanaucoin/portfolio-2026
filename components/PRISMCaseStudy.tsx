@@ -8,8 +8,6 @@ import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
   { id: "intro",      label: "Intro"      },
-  { id: "problem",    label: "Problem"    },
-  { id: "solution",   label: "Solution"   },
   { id: "process",    label: "Process"    },
   { id: "interface",  label: "Interface"  },
   { id: "reflection", label: "Reflection" },
@@ -106,8 +104,7 @@ export default function PRISMCaseStudy() {
 
             {/* ── INTRO ──────────────────────────────────────────────── */}
             <section id="prism-intro" className="mb-32">
-
-              <div className="grid grid-cols-12 gap-16 mb-20">
+              <div className="grid grid-cols-12 gap-16">
 
                 <div className="col-span-7">
                   <h1 className="text-5xl font-semibold text-zinc-900 tracking-tight mb-6 leading-tight">
@@ -118,10 +115,21 @@ export default function PRISMCaseStudy() {
                     social intelligence platform that turns invisible cues into clear insights.
                     It helps the socially overwhelmed navigate interpersonal success.
                   </p>
-                  <p className="text-[17px] text-zinc-500 leading-loose">
+                  <p className="text-[17px] text-zinc-500 leading-loose mb-8">
                     This mobile app concept was built using Figma Design, Figma Make, Adobe
                     Photoshop, and Claude
                   </p>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl bg-zinc-50 border border-zinc-100 px-4 py-3">
+                      <span className="text-[9px] font-semibold tracking-widest text-zinc-400 uppercase block mb-1.5">Problem</span>
+                      <p className="text-[13px] text-zinc-600 leading-snug">Social cues are often biological barriers &mdash; 40% of young professionals cite social exhaustion as their top barrier to success.</p>
+                    </div>
+                    <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+                      <span className="text-[9px] font-semibold tracking-widest text-emerald-600 uppercase block mb-1.5">Solution</span>
+                      <p className="text-[13px] text-zinc-700 leading-snug">Use AI to refract social interactions into a visible data spectrum, then build skills to close the gap.</p>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="col-span-4 col-start-9 flex flex-col pt-1">
@@ -137,61 +145,6 @@ export default function PRISMCaseStudy() {
                   <p className="mt-auto pt-8 text-[15px] text-zinc-400">2026</p>
                 </div>
               </div>
-
-              <div className="relative rounded-3xl bg-zinc-100 p-10">
-                <button
-                  onClick={togglePlay}
-                  aria-label={isPlaying ? "Pause" : "Play"}
-                  className="absolute top-5 right-5 z-10 bg-white/80 backdrop-blur border border-zinc-200 p-2 rounded-full text-zinc-800 hover:bg-white transition-all"
-                >
-                  {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                </button>
-
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="max-w-sm mx-auto w-full rounded-3xl shadow-lg block"
-                >
-                  <source src="/PRISM_demo.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── PROBLEM ────────────────────────────────────────────── */}
-            <section id="prism-problem" className="py-32">
-              <SectionLabel>Problem</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Social Exhaustion
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                Social cues are often biological barriers, not just social ones. 40% of young
-                professionals report &lsquo;social exhaustion&rsquo; as their main barrier to
-                success. PRISM bridges the gap.
-              </p>
-            </section>
-
-            <hr className="border-zinc-100" />
-
-            {/* ── SOLUTION ───────────────────────────────────────────── */}
-            <section id="prism-solution" className="py-32">
-              <SectionLabel>Solution</SectionLabel>
-              <h2 className="text-4xl font-semibold text-zinc-900 tracking-tight mb-8">
-                Refract the Signal
-              </h2>
-              <p className="text-zinc-500 text-[17px] leading-loose max-w-xl">
-                PRISM captures interactions via smartphone or Meta Glasses to reveal
-                communication patterns.{" "}
-                <strong className="text-zinc-700 font-semibold">
-                  It uses AI to refract chaotic social &lsquo;vibes&rsquo; into a visible
-                  spectrum of data. If you&rsquo;re stuck, it suggests specific skill-building
-                  quizzes so you can master conversations in real-time.
-                </strong>
-              </p>
             </section>
 
             <hr className="border-zinc-100" />
@@ -311,9 +264,42 @@ export default function PRISMCaseStudy() {
                 The Full Spectrum
               </h2>
               <p className="text-zinc-500 text-[17px] leading-loose max-w-xl mb-16">
-                Four surfaces — dashboard, recording, practice, and insights — each designed
+                Four surfaces &mdash; dashboard, recording, practice, and insights &mdash; each designed
                 to turn an invisible social moment into something you can act on.
               </p>
+
+              {/* Video + Problem/Solution pods */}
+              <div className="flex gap-6 items-center mb-14">
+                <div className="relative rounded-3xl bg-zinc-100 p-8 flex-1 flex items-center justify-center min-h-[400px]">
+                  <button
+                    onClick={togglePlay}
+                    aria-label={isPlaying ? "Pause" : "Play"}
+                    className="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur border border-zinc-200 p-2 rounded-full text-zinc-800 hover:bg-white transition-all"
+                  >
+                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  </button>
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="max-w-[200px] w-full rounded-3xl shadow-lg block"
+                  >
+                    <source src="/PRISM_demo.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div className="flex flex-col gap-4 w-[240px] flex-shrink-0">
+                  <div className="rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-sm">
+                    <span className="text-[9px] font-semibold tracking-widest text-zinc-400 uppercase block mb-2">Problem</span>
+                    <p className="text-[13px] text-zinc-700 leading-snug">Social cues are often biological barriers &mdash; 40% of young professionals report social exhaustion as their main barrier to success.</p>
+                  </div>
+                  <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-4 shadow-sm">
+                    <span className="text-[9px] font-semibold tracking-widest text-emerald-700 uppercase block mb-2">Solution</span>
+                    <p className="text-[13px] text-zinc-700 leading-snug">PRISM refracts social &lsquo;vibes&rsquo; into a visible data spectrum, then suggests targeted skill-building quizzes to close the gap.</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Dashboard + Recording */}
               <div className="mb-14">
