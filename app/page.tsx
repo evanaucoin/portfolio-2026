@@ -145,8 +145,10 @@ export default function Home() {
 
   return (
     <main className="relative h-screen overflow-hidden">
-      {/* Top pod — fixed, floats independently above the card stack */}
-      <div className="fixed top-28 left-1/2 -translate-x-1/2 z-20">
+      {/* Layout column: header-aware flex centering of top pod → card → bottom pod */}
+      <div className="fixed inset-0 pt-20 flex flex-col items-center justify-center gap-8">
+        {/* Top pod */}
+        <div className="flex-shrink-0 z-20">
         <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
@@ -173,15 +175,14 @@ export default function Home() {
             )}
           </AnimatePresence>
         </motion.div>
-      </div>
+        </div>
 
-      {/* Card deck — absolutely centered, independent of pods */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div
-        className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
+        {/* Card deck */}
+        <div
+          className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 flex-shrink-0 ${isReady ? "opacity-100" : "opacity-0"}`}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
         {Array.from({ length: CARD_COUNT }).map((_, i) => {
           const slot = (i - activeIndex + CARD_COUNT) % CARD_COUNT;
           const { zIndex } = SLOT_STATES[slot];
@@ -379,12 +380,12 @@ export default function Home() {
             </motion.div>
           );
         })}
-      </div>
-      </div>
+        </div>
 
-      {/* Bottom pod — fixed at viewport bottom, independent of central layout */}
-      <div className="fixed bottom-28 left-0 right-0 flex justify-center">
-        <StatusPod activeIndex={activeIndex} />
+        {/* Bottom pod */}
+        <div className="flex-shrink-0">
+          <StatusPod activeIndex={activeIndex} />
+        </div>
       </div>
 
       {/* Cursor follower */}
