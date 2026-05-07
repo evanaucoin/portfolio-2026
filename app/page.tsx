@@ -144,11 +144,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative h-screen overflow-hidden">
-      {/* Layout column: header-aware flex centering of top pod → card → bottom pod */}
-      <div className="fixed inset-0 pt-20 flex flex-col items-center justify-center gap-4">
+    <main className="relative pt-20">
+      {/* Symmetrical flex stack: top pod → card deck → bottom pod, centered in remaining viewport */}
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] gap-8 md:gap-12">
         {/* Top pod */}
-        <div className="flex-shrink-0 z-20">
+        <div className="flex-shrink-0 relative z-20">
         <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
@@ -385,7 +385,7 @@ export default function Home() {
         </div>
 
         {/* Bottom pod */}
-        <div className="flex-shrink-0 z-10">
+        <div className="flex-shrink-0 relative z-10">
           <StatusPod activeIndex={activeIndex} />
         </div>
       </div>
