@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem; /* tight corners — 16px all sides */
+  padding: 1.5rem 1rem 1rem; /* generous top air, 16px sides + bottom */
 }
 
 /* ── Logo (top-left corner) ──────────────────────────────────── */
@@ -15,9 +15,9 @@
   color: #18181b;
   text-decoration: none;
   line-height: 1;
-  min-height: 52px;
+  min-height: 40px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .bubble-logo:hover {
@@ -146,6 +146,6 @@
 
   .bubble-logo {
     font-size: 1.5rem;
-    min-height: 48px;
+    min-height: 40px;
   }
 }

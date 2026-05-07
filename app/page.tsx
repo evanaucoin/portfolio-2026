@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className="relative h-screen overflow-hidden">
       {/* Top pod — fixed, floats independently above the card stack */}
-      <div className="fixed top-12 left-1/2 -translate-x-1/2 z-20">
+      <div className="fixed top-28 left-1/2 -translate-x-1/2 z-20">
         <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 150, damping: 40 } }}
@@ -383,7 +383,7 @@ export default function Home() {
       </div>
 
       {/* Bottom pod — fixed at viewport bottom, independent of central layout */}
-      <div className="fixed bottom-12 left-0 right-0 flex justify-center">
+      <div className="fixed bottom-28 left-0 right-0 flex justify-center">
         <StatusPod activeIndex={activeIndex} />
       </div>
 

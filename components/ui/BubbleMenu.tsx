@@ -80,7 +80,7 @@ export default function BubbleMenu({
       </Link>
 
       {/* Center nav — hidden on mobile, visible md+ */}
-      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
+      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
         <Link href="/about" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">About</Link>
         <Link href="/playground" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Playground</Link>
         <Link href="/workflow" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Workflow</Link>
