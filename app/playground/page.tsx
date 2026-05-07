@@ -39,29 +39,37 @@ function FadeIn({
   );
 }
 
+// A mat-framed image that never crops — the image sits fully inside the
+// #f0f0ee mat with 48 px padding on all four sides. paddingTop encodes the
+// image's true display aspect ratio so object-contain fills edge-to-edge.
 function Frame({
   src,
   alt,
-  aspectStyle,
-  caption,
+  paddingTop,
   scrollRef,
   delay = 0,
+  sizes = "(max-width: 672px) calc(100vw - 48px), 624px",
 }: {
   src: string;
   alt: string;
-  aspectStyle: React.CSSProperties;
-  caption: string;
+  paddingTop: string;
   scrollRef: React.RefObject<HTMLElement | null>;
   delay?: number;
+  sizes?: string;
 }) {
   return (
-    <FadeIn scrollRef={scrollRef} delay={delay} className="flex flex-col">
+    <FadeIn scrollRef={scrollRef} delay={delay}>
       <div className="bg-[#f0f0ee] p-12">
-        <div className="relative w-full" style={aspectStyle}>
-          <Image src={src} alt={alt} fill className="object-cover" />
+        <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop }}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            className="object-contain"
+          />
         </div>
       </div>
-      <p className="text-xs text-zinc-400 mt-2 leading-relaxed">{caption}</p>
     </FadeIn>
   );
 }
@@ -72,53 +80,15 @@ const introTexts = [
   "The drawings. The photography. The hours spent studying how manga artists use negative space, how directors frame a shot, how a single garment carries a point of view. None of it was called design at the time. But it was all the same muscle.",
 ];
 
-const artFrames = [
-  {
-    src: "/PlaygroundA1.jpg",
-    alt: "Artwork A1",
-    aspectStyle: { paddingTop: "75%" },
-    caption: "Studies in form and line — the sketchbook before the screen.",
-  },
-  {
-    src: "/PlaygroundA2.jpg",
-    alt: "Artwork A2",
-    aspectStyle: { paddingTop: "133%" },
-    caption: "Portrait work from a life drawing session, 2023.",
-  },
-  {
-    src: "/PlaygroundA3.jpg",
-    alt: "Artwork A3",
-    aspectStyle: { paddingTop: "133%" },
-    caption: "Character exploration, influenced by how manga uses negative space.",
-  },
-];
+// Natural display aspect ratios (h ÷ w × 100).
+// Art pieces are hand-measured from source files.
+// Photos are EXIF-rotated iPhones — all display as 3024 × 4032 portrait.
+const PHOTO_PT = "133.3%"; // 4032 ÷ 3024
 
-const photoFrames = [
-  {
-    src: "/PlaygroundP1.jpeg",
-    alt: "Photography P1",
-    aspectStyle: { paddingTop: "56.25%" },
-    caption: "Taken before I thought of myself as a photographer.",
-  },
-  {
-    src: "/PlaygroundP2.jpeg",
-    alt: "Photography P2",
-    aspectStyle: { paddingTop: "100%" },
-    caption: "Early morning, Stratford.",
-  },
-  {
-    src: "/PlaygroundP3.jpeg",
-    alt: "Photography P3",
-    aspectStyle: { paddingTop: "100%" },
-    caption: "A quiet moment between people and space.",
-  },
-  {
-    src: "/PlaygroundP4.jpeg",
-    alt: "Photography P4",
-    aspectStyle: { paddingTop: "56.25%" },
-    caption: "The edit is the decision.",
-  },
-];
+// A2 (octopus) is the taller art piece; both A2 and A3 share its paddingTop
+// so paired frames sit at equal height. A3's ~7 % difference letterboxes
+// subtly into the same #f0f0ee mat — imperceptible in practice.
+const ART_PAIR_PT = "161.6%"; // 1146 ÷ 709
 
 export default function Playground() {
   const mainRef = useRef<HTMLElement>(null);
@@ -127,7 +97,7 @@ export default function Playground() {
     <main ref={mainRef} className="h-screen overflow-y-auto">
       <div className="mx-auto max-w-2xl px-6 pt-32 pb-24">
 
-        {/* ── Intro ──────────────────────────────────────────────────── */}
+        {/* ── Intro ───────────────────────────────────────────────────── */}
         <div className="mb-10">
           <FadeIn scrollRef={mainRef}>
             <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-4">
@@ -143,124 +113,95 @@ export default function Playground() {
           </div>
         </div>
 
-        {/* ── Art Gallery ────────────────────────────────────────────── */}
-        <FadeIn scrollRef={mainRef} className="border-t border-zinc-200 pt-6 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-4">
-            Art
-          </p>
-        </FadeIn>
+        {/* ── Gallery ─────────────────────────────────────────────────── */}
+        <div className="border-t border-zinc-200 pt-8 space-y-8">
 
-        <div className="space-y-4 mb-4">
-          {/* A1 — dominant, full width, 4:3 */}
+          {/* 1 — Solo: eye drawing */}
           <Frame
-            src={artFrames[0].src}
-            alt={artFrames[0].alt}
-            aspectStyle={artFrames[0].aspectStyle}
-            caption={artFrames[0].caption}
+            src="/PlaygroundA1.jpg"
+            alt="Eye drawing"
+            paddingTop="160.6%"
             scrollRef={mainRef}
           />
 
-          {/* A2 + A3 — side by side, portrait 3:4, A3 frame slightly wider */}
-          <div className="flex gap-4 items-start">
-            <FadeIn scrollRef={mainRef} className="flex-[2] flex flex-col">
+          {/* 2 — Paired: octopus + koi (equal height via shared paddingTop) */}
+          <div className="flex gap-6 items-start">
+            <FadeIn scrollRef={mainRef} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full" style={artFrames[1].aspectStyle}>
+                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: ART_PAIR_PT }}>
                   <Image
-                    src={artFrames[1].src}
-                    alt={artFrames[1].alt}
+                    src="/PlaygroundA2.jpg"
+                    alt="Octopus drawing"
                     fill
-                    className="object-cover"
+                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    className="object-contain"
                   />
                 </div>
               </div>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                {artFrames[1].caption}
-              </p>
             </FadeIn>
-
-            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-[3] flex flex-col">
+            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full" style={artFrames[2].aspectStyle}>
+                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: ART_PAIR_PT }}>
                   <Image
-                    src={artFrames[2].src}
-                    alt={artFrames[2].alt}
+                    src="/PlaygroundA3.jpg"
+                    alt="Koi fish drawing"
                     fill
-                    className="object-cover"
+                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    className="object-contain"
                   />
                 </div>
               </div>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                {artFrames[2].caption}
-              </p>
             </FadeIn>
           </div>
-        </div>
 
-        {/* ── Photography Gallery ────────────────────────────────────── */}
-        <FadeIn scrollRef={mainRef} className="border-t border-zinc-200 pt-6 mt-6 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-4">
-            Photography
-          </p>
-        </FadeIn>
-
-        <div className="space-y-4">
-          {/* P1 — full width, cinematic 16:9 */}
+          {/* 3 — Solo: graffiti alley */}
           <Frame
-            src={photoFrames[0].src}
-            alt={photoFrames[0].alt}
-            aspectStyle={photoFrames[0].aspectStyle}
-            caption={photoFrames[0].caption}
+            src="/PlaygroundP1.jpeg"
+            alt="Graffiti alley"
+            paddingTop={PHOTO_PT}
             scrollRef={mainRef}
           />
 
-          {/* P2 + P3 — side by side with optical breathing room */}
-          <div className="flex gap-10 items-start">
-            {/* P2 — pushed slightly left (wider left margin) */}
-            <FadeIn scrollRef={mainRef} className="flex-1 flex flex-col pr-3">
+          {/* 4 — Paired: London riverside + sea view (same aspect, exact height match) */}
+          <div className="flex gap-6 items-start">
+            <FadeIn scrollRef={mainRef} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full" style={photoFrames[1].aspectStyle}>
+                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: PHOTO_PT }}>
                   <Image
-                    src={photoFrames[1].src}
-                    alt={photoFrames[1].alt}
+                    src="/PlaygroundP2.jpeg"
+                    alt="London riverside at dusk"
                     fill
-                    className="object-cover"
+                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    className="object-contain"
                   />
                 </div>
               </div>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                {photoFrames[1].caption}
-              </p>
             </FadeIn>
-
-            {/* P3 — pushed slightly right (wider right margin) */}
-            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1 flex flex-col pl-3">
+            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full" style={photoFrames[2].aspectStyle}>
+                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: PHOTO_PT }}>
                   <Image
-                    src={photoFrames[2].src}
-                    alt={photoFrames[2].alt}
+                    src="/PlaygroundP3.jpeg"
+                    alt="Sea view from the cliffs"
                     fill
-                    className="object-cover"
+                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    className="object-contain"
                   />
                 </div>
               </div>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
-                {photoFrames[2].caption}
-              </p>
             </FadeIn>
           </div>
 
-          {/* P4 — full width, cinematic 16:9 */}
+          {/* 5 — Solo: Chinatown lanterns */}
           <Frame
-            src={photoFrames[3].src}
-            alt={photoFrames[3].alt}
-            aspectStyle={photoFrames[3].aspectStyle}
-            caption={photoFrames[3].caption}
+            src="/PlaygroundP4.jpeg"
+            alt="Chinatown lanterns"
+            paddingTop={PHOTO_PT}
             scrollRef={mainRef}
           />
         </div>
 
-        {/* ── Closing Line ───────────────────────────────────────────── */}
+        {/* ── Closing line ────────────────────────────────────────────── */}
         <FadeIn scrollRef={mainRef} className="mt-16">
           <p className="text-center text-zinc-600 leading-relaxed">
             I didn&apos;t stumble into design. I was practicing it the whole time.
