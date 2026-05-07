@@ -39,56 +39,11 @@ function FadeIn({
   );
 }
 
-// A mat-framed image that never crops — the image sits fully inside the
-// #f0f0ee mat with 48 px padding on all four sides. paddingTop encodes the
-// image's true display aspect ratio so object-contain fills edge-to-edge.
-function Frame({
-  src,
-  alt,
-  paddingTop,
-  scrollRef,
-  delay = 0,
-  sizes = "(max-width: 672px) calc(100vw - 48px), 624px",
-}: {
-  src: string;
-  alt: string;
-  paddingTop: string;
-  scrollRef: React.RefObject<HTMLElement | null>;
-  delay?: number;
-  sizes?: string;
-}) {
-  return (
-    <FadeIn scrollRef={scrollRef} delay={delay}>
-      <div className="bg-[#f0f0ee] p-12">
-        <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop }}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes={sizes}
-            className="object-contain"
-          />
-        </div>
-      </div>
-    </FadeIn>
-  );
-}
-
-const introTexts = [
-  "Growing up I thought my path was CS or business. I chose GBDA because it seemed like a smart middle ground. I didn't know product design existed.",
-  "Second year, something clicked. But I wasn't starting from zero.",
-  "The drawings. The photography. The hours spent studying how manga artists use negative space, how directors frame a shot, how a single garment carries a point of view. None of it was called design at the time. But it was all the same muscle.",
-];
-
 // Natural display aspect ratios (h ÷ w × 100).
-// Art pieces are hand-measured from source files.
-// Photos are EXIF-rotated iPhones — all display as 3024 × 4032 portrait.
-const PHOTO_PT = "133.3%"; // 4032 ÷ 3024
-
-// A2 (octopus) is the taller art piece; both A2 and A3 share its paddingTop
-// so paired frames sit at equal height. A3's ~7 % difference letterboxes
-// subtly into the same #f0f0ee mat — imperceptible in practice.
-const ART_PAIR_PT = "161.6%"; // 1146 ÷ 709
+// Art files measured from source dimensions.
+// Photos are EXIF-rotated iPhones displaying at 3024 × 4032.
+const PHOTO_PT = "133.3%";
+const ART_PAIR_PT = "161.6%"; // A2 (octopus) ratio; A3 shares it for equal height
 
 export default function Playground() {
   const mainRef = useRef<HTMLElement>(null);
@@ -97,43 +52,126 @@ export default function Playground() {
     <main ref={mainRef} className="h-screen overflow-y-auto">
       <div className="mx-auto max-w-2xl px-6 pt-32 pb-24">
 
-        {/* ── Intro ───────────────────────────────────────────────────── */}
-        <div className="mb-10">
-          <FadeIn scrollRef={mainRef}>
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-4">
-              Playground
-            </p>
-          </FadeIn>
-          <div className="space-y-4 text-zinc-600 leading-relaxed">
-            {introTexts.map((text, i) => (
-              <FadeIn key={i} scrollRef={mainRef} delay={i * 0.1}>
-                <p>{text}</p>
-              </FadeIn>
-            ))}
-          </div>
+        {/* ── Section label ────────────────────────────────────────────── */}
+        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-10">
+          Playground
+        </p>
+
+        {/* ── Opening ──────────────────────────────────────────────────── */}
+        <div className="space-y-4 text-zinc-600 leading-relaxed">
+          <p>
+            Growing up, I thought my path was computer science or business.
+            That was it — those were the options. I picked GBDA because it felt
+            like a good mix of both. I didn&apos;t even know product design existed.
+          </p>
+          <p>It wasn&apos;t until second year that something clicked.</p>
         </div>
 
-        {/* ── Gallery ─────────────────────────────────────────────────── */}
-        <div className="border-t border-zinc-200 pt-8 space-y-8">
+        {/* ── Drawing ──────────────────────────────────────────────────── */}
+        <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
+          <p>But here&apos;s the thing — it wasn&apos;t random.</p>
+          <p>
+            I&apos;ve been drawing my whole life. Not for any reason, just because I
+            always had. Hands, eyes, ink on whatever was nearby. Then I found
+            Vagabond. Takehiko Inoue draws the way most people can&apos;t think —
+            every panel is a composition decision, every stretch of negative
+            space is intentional. It changed how I looked at everything. Not
+            just drawing, but layout, weight, where your eye goes and why.
+          </p>
+        </div>
 
-          {/* 1 — Solo: eye drawing */}
-          <Frame
-            src="/PlaygroundA1.jpg"
-            alt="Eye drawing"
-            paddingTop="160.6%"
-            scrollRef={mainRef}
-          />
+        {/* ── Art triptych: A1, A2, A3 ─────────────────────────────────── */}
+        <div className="mt-10 flex gap-4 items-start">
+          <FadeIn scrollRef={mainRef} className="flex-1">
+            <div className="bg-[#f0f0ee] p-12">
+              <div
+                className="relative w-full bg-[#f0f0ee]"
+                style={{ paddingTop: "160.6%" }}
+              >
+                <Image
+                  src="/PlaygroundA1.jpg"
+                  alt="Eye drawing"
+                  fill
+                  sizes="(max-width: 672px) calc(33vw - 24px), 200px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
+            <div className="bg-[#f0f0ee] p-12">
+              <div
+                className="relative w-full bg-[#f0f0ee]"
+                style={{ paddingTop: ART_PAIR_PT }}
+              >
+                <Image
+                  src="/PlaygroundA2.jpg"
+                  alt="Octopus drawing"
+                  fill
+                  sizes="(max-width: 672px) calc(33vw - 24px), 200px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn scrollRef={mainRef} delay={0.2} className="flex-1">
+            <div className="bg-[#f0f0ee] p-12">
+              <div
+                className="relative w-full bg-[#f0f0ee]"
+                style={{ paddingTop: ART_PAIR_PT }}
+              >
+                <Image
+                  src="/PlaygroundA3.jpg"
+                  alt="Koi fish drawing"
+                  fill
+                  sizes="(max-width: 672px) calc(33vw - 24px), 200px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
 
-          {/* 2 — Paired: octopus + koi (equal height via shared paddingTop) */}
-          <div className="flex gap-6 items-start">
+        {/* ── Film ─────────────────────────────────────────────────────── */}
+        <div className="mt-16 text-zinc-600 leading-relaxed">
+          <p>
+            Film hit the same way. Good Will Hunting isn&apos;t a visually loud
+            movie — it&apos;s the opposite. Every scene is stripped back to exactly
+            what it needs. Nothing is there by accident. Watching it I kept
+            thinking about restraint, about how much you can say by leaving
+            things out. That&apos;s a design idea. I just didn&apos;t have the word for
+            it yet.
+          </p>
+        </div>
+
+        {/* ── Connecting ───────────────────────────────────────────────── */}
+        <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
+          <p>
+            None of that felt connected to a career at the time. It was just
+            what I cared about.
+          </p>
+          <p>
+            But after looking at my interests, I can start to see how I got
+            here — even if the path wasn&apos;t conventional. The eye for
+            composition. The obsession with how things feel, not just how they
+            look. That didn&apos;t start in Figma.
+          </p>
+        </div>
+
+        {/* ── Photo pairs: P1+P2, then P3+P4 ──────────────────────────── */}
+        <div className="mt-10 space-y-6">
+          <div className="flex gap-4 items-start">
             <FadeIn scrollRef={mainRef} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: ART_PAIR_PT }}>
+                <div
+                  className="relative w-full bg-[#f0f0ee]"
+                  style={{ paddingTop: PHOTO_PT }}
+                >
                   <Image
-                    src="/PlaygroundA2.jpg"
-                    alt="Octopus drawing"
+                    src="/PlaygroundP1.jpeg"
+                    alt="Graffiti alley"
                     fill
-                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    sizes="(max-width: 672px) calc(50vw - 32px), 306px"
                     className="object-contain"
                   />
                 </div>
@@ -141,50 +179,15 @@ export default function Playground() {
             </FadeIn>
             <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
               <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: ART_PAIR_PT }}>
-                  <Image
-                    src="/PlaygroundA3.jpg"
-                    alt="Koi fish drawing"
-                    fill
-                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-
-          {/* 3 — Solo: graffiti alley */}
-          <Frame
-            src="/PlaygroundP1.jpeg"
-            alt="Graffiti alley"
-            paddingTop={PHOTO_PT}
-            scrollRef={mainRef}
-          />
-
-          {/* 4 — Paired: London riverside + sea view (same aspect, exact height match) */}
-          <div className="flex gap-6 items-start">
-            <FadeIn scrollRef={mainRef} className="flex-1">
-              <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: PHOTO_PT }}>
+                <div
+                  className="relative w-full bg-[#f0f0ee]"
+                  style={{ paddingTop: PHOTO_PT }}
+                >
                   <Image
                     src="/PlaygroundP2.jpeg"
                     alt="London riverside at dusk"
                     fill
-                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            </FadeIn>
-            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
-              <div className="bg-[#f0f0ee] p-12">
-                <div className="relative w-full bg-[#f0f0ee]" style={{ paddingTop: PHOTO_PT }}>
-                  <Image
-                    src="/PlaygroundP3.jpeg"
-                    alt="Sea view from the cliffs"
-                    fill
-                    sizes="(max-width: 672px) calc(50vw - 36px), 306px"
+                    sizes="(max-width: 672px) calc(50vw - 32px), 306px"
                     className="object-contain"
                   />
                 </div>
@@ -192,21 +195,47 @@ export default function Playground() {
             </FadeIn>
           </div>
 
-          {/* 5 — Solo: Chinatown lanterns */}
-          <Frame
-            src="/PlaygroundP4.jpeg"
-            alt="Chinatown lanterns"
-            paddingTop={PHOTO_PT}
-            scrollRef={mainRef}
-          />
+          <div className="flex gap-4 items-start">
+            <FadeIn scrollRef={mainRef} className="flex-1">
+              <div className="bg-[#f0f0ee] p-12">
+                <div
+                  className="relative w-full bg-[#f0f0ee]"
+                  style={{ paddingTop: PHOTO_PT }}
+                >
+                  <Image
+                    src="/PlaygroundP3.jpeg"
+                    alt="Sea view from the cliffs"
+                    fill
+                    sizes="(max-width: 672px) calc(50vw - 32px), 306px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+            <FadeIn scrollRef={mainRef} delay={0.1} className="flex-1">
+              <div className="bg-[#f0f0ee] p-12">
+                <div
+                  className="relative w-full bg-[#f0f0ee]"
+                  style={{ paddingTop: PHOTO_PT }}
+                >
+                  <Image
+                    src="/PlaygroundP4.jpeg"
+                    alt="Chinatown lanterns"
+                    fill
+                    sizes="(max-width: 672px) calc(50vw - 32px), 306px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          </div>
         </div>
 
-        {/* ── Closing line ────────────────────────────────────────────── */}
-        <FadeIn scrollRef={mainRef} className="mt-16">
-          <p className="text-center text-zinc-600 leading-relaxed">
-            I didn&apos;t stumble into design. I was practicing it the whole time.
-          </p>
-        </FadeIn>
+        {/* ── Closing ──────────────────────────────────────────────────── */}
+        <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
+          <p>It feels like I got really lucky finding my passion.</p>
+          <p>I don&apos;t think it was luck anymore.</p>
+        </div>
 
       </div>
     </main>
