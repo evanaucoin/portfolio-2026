@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className="relative h-screen overflow-hidden">
       {/* Layout column: header-aware flex centering of top pod → card → bottom pod */}
-      <div className="fixed inset-0 pt-20 flex flex-col items-center justify-center gap-8">
+      <div className="fixed inset-0 pt-20 flex flex-col items-center justify-center gap-4">
         {/* Top pod */}
         <div className="flex-shrink-0 z-20">
         <motion.div
@@ -177,9 +177,10 @@ export default function Home() {
         </motion.div>
         </div>
 
-        {/* Card deck */}
+        {/* Card deck — pb-[45px] accounts for the ~45px peek-card overflow past the div boundary */}
+        <div className="flex-shrink-0 pb-[45px]">
         <div
-          className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 flex-shrink-0 ${isReady ? "opacity-100" : "opacity-0"}`}
+          className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
@@ -381,9 +382,10 @@ export default function Home() {
           );
         })}
         </div>
+        </div>
 
         {/* Bottom pod */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 z-10">
           <StatusPod activeIndex={activeIndex} />
         </div>
       </div>
