@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className="relative pt-20">
       {/* Symmetrical flex stack: top pod → card deck → bottom pod, centered in remaining viewport */}
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] gap-8 md:gap-12">
+      <div className="flex flex-col items-center justify-center min-h-[85vh] gap-10">
         {/* Top pod */}
         <div className="flex-shrink-0 relative z-20">
         <motion.div
@@ -177,8 +177,8 @@ export default function Home() {
         </motion.div>
         </div>
 
-        {/* Card deck — pb-[45px] accounts for the ~45px peek-card overflow past the div boundary */}
-        <div className="flex-shrink-0 pb-[45px]">
+        {/* Card deck — pb-[52px] accounts for ~45px peek-card overflow + ~7px shadow bleed so the gap reads from the shadow edge */}
+        <div className="flex-shrink-0 pb-[52px]">
         <div
           className={`relative w-[1100px] aspect-[21/9] overflow-visible transition-opacity duration-300 ${isReady ? "opacity-100" : "opacity-0"}`}
           onMouseEnter={() => setIsHovering(true)}
