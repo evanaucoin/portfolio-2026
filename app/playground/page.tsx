@@ -61,22 +61,31 @@ export default function Playground() {
         <div className="space-y-4 text-zinc-600 leading-relaxed">
           <p>
             Growing up, I thought my path was computer science or business.
-            That was it — those were the options. I picked GBDA because it felt
-            like a good mix of both. I didn&apos;t even know product design existed.
+            Those were the options. I picked GBDA because it felt like a good
+            mix of both. I didn&apos;t even know product design existed.
           </p>
           <p>It wasn&apos;t until second year that something clicked.</p>
         </div>
 
         {/* ── Drawing ──────────────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
-          <p>But here&apos;s the thing — it wasn&apos;t random.</p>
           <p>
-            I&apos;ve been drawing my whole life. Not for any reason, just because I
-            always had. Hands, eyes, ink on whatever was nearby. Then I found
-            Vagabond. Takehiko Inoue draws the way most people can&apos;t think —
-            every panel is a composition decision, every stretch of negative
+            I&apos;ve been drawing my whole life. I used to draw comics as a kid.
+            Now just cards for my girlfriend. Along the way I found Vagabond.
+            Every panel is a composition decision, every stretch of negative
             space is intentional. It changed how I looked at everything. Not
             just drawing, but layout, weight, where your eye goes and why.
+          </p>
+          <p>
+            <em>
+              &ldquo;Preoccupied with a single leaf, you won&apos;t see the tree.
+              Preoccupied with a single tree, you&apos;ll miss the entire forest&rdquo;
+            </em>
+            <span className="text-sm text-zinc-400"> — Takuan Soho</span>
+          </p>
+          <p>
+            It taught me to zoom out. In design that means never getting so
+            lost in a component that you lose the experience around it.
           </p>
         </div>
 
@@ -132,29 +141,18 @@ export default function Playground() {
           </FadeIn>
         </div>
 
-        {/* ── Film ─────────────────────────────────────────────────────── */}
-        <div className="mt-16 text-zinc-600 leading-relaxed">
-          <p>
-            Film hit the same way. Good Will Hunting isn&apos;t a visually loud
-            movie — it&apos;s the opposite. Every scene is stripped back to exactly
-            what it needs. Nothing is there by accident. Watching it I kept
-            thinking about restraint, about how much you can say by leaving
-            things out. That&apos;s a design idea. I just didn&apos;t have the word for
-            it yet.
-          </p>
-        </div>
-
-        {/* ── Connecting ───────────────────────────────────────────────── */}
+        {/* ── After art images ─────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
           <p>
-            None of that felt connected to a career at the time. It was just
-            what I cared about.
+            <em>
+              &ldquo;Talent is something you make bloom, instinct is something you
+              polish&rdquo;
+            </em>
+            <span className="text-sm text-zinc-400"> — Touru Oikawa</span>
           </p>
           <p>
-            But after looking at my interests, I can start to see how I got
-            here — even if the path wasn&apos;t conventional. The eye for
-            composition. The obsession with how things feel, not just how they
-            look. That didn&apos;t start in Figma.
+            I design relentlessly before I ever make a final copy. The
+            iterations aren&apos;t mistakes. They&apos;re the point.
           </p>
         </div>
 
@@ -231,8 +229,18 @@ export default function Playground() {
           </div>
         </div>
 
-        {/* ── Closing ──────────────────────────────────────────────────── */}
+        {/* ── Connecting ───────────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
+          <p>
+            None of that felt connected to a career at the time. It was just
+            what I cared about.
+          </p>
+          <p>
+            But after looking at my interests, I can start to see how I got
+            here, even if the path wasn&apos;t conventional. The eye for
+            composition. The obsession with how things feel, not just how they
+            look. That didn&apos;t start in Figma.
+          </p>
           <p>It feels like I got really lucky finding my passion.</p>
           <p>I don&apos;t think it was luck anymore.</p>
         </div>
