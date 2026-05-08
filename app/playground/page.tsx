@@ -62,7 +62,7 @@ export default function Playground() {
           <p>
             Growing up, I thought my path was computer science or business.
             Those were the options. I picked GBDA because it felt like a good
-            mix of both. I didn&apos;t even know product design existed.
+            mix of both, and I didn&apos;t even know product design existed.
           </p>
           <p>It wasn&apos;t until second year that something clicked.</p>
         </div>
@@ -70,11 +70,12 @@ export default function Playground() {
         {/* ── Drawing ──────────────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
           <p>
-            I&apos;ve been drawing my whole life. I used to draw comics as a kid.
-            Now just cards for my girlfriend. Along the way I found Vagabond.
-            Every panel is a composition decision, every stretch of negative
-            space is intentional. It changed how I looked at everything. Not
-            just drawing, but layout, weight, where your eye goes and why.
+            I&apos;ve been drawing my whole life. I used to draw comics as a kid,
+            and now just cards for my girlfriend. Along the way I found
+            Vagabond. Every panel is a composition decision, every stretch of
+            negative space is intentional, and it changed how I looked at
+            everything. Not just drawing, but layout, weight, where your eye
+            goes and why.
           </p>
           <p>
             <em>
@@ -155,9 +156,8 @@ export default function Playground() {
             iterations aren&apos;t mistakes. They&apos;re the point.
           </p>
           <p>
-            Photography taught me the same thing. You see the shot before you
-            understand why it works. That&apos;s the instinct. That&apos;s what you
-            polish.
+            I enjoy photography the same way I enjoy drawing — not as a
+            discipline, but as a way of recognizing and collecting good taste.
           </p>
         </div>
 
@@ -237,14 +237,15 @@ export default function Playground() {
         {/* ── Connecting ───────────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
           <p>
-            None of that felt connected to a career at the time. It was just
-            what I cared about.
+            Looking back, I was never purely technical and I was never purely
+            creative. I was always both. The eye for composition, the obsession
+            with how things feel and not just how they look, the instinct to
+            build as much as to design — none of that started in Figma, but it
+            all led here.
           </p>
           <p>
-            But after looking at my interests, I can start to see how I got
-            here, even if the path wasn&apos;t conventional. The eye for
-            composition. The obsession with how things feel, not just how they
-            look. That didn&apos;t start in Figma.
+            That&apos;s what a Design Engineer is. And that&apos;s what I&apos;m working
+            toward.
           </p>
           <p>It feels like I got really lucky finding my passion.</p>
           <p>I don&apos;t think it was luck anymore.</p>
