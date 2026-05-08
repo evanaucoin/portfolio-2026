@@ -144,6 +144,11 @@ export default function Playground() {
         {/* ── After art images ─────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
           <p>
+            Photography taught me the same thing. You see the shot before you
+            understand why it works. That&apos;s the instinct. That&apos;s what you
+            polish.
+          </p>
+          <p>
             <em>
               &ldquo;Talent is something you make bloom, instinct is something you
               polish&rdquo;
