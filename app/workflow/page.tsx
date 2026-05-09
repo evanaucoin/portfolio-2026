@@ -40,12 +40,9 @@ function FadeIn({
   );
 }
 
-type CardLayout = "split" | "stacked";
-
 type ProcessStage = {
   label: string;
   body: string;
-  layout: CardLayout;
   images: { src: string; alt: string }[];
 };
 
@@ -53,43 +50,36 @@ const STAGES: ProcessStage[] = [
   {
     label: "Ideation",
     body: `It starts with Claude. Not as a tool that does the work, but as a consultant that challenges it. I bring the brief, the problem, the direction — and I want it to push back. Question the assumptions, poke holes in the plan, make me explain why I'm making the decisions I'm making. A yes man makes you feel good. A consultant makes the work better.`,
-    layout: "stacked",
     images: [{ src: "/PortfolioClaudeUI.png", alt: "Claude — ideation session" }],
   },
   {
     label: "Mood Board",
     body: `Before I touch any UI I need to know what it should feel like. I pull references, collect things that capture the right tone, build a picture of the direction before I start designing. I'm not solving anything yet. I'm just making sure I know what I'm aiming at before I pick up the bow.`,
-    layout: "split",
     images: [{ src: "/PortfolioMoodboard.jpeg", alt: "Mood board" }],
   },
   {
     label: "Wireframe",
     body: `Then I block it out. No colour, no polish, just structure. Where does everything live, how does the eye move through it, what actually needs to be there. I'd rather figure out what's wrong at this stage than when it's already built.`,
-    layout: "split",
     images: [{ src: "/PortfolioWireframe.png", alt: "Wireframe" }],
   },
   {
     label: "Mockup",
     body: `This is where everything I've built up over time shows up. The taste, the references, the instincts I didn't know I was developing. I'm making real decisions now — layout, weight, feel. No tool does this part. It's just mine.`,
-    layout: "split",
     images: [{ src: "/PortfolioMockup.png", alt: "Mockup" }],
   },
   {
     label: "Prompt",
     body: `Figma Make bridges the design into code. Then comes the part most people underestimate. Figuring out exactly what you want to see is engineering a prompt — it's the same skill as writing a design brief. If you can't articulate the problem clearly, you can't solve it clearly. Getting better at prompting made me better at thinking, better at communicating, better at knowing what I want before I ask for it. That's not a technical skill. That's a design skill.`,
-    layout: "stacked",
     images: [{ src: "/PortfolioCursorUI.png", alt: "Cursor — prompt engineering" }],
   },
   {
     label: "Build",
     body: `Claude and Cursor take it the rest of the way, with multi-agent workflows handling the complexity. The clearer the thinking going in, the cleaner the build coming out. Everything decided in the earlier stages pays off here.`,
-    layout: "stacked",
     images: [{ src: "/PortfolioGeminiUI.png", alt: "Gemini — multi-agent build" }],
   },
   {
     label: "Push and Ship",
     body: `Everything gets pushed to GitHub and shipped on Vercel. Ideation to production. One person.`,
-    layout: "stacked",
     images: [
       { src: "/PortfolioGitUI2.png", alt: "GitHub — push" },
       { src: "/PortfolioVercelUI.png", alt: "Vercel — ship" },
@@ -135,66 +125,34 @@ function encodeAssetSrc(src: string): string {
 }
 
 function StageCardContent({ stage }: { stage: ProcessStage }) {
-  if (stage.layout === "split") {
-    return (
-      <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-10">
-        <div className="w-full shrink-0 md:w-[40%] md:min-w-0">
-          <p className="text-xs font-semibold tracking-widest text-zinc-400 [font-variant-caps:small-caps]">
-            {stage.label}
-          </p>
-          <p className="mt-4 text-zinc-600 leading-relaxed">{stage.body}</p>
-        </div>
-        <div className="flex w-full min-h-0 shrink-0 md:w-[60%] md:items-center md:justify-center">
-          {stage.images.map((img) => (
-            <div key={img.src} className="flex w-full justify-center">
-              <Image
-                src={encodeAssetSrc(img.src)}
-                alt={img.alt}
-                width={1200}
-                height={800}
-                sizes="(max-width: 768px) 100vw, 36vw"
-                className="h-auto max-h-[min(520px,70vh)] w-auto max-w-full object-contain"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
+  const multi = stage.images.length > 1;
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <p className="text-xs font-semibold tracking-widest text-zinc-400 [font-variant-caps:small-caps]">
-          {stage.label}
-        </p>
-        <p className="mt-4 text-zinc-600 leading-relaxed">{stage.body}</p>
-      </div>
-      <div
-        className={cn(
-          "flex w-full items-center justify-center gap-4",
-          stage.images.length > 1 ? "flex-row flex-wrap md:flex-nowrap" : "flex-col",
-        )}
-      >
-        {stage.images.map((img) => (
-          <div
-            key={img.src}
-            className={cn(
-              "flex min-w-0 justify-center",
-              stage.images.length > 1 ? "w-full flex-1 basis-[calc(50%-0.5rem)] md:basis-auto" : "w-full",
-            )}
-          >
-            <Image
-              src={encodeAssetSrc(img.src)}
-              alt={img.alt}
-              width={1200}
-              height={800}
-              sizes="(max-width: 768px) 100vw, 28vw"
-              className="max-h-[280px] w-auto max-w-full object-contain"
-            />
-          </div>
-        ))}
-      </div>
+    <div
+      className={cn(
+        "flex min-h-0 w-full items-center justify-center gap-4",
+        multi ? "flex-row flex-wrap" : "flex-col",
+      )}
+    >
+      {stage.images.map((img) => (
+        <div
+          key={img.src}
+          className={cn(
+            "flex items-center justify-center",
+            multi ? "min-w-0 flex-1 basis-[45%]" : "w-full",
+          )}
+        >
+          <Image
+            src={encodeAssetSrc(img.src)}
+            alt={img.alt}
+            width={1200}
+            height={800}
+            sizes={
+              multi ? "(max-width: 768px) 42vw, 22vw" : "(max-width: 768px) 100vw, 36vw"
+            }
+            className="h-auto max-h-[min(520px,70vh)] w-auto max-w-full object-contain"
+          />
+        </div>
+      ))}
     </div>
   );
 }
@@ -314,6 +272,7 @@ function ProcessCarousel() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
+                className="flex min-h-0 w-full items-center justify-center"
               >
                 <StageCardContent stage={stage} />
               </motion.div>
