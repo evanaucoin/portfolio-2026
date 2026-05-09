@@ -182,48 +182,53 @@ function ProcessCarousel() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
-            className="flex h-full flex-col"
+            className="flex h-full min-h-0 flex-col gap-4"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
-              {stage.label}
-            </p>
-            <p className="mt-4 flex-1 text-zinc-600 leading-relaxed overflow-y-auto pr-1">
-              {stage.body}
-            </p>
+            <div className="flex min-h-0 flex-1 basis-0 flex-col">
+              <p className="shrink-0 text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                {stage.label}
+              </p>
+              <p className="mt-4 min-h-0 flex-1 overflow-y-auto pr-1 text-zinc-600 leading-relaxed">
+                {stage.body}
+              </p>
+            </div>
 
-            <div
-              className={
-                stage.ui === "dual"
-                  ? "mt-6 flex shrink-0 gap-3"
-                  : "mt-6 flex shrink-0 justify-center"
-              }
-            >
-              {stage.images.map((img) => (
-                <div
-                  key={img.src}
-                  className={
-                    stage.ui === "dual"
-                      ? "relative min-w-0 flex-1 flex justify-center"
-                      : "relative w-full flex justify-center"
-                  }
-                >
+            <div className="flex min-h-0 flex-1 basis-0 flex-col">
+              <div
+                className={
+                  stage.ui === "dual"
+                    ? "flex min-h-0 flex-1 gap-3"
+                    : "flex min-h-0 flex-1 items-stretch justify-center"
+                }
+              >
+                {stage.images.map((img) => (
                   <div
+                    key={img.src}
                     className={
-                      stage.ui === "ui" || stage.ui === "dual"
-                        ? "flex max-h-[240px] w-full items-center justify-center rounded-lg border border-zinc-200 shadow-sm"
-                        : "flex max-h-[240px] w-full items-center justify-center"
+                      stage.ui === "dual"
+                        ? "relative flex min-h-0 min-w-0 flex-1"
+                        : "relative flex min-h-0 w-full flex-1"
                     }
                   >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      width={1200}
-                      height={800}
-                      className="max-h-[240px] w-auto max-w-full object-contain"
-                    />
+                    <div
+                      className={
+                        stage.ui === "ui" || stage.ui === "dual"
+                          ? "flex h-full min-h-0 w-full items-center justify-center rounded-lg border border-zinc-200 shadow-sm"
+                          : "flex h-full min-h-0 w-full items-center justify-center"
+                      }
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        width={1200}
+                        height={800}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
