@@ -36,7 +36,7 @@ export default function BubbleMenu({
   const bubblesRef = useRef<(HTMLDivElement | null)[]>([]);
   const pathname = usePathname();
   const { view, setView } = useView();
-  const showCenterNav = pathname === '/';
+  const showCenterNav = pathname === '/' && view === 'home';
 
   // Hide all bubbles on mount before first interaction
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function BubbleMenu({
         {logo}
       </Link>
 
-      {/* Center nav — homepage only; hidden on mobile, visible md+ */}
+      {/* Center nav — home deck only (not case study views); hidden on mobile, visible md+ */}
       {showCenterNav && (
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
           <Link href="/about" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">About</Link>

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import SiteNavLinks from "@/components/ui/SiteNavLinks";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
@@ -53,9 +52,7 @@ export default function JourneyCaseStudy() {
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
         <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
           <div>
-            <SiteNavLinks />
-
-            <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block mt-2">
+            <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block">
               Case Study
             </span>
             <p className="text-xl font-semibold text-zinc-900 mb-8 tracking-tight">JOURNEY</p>
