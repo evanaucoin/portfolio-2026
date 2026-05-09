@@ -184,7 +184,7 @@ function ProcessCarousel() {
             transition={{ duration: 0.35, ease: [0.32, 0, 0.08, 1] }}
             className="flex h-full min-h-0 flex-col gap-4"
           >
-            <div className="flex min-h-0 flex-1 basis-0 flex-col">
+            <div className="flex min-h-0 flex-[2] flex-col">
               <p className="shrink-0 text-xs font-semibold uppercase tracking-widest text-zinc-400">
                 {stage.label}
               </p>
@@ -193,12 +193,12 @@ function ProcessCarousel() {
               </p>
             </div>
 
-            <div className="flex min-h-0 flex-1 basis-0 flex-col">
+            <div className="flex min-h-0 flex-[3] flex-col">
               <div
                 className={
                   stage.ui === "dual"
-                    ? "flex min-h-0 flex-1 gap-3"
-                    : "flex min-h-0 flex-1 items-stretch justify-center"
+                    ? "flex min-h-0 flex-1 items-center gap-3"
+                    : "flex min-h-0 flex-1 items-center justify-center"
                 }
               >
                 {stage.images.map((img) => (
@@ -206,15 +206,15 @@ function ProcessCarousel() {
                     key={img.src}
                     className={
                       stage.ui === "dual"
-                        ? "relative flex min-h-0 min-w-0 flex-1"
-                        : "relative flex min-h-0 w-full flex-1"
+                        ? "relative flex min-h-0 min-w-0 flex-1 items-center justify-center"
+                        : "relative flex min-h-0 w-full flex-1 items-center justify-center"
                     }
                   >
                     <div
                       className={
                         stage.ui === "ui" || stage.ui === "dual"
-                          ? "flex h-full min-h-0 w-full items-center justify-center rounded-lg border border-zinc-200 shadow-sm"
-                          : "flex h-full min-h-0 w-full items-center justify-center"
+                          ? "flex h-full max-h-full min-h-0 w-full items-center justify-center bg-[#f0f0ee] p-6"
+                          : "flex h-full max-h-full min-h-0 w-full items-center justify-center"
                       }
                     >
                       <Image
@@ -262,7 +262,7 @@ function ProcessCarousel() {
             onClick={() => goTo(i)}
             className={
               i === index
-                ? "h-2 w-2 rounded-full bg-zinc-900"
+                ? "h-2 w-2 rounded-full bg-blue-600"
                 : "h-2 w-2 rounded-full border border-zinc-300 bg-transparent"
             }
           />
