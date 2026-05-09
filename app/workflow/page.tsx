@@ -171,7 +171,7 @@ function ProcessCarousel() {
 
   return (
     <div className="relative w-full">
-      <div className="relative h-[85vh] min-h-[320px] overflow-hidden rounded-lg bg-white p-10 shadow-sm">
+      <div className="relative h-[85vh] min-h-[320px] overflow-hidden rounded-lg bg-[#f0f0ee] p-10 shadow-sm">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={index}
@@ -197,7 +197,7 @@ function ProcessCarousel() {
               <div
                 className={
                   stage.ui === "dual"
-                    ? "flex min-h-0 flex-1 items-center gap-3"
+                    ? "flex min-h-0 flex-1 items-center justify-center gap-3"
                     : "flex min-h-0 flex-1 items-center justify-center"
                 }
               >
@@ -210,22 +210,14 @@ function ProcessCarousel() {
                         : "relative flex min-h-0 w-full flex-1 items-center justify-center"
                     }
                   >
-                    <div
-                      className={
-                        stage.ui === "ui" || stage.ui === "dual"
-                          ? "flex h-full max-h-full min-h-0 w-full items-center justify-center bg-[#f0f0ee] p-6"
-                          : "flex h-full max-h-full min-h-0 w-full items-center justify-center"
-                      }
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        width={1200}
-                        height={800}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={1200}
+                      height={800}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="max-h-[280px] max-w-full object-contain"
+                    />
                   </div>
                 ))}
               </div>
