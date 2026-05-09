@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import './BubbleMenu.css';
 import { useView } from '@/components/ViewContext';
@@ -20,10 +21,11 @@ interface BubbleMenuProps {
 }
 
 const defaultItems: MenuItem[] = [
-  { label: 'home',      href: '/',                                                        rotation:  0 },
-  { label: 'about',    href: '/about',                                                   rotation:  5 },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/evan-aucoin-184229354',        rotation:  7, target: '_blank', rel: 'noopener noreferrer' },
-  { label: 'email',    href: 'mailto:eaucoin@uwaterloo.ca',                              rotation: -6, target: '_blank' },
+  { label: 'about',      href: '/about',                                                   rotation:  5 },
+  { label: 'playground', href: '/playground',                                             rotation:  3 },
+  { label: 'workflow',   href: '/workflow',                                               rotation: -4 },
+  { label: 'linkedin',   href: 'https://www.linkedin.com/in/evan-aucoin-184229354',        rotation:  7, target: '_blank', rel: 'noopener noreferrer' },
+  { label: 'email',      href: 'mailto:eaucoin@uwaterloo.ca',                              rotation: -6, target: '_blank' },
 ];
 
 export default function BubbleMenu({
@@ -32,7 +34,9 @@ export default function BubbleMenu({
 }: BubbleMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const bubblesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const pathname = usePathname();
   const { view, setView } = useView();
+  const showCenterNav = pathname === '/';
 
   // Hide all bubbles on mount before first interaction
   useEffect(() => {
@@ -75,16 +79,28 @@ export default function BubbleMenu({
 
   return (
     <nav className="bubble-nav">
-      <Link href="/" className="bubble-logo">
+      <Link
+        href="/"
+        className="bubble-logo"
+        aria-label="Evan AuCoin home"
+        onClick={(e) => {
+          if (pathname === '/' && view !== 'home') {
+            e.preventDefault();
+            setView('home');
+          }
+        }}
+      >
         {logo}
       </Link>
 
-      {/* Center nav — hidden on mobile, visible md+ */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
-        <Link href="/about" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">About</Link>
-        <Link href="/playground" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Playground</Link>
-        <Link href="/workflow" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Workflow</Link>
-      </div>
+      {/* Center nav — homepage only; hidden on mobile, visible md+ */}
+      {showCenterNav && (
+        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
+          <Link href="/about" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">About</Link>
+          <Link href="/playground" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Playground</Link>
+          <Link href="/workflow" className="text-zinc-400 font-medium text-sm hover:text-zinc-900 transition-colors">Workflow</Link>
+        </div>
+      )}
 
       <div className="bubble-controls">
         <div
@@ -97,20 +113,14 @@ export default function BubbleMenu({
               ref={(el) => {
                 bubblesRef.current[i] = el;
               }}
-              className={`bubble${item.href === '/' ? ' bubble--home' : ''}`}
+              className="bubble"
             >
               <Link
                 href={item.href}
                 className="pill-link"
                 target={item.target}
                 rel={item.rel}
-                onClick={(e) => {
-                  if (item.href === '/' && view !== 'home') {
-                    e.preventDefault();
-                    setView('home');
-                  }
-                  setIsOpen(false);
-                }}
+                onClick={() => setIsOpen(false)}
               >
                 {item.label}
               </Link>

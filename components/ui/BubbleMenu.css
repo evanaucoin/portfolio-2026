@@ -64,11 +64,6 @@
   border-color: transparent;
 }
 
-/* ── Home bubble ─────────────────────────────────────────────── */
-.bubble--home {
-  --bubble-size: 56px;
-}
-
 /* ── Pill link (inner <a>) ───────────────────────────────────── */
 .pill-link {
   font-size: 1.25rem; /* text-xl */

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Pause, Play } from "lucide-react";
+import SiteNavLinks from "@/components/ui/SiteNavLinks";
 import { useView } from "@/components/ViewContext";
 
 const SECTIONS = [
@@ -66,14 +67,7 @@ export default function PRISMCaseStudy() {
         {/* ── SIDEBAR ──────────────────────────────────────────────── */}
         <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
           <div>
-            <button
-              onClick={() => setView("home")}
-              className="mb-10 w-full flex justify-center"
-            >
-              <span className="inline-block bg-zinc-100 text-zinc-900 font-medium text-base px-6 py-2 rounded-full">
-                Home
-              </span>
-            </button>
+            <SiteNavLinks />
 
             <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block mt-2">
               Case Study
