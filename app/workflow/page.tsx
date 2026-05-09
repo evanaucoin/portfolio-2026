@@ -249,9 +249,9 @@ export default function Workflow() {
           <div className="max-w-4xl mx-auto px-8 lg:px-16 pt-32 pb-24">
             {/* ── Opening — typography matches About narrative ───────────── */}
             <FadeIn scrollRef={mainRef}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-10">
+              <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-10">
                 Workflow
-              </p>
+              </h1>
               <div className="space-y-4 text-zinc-600 leading-relaxed">
                 <p>
                   Product designers have always had a toolbox. Figma, Illustrator,
@@ -260,8 +260,11 @@ export default function Workflow() {
                 </p>
                 <p>The toolbox just got bigger.</p>
                 <p>
-                  LLMs aren&apos;t replacing the designer. They&apos;re extending what a
-                  designer can execute on alone. A design engineer doesn&apos;t just design
+                  <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
+                    LLMs aren&apos;t replacing the designer. They&apos;re extending what a
+                    designer can execute on alone.
+                  </span>{" "}
+                  A design engineer doesn&apos;t just design
                   the thing, they build it too. The gap between a mockup and a shipped
                   product used to require handing work off. I close that gap myself.
                 </p>
@@ -270,7 +273,11 @@ export default function Workflow() {
               <div className="border-t border-zinc-200 my-10" aria-hidden />
 
               <div className="space-y-4 text-zinc-600 leading-relaxed">
-                <p>This portfolio is my third attempt.</p>
+                <p>
+                  <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
+                    This portfolio is my third attempt.
+                  </span>
+                </p>
                 <p>
                   The first two failed because I didn&apos;t understand what I was doing. I
                   was aimlessly prompting, fiddling with the terminal, expecting the
@@ -335,7 +342,11 @@ export default function Workflow() {
                   the same path. The tools are the same, the thinking is the same, the
                   standard is the same.
                 </p>
-                <p>This portfolio isn&apos;t just the output. It&apos;s the proof of concept.</p>
+                <p>
+                  <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
+                    This portfolio isn&apos;t just the output. It&apos;s the proof of concept.
+                  </span>
+                </p>
               </FadeIn>
             </div>
           </div>

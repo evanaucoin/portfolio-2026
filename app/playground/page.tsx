@@ -52,16 +52,25 @@ export default function Playground() {
     <main ref={mainRef} className="h-screen overflow-y-auto">
       <div className="mx-auto max-w-2xl px-6 pt-32 pb-24">
 
-        {/* ── Section label ────────────────────────────────────────────── */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-10">
+        {/* ── Page title — matches About `<h1>` ─────────────────────────── */}
+        <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-10">
           Playground
-        </p>
+        </h1>
 
         {/* ── Opening ──────────────────────────────────────────────────── */}
         <div className="space-y-4 text-zinc-600 leading-relaxed">
           <p>
             Growing up, I thought my path was computer science or business.
-            Those were the options. I picked GBDA because it felt like a good
+            Those were the options. I picked{" "}
+            <a
+              href="https://uwaterloo.ca/stratford-school-of-interaction-design-and-business/global-business-and-digital-arts"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors"
+            >
+              GBDA
+            </a>{" "}
+            because it felt like a good
             mix of both, and I didn&apos;t even know product design existed.
           </p>
           <p>It wasn&apos;t until second year that something clicked.</p>
@@ -78,10 +87,10 @@ export default function Playground() {
             goes and why.
           </p>
           <p>
-            <em>
+            <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
               &ldquo;Preoccupied with a single leaf, you won&apos;t see the tree.
               Preoccupied with a single tree, you&apos;ll miss the entire forest&rdquo;
-            </em>
+            </span>
             <span className="text-sm text-zinc-400"> — Takuan Soho</span>
           </p>
           <p>
@@ -145,10 +154,10 @@ export default function Playground() {
         {/* ── After art images ─────────────────────────────────────────── */}
         <div className="mt-16 space-y-4 text-zinc-600 leading-relaxed">
           <p>
-            <em>
+            <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
               &ldquo;Talent is something you make bloom, instinct is something you
               polish&rdquo;
-            </em>
+            </span>
             <span className="text-sm text-zinc-400"> — Touru Oikawa</span>
           </p>
           <p>
@@ -244,8 +253,10 @@ export default function Playground() {
             all led here.
           </p>
           <p>
-            That&apos;s what a Design Engineer is. And that&apos;s what I&apos;m working
-            toward.
+            <span className="inline-flex items-center rounded px-1.5 py-0.5 bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 transition-colors">
+              That&apos;s what a Design Engineer is. And that&apos;s what I&apos;m working
+              toward.
+            </span>
           </p>
           <p>It feels like I got really lucky finding my passion.</p>
           <p>I don&apos;t think it was luck anymore.</p>
