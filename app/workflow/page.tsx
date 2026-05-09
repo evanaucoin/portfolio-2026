@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/components/ui/cn";
+import { useView } from "@/components/ViewContext";
 
 function makeFadeUp(delay = 0): Variants {
   return {
@@ -45,7 +47,7 @@ type ProcessStage = {
   label: string;
   body: string;
   images: { src: string; alt: string }[];
-  /** When set, caps image height at 360px (Wireframe & Mockup). Otherwise 480px. */
+  /** Wireframe & Mockup: split layout + shorter image cap */
   imageTreatment?: "wireframe";
 };
 
@@ -99,6 +101,8 @@ const STAGES: ProcessStage[] = [
   },
 ];
 
+type SectionId = (typeof STAGES)[number]["id"];
+
 /** Encode filename segment so paths like `/PortfolioGit UI2.png` resolve correctly. */
 function encodeAssetSrc(src: string): string {
   if (!src.includes(" ")) return src;
@@ -110,8 +114,10 @@ function encodeAssetSrc(src: string): string {
 
 function StageImageFrame({
   stage,
+  layout = "default",
 }: {
   stage: ProcessStage;
+  layout?: "default" | "split";
 }) {
   const multi = stage.images.length > 1;
   const maxH =
@@ -120,7 +126,9 @@ function StageImageFrame({
   return (
     <div
       className={cn(
-        "mx-auto mt-8 w-full max-w-[640px] bg-[#f5f5f3] p-10",
+        "w-full bg-[#f5f5f3] p-10",
+        layout === "default" && "mx-auto mt-8 max-w-[640px]",
+        layout === "split" && "mt-8 md:mt-0",
         multi &&
           "flex flex-row flex-nowrap items-center justify-center gap-4",
         !multi && "flex justify-center",
@@ -155,169 +163,184 @@ function StageImageFrame({
   );
 }
 
-function StageStickyNav({
-  scrollRootRef,
-}: {
-  scrollRootRef: React.RefObject<HTMLElement | null>;
-}) {
-  const [activeId, setActiveId] = useState(STAGES[0]!.id);
-
-  useEffect(() => {
-    const root = scrollRootRef.current;
-    if (!root) return;
-
-    const sectionEls = STAGES.map((s) =>
-      root.querySelector(`#${CSS.escape(s.id)}`),
-    ).filter((el): el is Element => el instanceof Element);
-
-    if (sectionEls.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const intersecting = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (intersecting[0]?.target.id) {
-          setActiveId(intersecting[0].target.id);
-        }
-      },
-      {
-        root,
-        rootMargin: "-10.5rem 0px -45% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      },
-    );
-
-    sectionEls.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [scrollRootRef]);
-
-  const onNavClick = (id: string) => {
-    const root = scrollRootRef.current;
-    const el = root?.querySelector(`#${CSS.escape(id)}`);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
+/** Matches case study in-page section label (DZDCaseStudy `SectionLabel`). */
+function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <nav
-      aria-label="Process stages"
-      className="sticky top-32 z-40 border-b border-zinc-900/[0.06] bg-white py-3"
-    >
-      <div className="flex flex-nowrap items-center justify-start gap-x-0 gap-y-1 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {STAGES.map((stage, i) => (
-          <span key={stage.id} className="flex shrink-0 items-center">
-            {i > 0 ? (
-              <span
-                aria-hidden
-                className="px-1.5 text-xs font-semibold tracking-widest text-zinc-300"
-              >
-                ·
-              </span>
-            ) : null}
-            <a
-              href={`#${stage.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onNavClick(stage.id);
-              }}
-              className={cn(
-                "shrink-0 text-left text-xs font-semibold tracking-widest transition-colors",
-                activeId === stage.id
-                  ? "text-blue-600"
-                  : "text-zinc-400 hover:text-zinc-600",
-              )}
-            >
-              {stage.label}
-            </a>
-          </span>
-        ))}
-      </div>
-    </nav>
+    <span className="text-[10px] font-semibold tracking-[0.15em] text-blue-600 uppercase mb-4 block">
+      {children}
+    </span>
   );
 }
 
 export default function Workflow() {
-  const mainRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState<SectionId>(STAGES[0]!.id);
+  const { setView } = useView();
+
+  useEffect(() => {
+    const container = mainRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const trigger = window.innerHeight * 0.35;
+      let current: SectionId = STAGES[0]!.id;
+      for (const { id } of STAGES) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= trigger) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <main ref={mainRef} className="h-screen overflow-y-auto">
-      <div className="pt-32 pb-24">
-        {/* ── Opening — narrow column ────────────────────────────────── */}
-        <div className="mx-auto max-w-2xl px-6">
-          <FadeIn scrollRef={mainRef}>
-            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-10">
+    <div ref={mainRef} className="h-screen overflow-y-auto bg-white">
+      <div className="flex">
+        {/* ── SIDEBAR — same structure/classes as case study pages (DZD) ─── */}
+        <aside className="sticky top-0 h-screen w-[250px] flex-shrink-0 hidden lg:flex flex-col justify-between pt-24 pb-10 px-8 border-r border-zinc-100">
+          <div>
+            <Link
+              href="/"
+              onClick={() => setView("home")}
+              className="mb-10 w-full flex justify-center"
+            >
+              <span className="inline-block bg-zinc-100 text-zinc-900 font-medium text-base px-6 py-2 rounded-full">
+                Home
+              </span>
+            </Link>
+
+            <span className="text-[10px] font-semibold tracking-[0.15em] text-zinc-400 uppercase mb-1 block mt-2">
+              Case Study
+            </span>
+            <p className="text-xl font-semibold text-zinc-900 mb-8 tracking-tight">
               Workflow
             </p>
-            <div className="space-y-4 text-zinc-600 leading-relaxed">
-              <p>
-                Product designers have always had a toolbox. Figma, Illustrator,
-                Photoshop — the tools changed over time but the job stayed the same.
-                Design something meaningful, make it work, ship it.
-              </p>
-              <p>The toolbox just got bigger.</p>
-              <p>
-                LLMs aren&apos;t replacing the designer. They&apos;re extending what a
-                designer can execute on alone. A design engineer doesn&apos;t just design
-                the thing, they build it too. The gap between a mockup and a shipped
-                product used to require handing work off. I close that gap myself.
-              </p>
-            </div>
 
-            <div className="border-t border-zinc-200 my-10" aria-hidden />
-
-            <div className="space-y-4 text-zinc-600 leading-relaxed">
-              <p>This portfolio is my third attempt.</p>
-              <p>
-                The first two failed because I didn&apos;t understand what I was doing. I
-                was aimlessly prompting, fiddling with the terminal, expecting the
-                output to be right without doing the work to ask correctly. After two
-                weeks on my second attempt I decided something had to change.
-              </p>
-              <p>
-                So I stopped building and started understanding. What is actually
-                happening here, and more importantly, why.
-              </p>
-              <p>That changed everything. This is the process I arrived at.</p>
-            </div>
-
-            <div className="border-t border-zinc-200 my-10" aria-hidden />
-          </FadeIn>
-        </div>
-
-        {/* ── Sticky stage nav + sections — narrow column ───────────── */}
-        <div className="mx-auto max-w-2xl px-6">
-          <StageStickyNav scrollRootRef={mainRef} />
-
-          <div className="flex flex-col gap-[clamp(4rem,8vw,6rem)]">
-            {STAGES.map((stage) => (
-              <FadeIn key={stage.id} scrollRef={mainRef}>
-                <section
-                  id={stage.id}
-                  className="scroll-mt-[10.5rem]"
+            <nav className="flex flex-col gap-3">
+              {STAGES.map(({ id, label }) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => scrollTo(id)}
+                  className={`text-left px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    activeSection === id
+                      ? "bg-blue-600 text-white"
+                      : "text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50"
+                  }`}
                 >
-                  <p className="text-xs font-semibold tracking-widest text-zinc-400 [font-variant-caps:small-caps]">
-                    {stage.label}
-                  </p>
-                  <p className="mt-4 text-zinc-600 leading-relaxed">{stage.body}</p>
-                  <StageImageFrame stage={stage} />
-                </section>
-              </FadeIn>
-            ))}
+                  {label}
+                </button>
+              ))}
+            </nav>
           </div>
-        </div>
+        </aside>
 
-        {/* ── Closing — narrow column ────────────────────────────────── */}
-        <div className="mx-auto max-w-2xl px-6 mt-20">
-          <FadeIn scrollRef={mainRef} className="space-y-4 text-zinc-600 leading-relaxed">
-            <p>
-              The process is repeatable. Every project I&apos;ve worked on has followed
-              the same path. The tools are the same, the thinking is the same, the
-              standard is the same.
-            </p>
-            <p>This portfolio isn&apos;t just the output. It&apos;s the proof of concept.</p>
-          </FadeIn>
-        </div>
+        <main className="flex-1 min-w-0">
+          <div className="max-w-4xl mx-auto px-8 lg:px-16 pt-32 pb-24">
+            {/* ── Opening — typography matches About narrative ───────────── */}
+            <FadeIn scrollRef={mainRef}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-10">
+                Workflow
+              </p>
+              <div className="space-y-4 text-zinc-600 leading-relaxed">
+                <p>
+                  Product designers have always had a toolbox. Figma, Illustrator,
+                  Photoshop — the tools changed over time but the job stayed the same.
+                  Design something meaningful, make it work, ship it.
+                </p>
+                <p>The toolbox just got bigger.</p>
+                <p>
+                  LLMs aren&apos;t replacing the designer. They&apos;re extending what a
+                  designer can execute on alone. A design engineer doesn&apos;t just design
+                  the thing, they build it too. The gap between a mockup and a shipped
+                  product used to require handing work off. I close that gap myself.
+                </p>
+              </div>
+
+              <div className="border-t border-zinc-200 my-10" aria-hidden />
+
+              <div className="space-y-4 text-zinc-600 leading-relaxed">
+                <p>This portfolio is my third attempt.</p>
+                <p>
+                  The first two failed because I didn&apos;t understand what I was doing. I
+                  was aimlessly prompting, fiddling with the terminal, expecting the
+                  output to be right without doing the work to ask correctly. After two
+                  weeks on my second attempt I decided something had to change.
+                </p>
+                <p>
+                  So I stopped building and started understanding. What is actually
+                  happening here, and more importantly, why.
+                </p>
+                <p>That changed everything. This is the process I arrived at.</p>
+              </div>
+
+              <div className="border-t border-zinc-200 my-10" aria-hidden />
+            </FadeIn>
+
+            <div className="flex flex-col gap-[clamp(4rem,8vw,6rem)]">
+              {STAGES.map((stage) => {
+                const isSplit = stage.imageTreatment === "wireframe";
+
+                if (isSplit) {
+                  return (
+                    <FadeIn key={stage.id} scrollRef={mainRef}>
+                      <section id={stage.id}>
+                        <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-8">
+                          <div className="w-full md:w-1/2 md:flex md:flex-col md:justify-center">
+                            <SectionHeading>{stage.label}</SectionHeading>
+                            <p className="text-[17px] text-zinc-500 leading-relaxed">
+                              {stage.body}
+                            </p>
+                          </div>
+                          <div className="w-full md:w-1/2 md:flex md:flex-col md:justify-center">
+                            <StageImageFrame stage={stage} layout="split" />
+                          </div>
+                        </div>
+                      </section>
+                    </FadeIn>
+                  );
+                }
+
+                return (
+                  <FadeIn key={stage.id} scrollRef={mainRef}>
+                    <section id={stage.id}>
+                      <SectionHeading>{stage.label}</SectionHeading>
+                      <p className="text-[17px] text-zinc-500 leading-relaxed">
+                        {stage.body}
+                      </p>
+                      <StageImageFrame stage={stage} layout="default" />
+                    </section>
+                  </FadeIn>
+                );
+              })}
+            </div>
+
+            <div className="mt-20">
+              <FadeIn
+                scrollRef={mainRef}
+                className="space-y-4 text-zinc-600 leading-relaxed"
+              >
+                <p>
+                  The process is repeatable. Every project I&apos;ve worked on has followed
+                  the same path. The tools are the same, the thinking is the same, the
+                  standard is the same.
+                </p>
+                <p>This portfolio isn&apos;t just the output. It&apos;s the proof of concept.</p>
+              </FadeIn>
+            </div>
+          </div>
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
