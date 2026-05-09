@@ -7,6 +7,7 @@ export default function Navbar() {
         items={[
           { label: 'home',      href: '/',                                                 rotation:  0 },
           { label: 'about',    href: '/about',                                            rotation:  5 },
+          { label: 'workflow', href: '/workflow',                                          rotation: -4 },
           { label: 'linkedin', href: 'https://www.linkedin.com/in/evan-aucoin-184229354', rotation:  7, target: '_blank', rel: 'noopener noreferrer' },
           { label: 'email',    href: 'mailto:eaucoin@uwaterloo.ca',                       rotation: -6, target: '_blank' },
         ]}
